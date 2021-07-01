@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+    </script>
+    <script src="../Scripts/ajaxCalls.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCCwWKnfacKHx3AVajstMk6Ist1VUoNt9w"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link href="aboutStyle.css" rel="stylesheet" />
+    <script src="../Scripts/movie.js"></script>
+    <link href="navbarStyle.css" rel="stylesheet" />
+    <link href="myStyle.css" rel="stylesheet" />
+    <script src="../Scripts/navbarFunc.js"></script>
+    <style>
+        #aboutM {
+            position: relative;
+        }
+
+        #Poster > img {
+            /*float: left;*/
+            /*z-index: 2;*/
+            position: absolute;
+            top: 50px;
+            left: 15px;
+            width: 300px;
+            border-radius: 10px;
+        }
+        /* #Poster {
+            left: 10px;
+            top:40px;
+        }*/
+        #aboutM > div {
+            position: absolute;
+        }
+
+        #movieName {
+            font-family: sans-serif;
+            font-size: 55px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            left: 50%;
+        }
+
+        #overview {
+            top: 300px;
+            left: 30px;
+        }
+
+        .imgActorAbout {
+            border-radius: 25px;
+            width: 20%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ActorTitle {
+            font-size: 30px;
+            color: powderblue;
+            text-align: center;
+        }
+
+        .aboutActor {
+            color: white;
+        }
+
+        p {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"> The Movie H & H</a>
+            </div>
+            <ul class="nav navbar-nav justify-content-between">
+                <li><div id="profile"></div></li>
+                <li><div id="userName"></div></li>
+                <li><a class="toblack" href="homePage.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a class="toblack" href="insert_signup.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
+                <li><a class="toblack" href="movie.html"><span class="glyphicon glyphicon-search"></span> Search Movie</a></li>
+                <li><a class="toblack" id="view" href="view.html"><span class="glyphicon glyphicon-heart-empty"></span> View</a></li><!--"glyphicon glyphicon-eye-open"-->
+                <li><a class="toblack" id="admin" href="admin.html"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a onclick="signUpClick()" id="signUp" class="toblack"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a id="login" href="login.html" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+                <li><a href="editUser.html" id="editUser" class="toblack"><span class="glyphicon glyphicon-pencil"></span>  Edit Profile</a></li>
+                <li><a onclick="exitFunc()" id="exit" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Exit</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="header">
+        <input type="text" id="SearchMovieName" placeholder="I want to watch..." />
+        <button id="getMovie">Search</button>
+    </div>
+    <div id="TheMovieList" class="seasons-center"></div>
+
+    <div id="aboutM">
+        <div id="backgroundPorter"> </div>
+        <div class="left" id="Poster"></div>
+        <div class="right">
+            <div id="movieName"></div>
+            <div id="overview"></div>
+            <div id="actors"></div>
+            <!-- Modal content -->
+            <div id="myModal" class="modal">
+                <div id="actorAbout" class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Some text in the Modal..</p>
+                </div>
+            </div>
+            <div id="trailer"></div>
+        </div>
+    </div>
+
+    <div class='title'><a>TOP RATED</a></div>
+    <div id="topRated"></div>
+
+
+
+</body>
+</html>
