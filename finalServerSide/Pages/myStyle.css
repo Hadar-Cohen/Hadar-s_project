@@ -66,9 +66,13 @@ body {
     height: 40px;
     top: 60px;
     border-radius: 10px;
-    float:left;
-    display:flex;
+    float: left;
+    display: flex;
     justify-content: center;
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+  
 }
 
 /*.center {
@@ -224,14 +228,15 @@ td {
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+/*input[type=text], input[type=password] {
+
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
-}
+}*/
 
 /* Add a background color when the inputs get focus */
 input[type=text]:focus, input[type=password]:focus {
@@ -316,6 +321,10 @@ button: hover {
 hr {
     border: 1px solid #f1f1f1;
     margin-bottom: 25px;
+    width:90%;
+    left:200px;
+    display:none;
+  
 }
 
 /* The Close Button (x) */
@@ -477,3 +486,32 @@ p{
    color:red;
 
 }
+#pForm{
+/*    position:relative;
+*/    height:900px;
+    width:1000px;
+}
+
+/*.form-group > input {
+    
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    float: none !important;
+}*/
+    .form-group > label{
+        font-size:14px;
+
+    }
+    .form-control {
+        position: static; /*padding: 15px;*/
+        width: 80%;
+       
+    }
+.form-group {
+    margin:0;
+}
+#signUpTitle, #signUp {
+    text-align: center;
+/*    margin-left:40%
+*/}
