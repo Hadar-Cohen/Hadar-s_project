@@ -170,6 +170,9 @@ function getSeasonErrorCB(err) {
 }
 
 function showEpisode(seasonNum) {
+    $("html, #Episodes").animate({ scrollTop: document.body.scrollHeight }, "slow");
+
+
     chooseSeasonClass(seasonNum);
     j = 1;
     saveSeasonNum = seasonNum;
