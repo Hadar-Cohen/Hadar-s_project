@@ -41,13 +41,14 @@
 }
 
 body {
-    background-color: #1e212d;
+    background-color: #1e212d !important;
 }
 
 .header {
     margin: 0 auto;
     max-width: 600px;
-    display:block;
+    display: block;
+    background-color: #1e212d;
 }
 
 #Episodes > img {
