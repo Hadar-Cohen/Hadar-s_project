@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     //https://api.themoviedb.org/3/tv/1416/season/0/episode/64467?api_key=1c107f2bd2f3fc2aee24aa4f2f8d8647&language=en-US
     //AIzaSyBAFQpdpUo7xpd6xQKspMv7Ci-Ex5xmbDg
-    navBarVisability();
+    //navBarVisability();
 
     if (localStorage.series != null) {
      //   getTV();

@@ -29,20 +29,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <link href="navbarStyle.css" rel="stylesheet" />
-    <link href="myStyle.css" rel="stylesheet" />
-    <link href="btnLikeStyle.css" rel="stylesheet" />
-    <script src="../Scripts/insert.js"></script>
     <script src="../Scripts/navbarFunc.js"></script>
     <script src="../Scripts/signUp.js"></script>
+    <link href="myStyle.css" rel="stylesheet" />
+
 
     <!--//firebase-->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>-->
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
-    <script src="../Scripts/config.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script src="../Scripts/config.js"></script>-->
+    <script>
+
+        $(document).ready(function () {
+            navBarVisability();
+        });
+    </script>
 </head>
 
 <body>
@@ -56,7 +61,7 @@
                 <li><div id="profile"></div></li>
                 <li><div id="userName"></div></li>
                 <li><a class="toblack" href="homePage.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a class="toblack" href="insert_signup.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
+                <li><a class="toblack" href="searchTV.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
                 <li><a class="toblack" href="movie.html"><span class="glyphicon glyphicon-search"></span> Search Movie</a></li>
                 <li><a class="toblack" id="view" href="view.html"><span class="glyphicon glyphicon-heart-empty"></span> View</a></li><!--"glyphicon glyphicon-eye-open"-->
                 <li><a class="toblack" id="admin" href="admin.html"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
@@ -171,7 +176,7 @@
         </form>
     </div>
 
-    <div class="header">
+    <!--<div class="header">
         <input type="text" id="tvShowName" placeholder="I want to watch..." />
         <button id="getTV">Get TV Show</button>
         <div>
@@ -182,7 +187,7 @@
 
     <div id="seasonsList" class="seasons-center"></div>
     <br />
-    <div class="episodes-center" id="Episodes"></div>
+    <div class="episodes-center" id="Episodes"></div>-->
 
     <script>
         // Get the modal
