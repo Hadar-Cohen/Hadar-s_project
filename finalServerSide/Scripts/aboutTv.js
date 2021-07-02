@@ -501,7 +501,7 @@ function addMSG() { //add msg to the array of messages
     //}
     ref.push().set({ "msg": content, "user": userTmp, "date": date })
     setTimeout(scrollChatDown, 1);
-    document.getElementById("msgTB").textContent = ""
+    document.getElementById("msgTB").textContent = "";
 }
 
 function printToChat(msg) {/*class="media-body"*/

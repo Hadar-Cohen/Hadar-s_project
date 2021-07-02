@@ -175,6 +175,7 @@ function showEpisode(seasonNum) {
     saveSeasonNum = seasonNum;
     episodesList = "";
     $("#Episodes").html(episodesList);
+   
     let method = "3/tv/";
     let api_key = "api_key=" + key;
 
