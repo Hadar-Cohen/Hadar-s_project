@@ -9,7 +9,10 @@
     </script>
     <script src="../Scripts/ajaxCalls.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCCwWKnfacKHx3AVajstMk6Ist1VUoNt9w"></script>
@@ -83,6 +86,30 @@
         p {
             color: white;
         }
+
+        #SearchMovieName {
+            background-color: #e6ebff;
+            font-size: 20px;
+            height: 40px;
+            top: 60px;
+            border-radius: 10px;
+            float: left;
+            display: flex;
+            justify-content: center;
+        }
+
+        #getMovie {
+            font-size: 20px;
+            height: 40px;
+            top: 77px;
+            border-radius: 10px;
+            float: right;
+            justify-content: center;
+            background-color: #e6ebff;
+            color: black;
+            border: 2px solid black;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -101,7 +128,7 @@
                 <li><a class="toblack" id="admin" href="admin.html"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a onclick="signUpClick()" id="signUp" class="toblack"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a id="signUp" class="toblack"><span class="glyphicon glyphicon-user" href="insert_signup.html" data-target="#modalBox"></span> Sign Up</a></li>
                 <li><a id="login" href="login.html" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
                 <li><a href="editUser.html" id="editUser" class="toblack"><span class="glyphicon glyphicon-pencil"></span>  Edit Profile</a></li>
                 <li><a onclick="exitFunc()" id="exit" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Exit</a></li>

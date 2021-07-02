@@ -334,7 +334,6 @@
     <Content Include="Pages\adminStyle.css" />
     <Content Include="Pages\btnLikeStyle.css" />
     <Content Include="Pages\chatStyle.css" />
-    <Content Include="Pages\chatTry.html" />
     <Content Include="Pages\comment.html" />
     <Content Include="Pages\commentStyle.css" />
     <Content Include="Pages\editUser.css" />
@@ -524,6 +523,7 @@
     <Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\config.js" />
+    <Content Include="Scripts\forum.js" />
     <Content Include="Scripts\homePage.js" />
     <Content Include="Scripts\insert.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

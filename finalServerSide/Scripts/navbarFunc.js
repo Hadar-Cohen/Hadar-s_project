@@ -36,6 +36,31 @@ function exitFunc() {
     document.getElementById("pForm").reset();
 }
 
+//let searchInput = 'search_input';
+//function signUpClick() {
+//    document.location = 'insert_signup.html';
+//    document.getElementById('modalBox').style.display = 'block';
+
+//    $("#pForm").submit(submit); // bind the submit event to a function called addUser
+//    var autocomplete;
+//    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+//        types: ['geocode'],
+
+//    });
+//    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+//        var near_place = autocomplete.getPlace();
+//        document.getElementById('loc_lat').value = near_place.geometry.location.lat();
+//        document.getElementById('loc_long').value = near_place.geometry.location.lng();
+//    });
+
+//    $('#passwordTB, #confirmPasswordTB').on('keyup', function () {
+//        if ($('#passwordTB').val() == $('#confirmPasswordTB').val()) {
+//            $('#message').html('Passwords are Matching').css('color', 'green');
+//        } else
+//            $('#message').html('Passwords are Not Matching').css('color', 'red');
+//    });
+//}
+
 function createNavBar() {
     return `<nav class="navbar navbar-inverse ">
         <div class="container-fluid">
