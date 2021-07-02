@@ -206,7 +206,8 @@ function getSuccessTVShowGenres(seriess) {
     seriesAccoGenreList += "</div></div>";
     $("#seriesAccoGenre").html(seriesAccoGenreList);
     r = 0;
-    window.scrollTo(0, document.body.scrollHeight);
+    $("html, body").animate({ scrollTop: document.body.scrollHeight }, "slow");
+
 
 }
 function drawAccoGenre(TVShow) {

@@ -83,6 +83,7 @@ text-align:left;
     width: 400px;
     top: 10px;
     margin-bottom: 20px;
+    border-radius:8px;
 }
 
 .row {
