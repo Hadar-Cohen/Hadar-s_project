@@ -52,14 +52,14 @@
             <h2>Login</h2>
             <div class="form-group">
                 <label for="emailTB"><span class="red-star"></span> Email </label>
-                <input type="text" class="form-control" placeholder="Enter the email" id="emailTB"
+                <input type="text" class="form-control" placeholder="Enter the email" id="email"
                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                        oninvalid="this.setCustomValidity('Format should be with @')"
                        oninput="this.setCustomValidity('')" required />
             </div>
             <div class="form-group">
                 <label for="passwordTB"><span class="red-star"></span> Password</label>
-                <input type="password" class="form-control" placeholder="Enter the password" id="passwordTB"
+                <input type="password" class="form-control" placeholder="Enter the password" id="password"
                        pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,}$"
                        oninvalid="this.setCustomValidity('Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters')"
                        oninput="this.setCustomValidity('')" required />

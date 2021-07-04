@@ -282,12 +282,12 @@ button: hover {
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn {
     float: left;
-    width: 50%;
+    width: 100%;
 }
 
 .container {
     padding: 16px;
-    width: 100%;
+    width: 65%;
 }
 /* Add padding to container elements */
 .signUpcontainer {
@@ -391,8 +391,9 @@ select, #yearOfBirthTB {
 }
 label, h1, #signUpTitle {
     color: white;
+    color: #1e212d;
 }
-h1, #signUpTitle {
+h1 {
     font-family: Fantasy;
 }
 p{

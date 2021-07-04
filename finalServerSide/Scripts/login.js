@@ -8,8 +8,8 @@ function submit() {
     return false;
 }
 function confirmUser() {
-    let email = $('#emailTB').val();
-    let pass = $('#passwordTB').val();
+    let email = $('#email').val();
+    let pass = $('#password').val();
     let api = "../api/Users?email=" + email + "&password=" + pass;
     ajaxCall("GET", api, "", getLoginSuccessCB, getLoginErrorCB);
 }

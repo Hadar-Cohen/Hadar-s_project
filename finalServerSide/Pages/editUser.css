@@ -52,3 +52,10 @@ select, #search_input {
     width: 100%;
     opacity: 0.9;
 }
+h1 {
+    font-family: Fantasy;
+}
+
+#signUpTitle{
+    font-size: 22px;
+}
