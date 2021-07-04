@@ -18,11 +18,11 @@ namespace finalServerSide.Controllers
             Comment c = new Comment();
             return c.Get(seriesId, connectedUserId);
         }
-        //public int Get()
-        //{
-        //    Comment c = new Comment();
-        //    return c.Get(); 
-        //}
+        public int Get()
+        {
+            Comment c = new Comment();
+            return c.Get();
+        }
 
         // POST api/<controller>
         public int Post([FromBody] Comment com)
