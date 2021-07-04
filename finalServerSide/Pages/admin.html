@@ -20,14 +20,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <script src="../scripts/ajaxCalls.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link href="myStyle.css" rel="stylesheet" />
-
-    <link href="AdminStyle.css" rel="stylesheet" />
-   
+    <!--<link href="myStyle.css" rel="stylesheet" />-->
     <script src="../Scripts/admin.js"></script>
+
     <script>
         $(document).ready(function () {
-            $("#nav-bar").load("signup.html"); 
+            $("#nav-bar").load("signup.html");
             getMostViewedS();
             getMostViewedE();
             getMostActiveUser();
@@ -77,12 +75,11 @@
 
         }
     </script>
-   
-
 
 </head>
 <body>
-    <div id="test-nav"></div> 
+    <div id="nav-bar"></div>
+
     <div style="text-align:center">
         <h1 style="color:aliceblue"> Hello Admin!</h1> <h3 style="color:aliceblue"> <br /> You can remove Users<br /> And see how mach save spacific apisodes and seriess</h3>
     </div>
@@ -104,3 +101,4 @@
 
 </body>
 </html>
+<link href="AdminStyle.css" rel="stylesheet" />
