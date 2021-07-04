@@ -15,7 +15,6 @@
 
     <script src="../Scripts/ajaxCalls.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-    <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -29,20 +28,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <link href="navbarStyle.css" rel="stylesheet" />
-    <link href="myStyle.css" rel="stylesheet" />
-    <link href="btnLikeStyle.css" rel="stylesheet" />
-    <script src="../Scripts/insert.js"></script>
     <script src="../Scripts/navbarFunc.js"></script>
     <script src="../Scripts/signUp.js"></script>
+    <link href="myStyle.css" rel="stylesheet" />
 
     <!--//firebase-->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>-->
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
-    <script src="../Scripts/config.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script src="../Scripts/config.js"></script>-->
+    
+    <script>
+
+        $(document).ready(function () {
+            navBarVisability();
+        });
+    </script>
 </head>
 
 <body>
@@ -56,7 +60,7 @@
                 <li><div id="profile"></div></li>
                 <li><div id="userName"></div></li>
                 <li><a class="toblack" href="homePage.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a class="toblack" href="insert_signup.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
+                <li><a class="toblack" href="searchTV.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
                 <li><a class="toblack" href="movie.html"><span class="glyphicon glyphicon-search"></span> Search Movie</a></li>
                 <li><a class="toblack" id="view" href="view.html"><span class="glyphicon glyphicon-heart-empty"></span> View</a></li><!--"glyphicon glyphicon-eye-open"-->
                 <li><a class="toblack" id="admin" href="admin.html"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
@@ -69,8 +73,6 @@
             </ul>
         </div>
     </nav>
-
-    <!--<nav id="navBar" class="navbar navbar-inverse "></nav>-->
 
     <div id="modalBox" class="modal">
         <span onclick="document.getElementById('modalBox').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -134,22 +136,22 @@
                     <label for="genreTB">select genre:</label>
                     <select id="genreTB" name="genre">
                         <option value="select">select genre</option>
-                        <option value="Action">Action</option>
-                        <option value="Adventure">Adventure</option>
+                        <option value="Action & Adventure">Action & Adventure</option>
                         <option value="Animation">Animation</option>
-                        <option value="Biography">Biography</option>
                         <option value="Comedy">Comedy</option>
                         <option value="Crime">Crime</option>
+                        <option value="Documentary">Documentary</option>
                         <option value="Drama">Drama</option>
-                        <option value="Horror">Horror</option>
-                        <option value="Music">Music</option>
+                        <option value="Family">Family</option>
+                        <option value="Kids">Kids</option>
                         <option value="Mystery">Mystery</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Thriller">Thriller</option>
-                        <option value="War">War</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Historical">Historical</option>
-                        <option value="Touching">Touching</option>
+                        <option value="News">News</option>
+                        <option value="Reality">Reality</option>
+                        <option value="Sci-Fi & Fantasy">Sci-Fi & Fantasy</option>
+                        <option value="Soap">Soap</option>
+                        <option value="Talk">Talk</option>
+                        <option value="War & Politics">War & Politics</option>
+                        <option value="Western">Western</option>
                     </select>
                 </div>
                 <div>
@@ -159,8 +161,6 @@
                 </div>
                 <div>
                     <input type="file" id="photo" />
-                    <!--<img id="image"/>-->
-                    <!--<button type="button" onclick="uploadImage()">Upload Image</button>-->
                 </div>
 
                 <div class="clearfix">
@@ -170,19 +170,6 @@
             </div>
         </form>
     </div>
-
-    <div class="header">
-        <input type="text" id="tvShowName" placeholder="I want to watch..." />
-        <button id="getTV">Get TV Show</button>
-        <div>
-            <div id="ph"></div>
-            <div id="actors"></div>
-        </div>
-    </div>
-
-    <div id="seasonsList" class="seasons-center"></div>
-    <br />
-    <div class="episodes-center" id="Episodes"></div>
 
     <script>
         // Get the modal

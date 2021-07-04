@@ -39,7 +39,6 @@ function addUser() {
         Genre: $('#genreTB').val(),
         Address: $('#search_input').val()
     }
-
     let api = "../api/Users";
     ajaxCall("POST", api, JSON.stringify(user), postSuccess, postError)
 }

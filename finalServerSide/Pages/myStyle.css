@@ -9,6 +9,7 @@
     display: block;
     margin: 0 auto;
     border-radius: 10px;
+    
 }
 
 #ph {
@@ -74,10 +75,7 @@ body {
     margin: 5px 0 22px 0;
 }
 
-/*.center {
-    margin-left: auto;
-    margin-right: auto;
-}*/
+
 .episodes-center, #episodesView {
     display: grid;
     width: 100%;
@@ -140,6 +138,7 @@ div:focus {
     height: 250px;
     width: 170px;
     background: radial-gradient(white, #c0c9ed);
+    box-shadow: 2px 2px 5px white;
 }
 
     .card:hover {
@@ -168,6 +167,7 @@ div:focus {
     max-width: 250px;
     width: 500px; /*from td*/
     background-color: #c0c9ed;
+    box-shadow: 2px 2px 5px white;
 }
 
     .card2:hover {

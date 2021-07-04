@@ -21,8 +21,53 @@
     getLinks(); 
     /////////////jast members cat see chat///////////////
     if (localStorage.user == null)
-        document.getElementById("chatTablinks").style.visibility = "hidden";
+        document.getElementById("floatingChat").style.visibility = "hidden";
+
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 5
+            }
+        }
+    })
+
+    //$('.right').click(function () {
+    //    var position = $('.container').position();
+    //    var r = position.left - $(window).width()
+    //    $('.container').animate({
+    //        'left': '' + r + 'px'
+    //    });
+    //});
+
+    //$('.left').click(function () {
+    //    var position = $('.container').position();
+    //    var l = position.left + $(window).width()
+    //    if (l <= 0) {
+    //        $('.container').animate({
+    //            'left': '' + l + 'px'
+    //        });
+    //    }
+    //});    
+
 });
+
+////Here we are getting the number of the divs with class contentContainer inside the div container
+//var length = $('div .container').children('div .recommand-card').length;
+////Here we are setting the % width depending on the number of the child divs
+//$(".container").width(length * 100 + '%');
+
+
+
 
 //Header of the page -> Show the basic data of the TV show. Taking it from LS.
 function showTVData() {

@@ -215,7 +215,7 @@ function getEpisodeSuccessCB(episodes) {
 
     epArr.push(episode);    //מערך של כל הפרקים
     episodesList += "<div class='card2'><img class= 'imgCard' id='" + j + "' src='" + episode.ImageURL + "'>"; //td changed to div
-    episodesList += "<div class='episodeBlock'><br><b class='episodeTitle'>" + (episodes.name).slice(0, 17);
+    episodesList += "<div class='episodeBlock'><br><b class='episodeTitle'>" + (episodes.name)/*.slice(0, 17)*/;
     episodesList += "</b></br> " + episodes.air_date + "</br></br><div id='episodeOverView'>" + episodes.overview + "</div></div>";
     if (localStorage.user != undefined) {
         episodesList += "</br><button class='addBtn' id='" + c + "' type='button' onclick=PostToServer(epArr[this.id])> Add </button> </center>";

@@ -8,7 +8,6 @@
     method = "3/tv/";
     api_key = "api_key=" + key;
 
-    navBarVisability()
     getTopRated();  // Get similars Tv show
     getMostViewed();
     getMostViewedEpisodes();

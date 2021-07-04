@@ -43,6 +43,12 @@
     <!--Your web app's Firebase configuration-->
     <script src="../Scripts/config.js"></script>
     <!-- Links For Chat -->
+    <!-- OwlCarousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 
     <script src="../Scripts/aboutTv.js"></script>
 
@@ -62,7 +68,6 @@
                 <div id="mediaLinks" class="wrapper"> </div>
             </div>
         </div>
-
     </div>
     <div class="floating-chat" id="floatingChat">
         <i class="fa" aria-hidden="true">&#xf0e6;</i>
@@ -113,7 +118,7 @@
         <button class="tablinks" tabindex="3" onclick="openTab(event, 'Recommendations')"><i style="font-size:24px" class="fa">&#xf005;</i>Recommendations</button>
         <button class="tablinks" tabindex="4" onclick="openTab(event, 'Similar')">Similar</button>
         <button class="tablinks" tabindex="5" onclick="openTab(event, 'Reviews'); window.dispatchEvent(new Event('resize'));">Reviews</button>
-        <button id="chatTablinks" class="tablinks" tabindex="6" onclick="openTab(event, 'Chat'); setTimeout(scrollChatDown, 1);"><i style="font-size:24px" class="fa">&#xf0e6;</i> Chat</button>
+        <!--<button id="chatTablinks" class="tablinks" tabindex="6" onclick="openTab(event, 'Chat'); setTimeout(scrollChatDown, 1);"><i style="font-size:24px" class="fa">&#xf0e6;</i> Chat</button>-->
     </div>
 
     <div id="Actors" class="tabcontent">
@@ -151,10 +156,10 @@
         <div id="links"> </div>
     </div>
 
-    <div id="Chat" class="tabcontent">
+    <!--<div id="Chat" class="tabcontent">
         <div class='title'><a>for Chat search on bottom right corner :)</a></div>
         
-    </div>
+    </div>-->
     <script src="../Scripts/liveChat.js"></script>
 
 </body>

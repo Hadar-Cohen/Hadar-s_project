@@ -4,9 +4,10 @@
 .navbar {
     border: 1px solid #ccc;
     background-color: #b3c0f2;
-    /*background-image: url('../images/cool-background.png');
+    opacity:0.8;
+    background-image: url('../images/cool-background.png');
     background-repeat: no-repeat;
-    background-size: cover;*/
+    background-size: cover;
 }
 
 .navbar-toggle .icon-bar {
