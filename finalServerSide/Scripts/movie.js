@@ -11,7 +11,6 @@
   //  url = "https://api.themoviedb.org/3/search/movie?";
     url = "https://api.themoviedb.org/";
     imagePath = "https://image.tmdb.org/t/p/w500/";
-    navBarVisability();
     getTopRated();
     //document.getElementById('card').onclick = function () {
     //    document.getElementById('scripted').focus();

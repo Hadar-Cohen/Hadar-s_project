@@ -350,6 +350,7 @@
     <Content Include="Pages\myStyle.css" />
     <Content Include="Pages\navbarStyle.css" />
     <Content Include="Pages\searchTv.html" />
+    <Content Include="Pages\signup.html" />
     <Content Include="Pages\StyleSheetModalactor.css" />
     <Content Include="Pages\TrySlider.html" />
     <Content Include="Pages\view.html" />

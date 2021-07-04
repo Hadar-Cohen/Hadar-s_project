@@ -15,7 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCCwWKnfacKHx3AVajstMk6Ist1VUoNt9w"></script>
+   
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -25,13 +25,20 @@
 
     <link href="aboutStyle.css" rel="stylesheet" />
     <script src="../Scripts/movie.js"></script>
-    <link href="navbarStyle.css" rel="stylesheet" />
+    <script>
+
+        $(document).ready(function () {
+            $("#nav-bar").load("signup.html");
+        });
+    </script>
+
+    <!--<link href="navbarStyle.css" rel="stylesheet" />
     <link href="myStyle.css" rel="stylesheet" />
-    <script src="../Scripts/navbarFunc.js"></script>
+    <script src="../Scripts/navbarFunc.js"></script>-->
     <style>
         #aboutM {
             position: relative;
-         }
+        }
 
         #Poster > img {
             /*float: left;*/
@@ -49,7 +56,9 @@
         #aboutM > div {
             position: absolute;
         }
-
+        #aboutM > backgroundPorter{
+            height:100%;
+        }
         #movieName {
             font-family: sans-serif;
             font-size: 55px;
@@ -116,33 +125,14 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse ">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"> The Movie H & H</a>
-            </div>
-            <ul class="nav navbar-nav justify-content-between">
-                <li><div id="profile"></div></li>
-                <li><div id="userName"></div></li>
-                <li><a class="toblack" href="homePage.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a class="toblack" href="insert_signup.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
-                <li><a class="toblack" href="movie.html"><span class="glyphicon glyphicon-search"></span> Search Movie</a></li>
-                <li><a class="toblack" id="view" href="view.html"><span class="glyphicon glyphicon-heart-empty"></span> View</a></li><!--"glyphicon glyphicon-eye-open"-->
-                <li><a class="toblack" id="admin" href="admin.html"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a id="signUp" class="toblack"><span class="glyphicon glyphicon-user" href="insert_signup.html" data-target="#modalBox"></span> Sign Up</a></li>
-                <li><a id="login" href="login.html" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
-                <li><a href="editUser.html" id="editUser" class="toblack"><span class="glyphicon glyphicon-pencil"></span>  Edit Profile</a></li>
-                <li><a onclick="exitFunc()" id="exit" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Exit</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div id="nav-bar"></div>
 
     <div class="header">
         <input type="text" id="SearchMovieName" placeholder="I want to watch..." />
         <button id="getMovie">Search</button>
     </div>
+    <div class='title'><a>TOP RATED</a></div>
+    <div id="topRated"></div>
     <div id="TheMovieList" class="seasons-center"></div>
 
     <div id="aboutM">
@@ -163,8 +153,7 @@
         </div>
     </div>
 
-    <div class='title'><a>TOP RATED</a></div>
-    <div id="topRated"></div>
+
 
 
 

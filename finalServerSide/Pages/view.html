@@ -8,7 +8,7 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--<link href="chatStyle.css" rel="stylesheet" />-->
-    
+
 
     <script src="../Scripts/ajaxCalls.js"></script>
     <!--<link href="modalView.css" rel="stylesheet" />-->
@@ -24,36 +24,41 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <script>
 
-    <link href="myStyle.css" rel="stylesheet" />
-    <link href="navbarStyle.css" rel="stylesheet" />
+        $(document).ready(function () {
+            $("#nav-bar").load("signup.html");
+        });
+    </script>
+    <!--<link href="myStyle.css" rel="stylesheet" />
+    <link href="navbarStyle.css" rel="stylesheet" />-->
     <style>
-      
+
+
         .wrapper {
-            color:white;
+            color: white;
             position: absolute;
             top: 12%;
             left: 20%;
             transform: translate(-50%, -50%);
         }
 
-        .wrapper > a {
-            display: block;
-            font-size: 24px;
-            font-family: sans-serif;
-            text-decoration: none;
-            color: white;
-            border-top: 2px solid #333;
-            border-bottom: 2px solid #333;
-            padding: 10px;
-            letter-spacing: 2px;
-            transition: all .25s;
-        }
+            .wrapper > a {
+                display: block;
+                font-size: 24px;
+                font-family: sans-serif;
+                text-decoration: none;
+                color: white;
+                border-top: 2px solid #333;
+                border-bottom: 2px solid #333;
+                padding: 10px;
+                letter-spacing: 2px;
+                transition: all .25s;
+            }
 
-        .wrapper > a:hover {
-            letter-spacing: 15px;
-        }
-
+                .wrapper > a:hover {
+                    letter-spacing: 15px;
+                }
     </style>
     <script>
         $(document).ready(function () {
@@ -76,7 +81,7 @@
             let api = "../api/Totals?UserId=" + userId;
             ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
         });
-        
+
     </script>
     <script src="../Scripts/navbarFunc.js"></script>
     <script src="../Scripts/view.js"></script>
@@ -84,29 +89,8 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-inverse ">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"> The Movie H & H</a>
-            </div>
-            <ul class="nav navbar-nav justify-content-between">
-                <li><div id="profile"></div></li>
-                <li><div id="userName"></div></li>
-                <li><a class="toblack" href="homePage.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a class="toblack" href="insert_signup.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
-                <li><a class="toblack" href="movie.html"><span class="glyphicon glyphicon-search"></span> Search Movie</a></li>
-                <li><a class="toblack" id="view" href="view.html"><span class="glyphicon glyphicon-heart-empty"></span> View</a></li><!--"glyphicon glyphicon-eye-open"-->
-                <li><a class="toblack" id="admin" href="admin.html"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a onclick="signUpClick()" id="signUp" class="toblack"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a id="login" href="login.html" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
-                <li><a href="editUser.html" id="editUser" class="toblack"><span class="glyphicon glyphicon-pencil"></span>  Edit Profile</a></li>
-                <li><a onclick="exitFunc()" id="exit" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Exit</a></li>
-            </ul>
-        </div>
-    </nav>
-   
+    <div id="nav-bar"></div>
+
     <div id="myheader">
         <div id="forum"></div>
         <div id="title">My Series</div>
