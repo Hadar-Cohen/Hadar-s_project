@@ -18,19 +18,23 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
     <script src="../scripts/ajaxCalls.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!--<link href="myStyle.css" rel="stylesheet" />-->
-    <script src="../Scripts/admin.js"></script>
+    <link href="myStyle.css" rel="stylesheet" />
 
+    <link href="AdminStyle.css" rel="stylesheet" />
+    <link href="navbarStyle.css" rel="stylesheet" />
+    <script src="../Scripts/navbarFunc.js"></script>
+    <script src="../Scripts/admin.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#nav-bar").load("signup.html");
-            getMostViewedS();
-            getMostViewedE();
-            getMostActiveUser();
-            adminDatails();
-        });
+        //$(document).ready(function () {
+        //    navBarVisability();
+        //    getMostViewedS();
+        //    getMostViewedE();
+        //    getMostActiveUser();
+        //    adminDatails();
+        //});
         ///////////////////////////////////// get the Most popular series in our DB//////////////////////////////////////////////////////
         function getMostViewedS() {
             let api = "../api/Seriess";
@@ -78,8 +82,30 @@
 
 </head>
 <body>
-    <div id="nav-bar"></div>
-
+   <!-- <div id="nav-bar"></div>-->
+    
+    <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"> The Movie H & H</a>
+            </div>
+            <ul class="nav navbar-nav justify-content-between">
+                <li><div id="profile"></div></li>
+                <li><div id="userName"></div></li>
+                <li><a class="toblack" href="homePage.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a class="toblack" href="insert_signup.html"><span class="glyphicon glyphicon-search"></span> Search TvShow</a></li>
+                <li><a class="toblack" href="movie.html"><span class="glyphicon glyphicon-search"></span> Search Movie</a></li>
+                <li><a class="toblack" id="view" href="view.html"><span class="glyphicon glyphicon-heart-empty"></span> View</a></li>
+                <li><a class="toblack" id="admin" href="admin.html"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a onclick="signUpClick()" id="signUp" class="toblack"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a id="login" href="login.html" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+                <li><a href="editUser.html" id="editUser" class="toblack"><span class="glyphicon glyphicon-pencil"></span>  Edit Profile</a></li>
+                <li><a onclick="exitFunc()" id="exit" class="toblack"><span class="glyphicon glyphicon-log-in"></span>  Exit</a></li>
+            </ul>
+        </div>
+    </nav>
     <div style="text-align:center">
         <h1 style="color:aliceblue"> Hello Admin!</h1> <h3 style="color:aliceblue"> <br /> You can remove Users<br /> And see how mach save spacific apisodes and seriess</h3>
     </div>
@@ -88,7 +114,6 @@
         <div id="redDiv"></div>
         <div id="blueDiv"></div>
         <div id="greenDiv"></div>
-        <div id="pinkDiv"></div>
     </div>
     <center>
         <div class="btn-group">
@@ -101,4 +126,3 @@
 
 </body>
 </html>
-<link href="AdminStyle.css" rel="stylesheet" />

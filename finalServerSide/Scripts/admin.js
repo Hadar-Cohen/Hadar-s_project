@@ -1,9 +1,13 @@
 ﻿var tbl; //DATA TABLE
 $(document).ready(function () {
+    navBarVisability();
+    getMostViewedS();
+    getMostViewedE();
+    getMostActiveUser();
+    adminDatails();
     $("#showUsers").on("click", getUsers);
     $("#showSeries").on("click", getSeries);
     $("#showEpisodes").on("click", getEpisodes);
-
 });
 
 function getUsers() {
@@ -49,7 +53,7 @@ function deleteFunc(id) {
         });
 }
 function deleteSuccess(numOfUser) {
-    alert("Deleted " + numOfUser + " users")
+    swal("User Deleted")
     getUsers();
 }
 function error(err) {
