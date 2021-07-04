@@ -240,6 +240,7 @@ function showAbout(tvShow) {
     console.log(tvShow);
     storeToLS(tvShow);
     window.location.replace("insert_signup.html");
+    window.location.replace("searchTv.html");
     // location.reload();
 }
 //Store to Local Storage the tvShow that was clicked
@@ -271,7 +272,7 @@ function storeToLS(tvShow) {
 function showAboutFronOurWeb(tvShow) {
     console.log(tvShow);
     storeToLsFromSeriesDB(tvShow);
-    window.location.replace("insert_signup.html");
+    window.location.replace("searchTv.html");
     // location.reload();
 }
 ///////////in our proj we need Upper letters - property//////////
