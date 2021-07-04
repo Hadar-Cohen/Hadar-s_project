@@ -239,7 +239,6 @@ function drawAccoGenre(TVShow) {
 function showAbout(tvShow) {
     console.log(tvShow);
     storeToLS(tvShow);
-    window.location.replace("insert_signup.html");
     window.location.replace("searchTv.html");
     // location.reload();
 }
