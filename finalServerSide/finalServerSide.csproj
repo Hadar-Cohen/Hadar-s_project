@@ -340,7 +340,8 @@
     <Content Include="Pages\editUser.html" />
     <Content Include="Pages\homePage.css" />
     <Content Include="Pages\homePage.html" />
-    <Content Include="Pages\insert_signup.html" />
+    <Content Include="Pages\signupStyle.css" />
+    <Content Include="Pages\signup.html" />
     <Content Include="Pages\links.css" />
     <Content Include="Pages\linkTest.html" />
     <Content Include="Pages\login.html" />

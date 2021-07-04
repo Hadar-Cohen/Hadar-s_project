@@ -24,13 +24,18 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
     <script src="../Scripts/config.js"></script>
 
-
     <script src="../Scripts/ajaxCalls.js"></script>
     <script src="../Scripts/login.js"></script>
     <script src="../Scripts/navbarFunc.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#test-nav").load("signup.html");
+        });
+    </script>
 </head>
 <body>
-    <nav class="navbar navbar-inverse ">
+    <!--<nav class="navbar navbar-inverse ">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">The Movie H & H</a>
@@ -40,8 +45,8 @@
                 </ul>
             </div>
         </div>
-    </nav>
-
+    </nav>-->
+    <div id="test-nav"></div>
     <div class="container">
         <form id="pForm">
             <h2>Login</h2>
@@ -60,8 +65,11 @@
                        oninput="this.setCustomValidity('')" required />
             </div>
             <input id="submitBTN" type="submit" value="Submit " />
+            <div id="notRegistered">
+                If you are not registered <a href="">click here</a>
+            </div>
         </form>
-
+        
     </div>
 </body>
 </html >
