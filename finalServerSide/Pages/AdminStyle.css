@@ -74,26 +74,39 @@ td > p > .overview{
 }
     .rowDivs > div {
         height: 150px;
-        width: 250px;
+        width: 300px;
         border-radius: 10px;
         opacity: 0.8;
         float: left;
         margin-left: 120px;
+        border:2px solid white;
     }
-#greenDiv {
-    background-color: purple;
+#greenDiv:hover,
+#greenDiv:focus,
+#blueDiv:hover,
+#blueDiv:focus,
+#redDiv:hover,
+#redDiv:focus {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    box-shadow: 7px 10px 5px #C7C7C7;
+    /*  box-shadow: 0 0.9em 0.9em -0.9em var(--hover);
+    transform: translateY(-3em);*/
+    /*    transform: translateY(-5px);*/
 }
+        #greenDiv {
+            /* background-color: purple;*/
+            background: linear-gradient(to right, #01a9ac, #01dbdf);
+        }
 
 #redDiv {
-    background-color: red;
+    background: linear-gradient(to right, #fe5d70, #fe5d70, #fe909d,#ff919e);
 }
 
-#pinkDiv {
-    background-color: pink;
-}
 
 #blueDiv {
-    background-color: deepskyblue;
+    background: linear-gradient(to right, #fe9365, #feb798);
 }
 .MostViewed {
     margin-top: 20px;
