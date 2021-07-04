@@ -1,9 +1,9 @@
 ﻿var tbl; //DATA TABLE
-$('document').ready(function () {
-    navBarVisability();
+$(document).ready(function () {
     $("#showUsers").on("click", getUsers);
     $("#showSeries").on("click", getSeries);
     $("#showEpisodes").on("click", getEpisodes);
+
 });
 
 function getUsers() {
