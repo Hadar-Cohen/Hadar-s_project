@@ -17,7 +17,7 @@
 ////////////////////////////////////top rated from the movie DB api - //////////////////////////////////////////////
 function getTopRated() {
     topRatedList = "<div class='container'>";
-    topRatedList += "<div class='row'>";
+    topRatedList += "<div class='owl-carousel owl-theme row'>";
 
     let apiCall = url + "3/trending/tv/week?" + api_key;
     ajaxCall("GET", apiCall, "", getSuccesstopRated, errortopRated);
@@ -58,7 +58,7 @@ function drawtopRated(TVShow) {
             break;
     }
     str = "";
-    str = `<div class='recommand-card' onclick = 'showAbout(topRatedArr[` + r + `])'>
+    str = `<div class='item recommand-card' onclick = 'showAbout(topRatedArr[` + r + `])'>
                            <img src='` + imagePath + TVShow.poster_path + `'>
                            <h4><b>` + TVShow.name + `</b></h4>
                            <img class='starsPopularity' src= '../images/` + stars + `stars.png'/></div>`
@@ -166,8 +166,8 @@ r = 0; //index in result array that contain all the tv shows in the TMDB service
 genresArr = [];//local arrey to render and play onclick function
 function getSuccessGenres(genre) {
     genresArr = genre.genres;
-    genresArr.forEach(gan => {
-        genresList += drawGenres(gan);
+    genresArr.forEach(genre => {
+        genresList += drawGenres(genre);
         r++;
     });
     genresList += "</select></div>";
@@ -182,15 +182,12 @@ function drawGenres(genre) {
     console.log(genre);
     str = "";
     str += "<option value=" + genre.id + ">" + genre.name + "</option>";
-    // str = `<button id=` + genre.id +` class="button button5">`+genre.name+`</button>`
     return str;
 }
-/////////////
+
 function showSeriesAccoGenre(ganerId) {
     seriesAccoGenreList = "<div class='container'>";
-    seriesAccoGenreList += "<div class='row'>";
-
-
+    seriesAccoGenreList += "<div class='owl-carousel owl-theme row'>";
     let apiCall = url + "3/discover/tv?" + api_key + "&sort_by=popularity.desc&with_genres=" + ganerId;
     ajaxCall("GET", apiCall, "", getSuccessTVShowGenres, errorGenres);
 }
@@ -198,12 +195,34 @@ r = 0; //index in result array that contain all the tv shows in the TMDB service
 seriesAccoGenreArr = [];//local arrey to render and play onclick function
 function getSuccessTVShowGenres(seriess) {
     seriesAccoGenreArr = seriess.results;
+    
     seriesAccoGenreArr.forEach(TVShow => {
         seriesAccoGenreList += drawAccoGenre(TVShow);
         r++;
     });
     seriesAccoGenreList += "</div></div>";
     $("#seriesAccoGenre").html(seriesAccoGenreList);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    jQuery(function ($) {
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    });
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     r = 0;
     $("html, body").animate({ scrollTop: document.body.scrollHeight }, "slow");
 
@@ -228,7 +247,7 @@ function drawAccoGenre(TVShow) {
             break;
     }
     str = "";
-    str = `<div class='recommand-card' onclick = 'showAbout(seriesAccoGenreArr[` + r + `])'>
+    str = `<div class='item recommand-card' onclick = 'showAbout(seriesAccoGenreArr[` + r + `])'>
                            <img src='` + imagePath + TVShow.poster_path + `'>
                            <h4><b>` + TVShow.name + `</b></h4>
                            <img class='starsPopularity' src= '../images/` + stars + `stars.png'/></div>`

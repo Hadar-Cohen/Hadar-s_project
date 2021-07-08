@@ -208,7 +208,7 @@ r = 0; //index in result array that contain all the tv shows in the TMDB service
 recArr = [];
 function getSuccessRecommendationsCB(recommendations) {
     let recList = "<div class='container'>";
-    recList += "<div class='row'>";
+    recList += "<div class='owl-carousel owl-theme row'>";
     recArr = recommendations.results;
     recArr.forEach(recommand => {
         recList += drawRecommand(recommand);
@@ -242,7 +242,7 @@ function drawRecommand(rec) {
             break;
     }
     str = "";
-    str = `<div class='recommand-card' onclick = 'showAbout(recArr[` + r + `])'>
+    str = `<div class='item recommand-card' onclick = 'showAbout(recArr[` + r + `])'>
         <img src='` + imagePath + rec.poster_path + `'>
         <h4><b>` + rec.name + `</b></h4>
         <h4>` + rec.origin_country[0] + `, ` + rec.original_language + `</h4>
@@ -260,7 +260,7 @@ similarArr = null;
 function getSuccessSimilarsCB(similars) {
     similarArr = similars.results;
     let similarList = "<div class='container'>";
-    similarList += "<div class='row'>";
+    similarList += "<div class='owl-carousel owl-theme row'>";
     similarArr.forEach(similarShow => {
         similarList += drawRecommand(similarShow);
         r++;

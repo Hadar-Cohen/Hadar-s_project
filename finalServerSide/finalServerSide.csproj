@@ -539,6 +539,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\movie.js" />
     <Content Include="Scripts\navbarFunc.js" />
+    <Content Include="Scripts\owl-carousel-script.min.js" />
     <Content Include="Scripts\signUp.js" />
     <Content Include="Scripts\view.js" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />

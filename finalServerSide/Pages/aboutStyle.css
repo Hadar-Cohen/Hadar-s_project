@@ -396,3 +396,13 @@ media media-chat media-chat-reverse .media-body > .avatarChat {
     .row::-webkit-scrollbar-button:vertical:decrement {
         background-image: url(https://dl.dropboxusercontent.com/u/55165267/icon.png);
     }*/
+
+.owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev, .owl-carousel button.owl-dot {
+    background: 0 0;
+    color: inherit;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    font-size: 40px;
+    color: white;
+}
