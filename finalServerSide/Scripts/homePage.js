@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+    $("#test-nav").load("signup.html");
     key = "90f77ef6862d870eb9f5fff3bc587100";
 
     url = "https://api.themoviedb.org/";

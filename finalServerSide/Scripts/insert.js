@@ -166,12 +166,12 @@ function getSeasonErrorCB(err) {
     if (err.status == 404) {
         $("#seasonsList").html(seasonsList);
         console.log(err);
+        i = 0;
     }
 }
-
+saveSeasonNum = 0;
 function showEpisode(seasonNum) {
     $("html, #Episodes").animate({ scrollTop: document.body.scrollHeight }, "slow");
-
 
     chooseSeasonClass(seasonNum);
     j = 1;
@@ -188,11 +188,12 @@ function showEpisode(seasonNum) {
 
 function chooseSeasonClass(seasonNum) {
     document.getElementById(seasonNum).classList.add("cardSelected");
-    for (var i = 1; i < seasonsCount; i++) {
-        if (i != seasonNum) {
-            document.getElementById(i).classList.remove("cardSelected");
-        }
+    //for (var i = 1; i <= seasonsCount; i++) {
+    if (saveSeasonNum != 0) {
+        document.getElementById(saveSeasonNum).classList.remove("cardSelected");
     }
+       
+    //}
 }
 
 //Get Episodes from the TMDB server

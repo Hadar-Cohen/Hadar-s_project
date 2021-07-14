@@ -93,5 +93,11 @@ text-align:left;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
-/*    justify-content: center;
-*/}
+    z-index: 1;
+    /*    justify-content: center;
+*/
+}
+
+/*.no-js .owl-carousel, .owl-carousel.owl-loaded{
+    z-index:-1;
+}*/
