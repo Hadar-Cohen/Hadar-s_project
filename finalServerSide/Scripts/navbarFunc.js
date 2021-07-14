@@ -60,27 +60,3 @@ function exitFunc() {
 //            $('#message').html('Passwords are Not Matching').css('color', 'red');
 //    });
 //}
-
-function createNavBar() {
-    return `<nav class="navbar navbar-inverse ">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <!--<a class="navbar-brand" href="#">The Movie H & H</a>-->
-            </div>
-            <ul class="nav navbar-nav justify-content-between">
-                <li><div id="userName"></div></li>
-                <li><a class="toblack" href="homePage.html"> Home</a></li>
-                <li><a class="toblack" href="insert_signup.html">Search</a></li>
-                <li><a class="toblack" id="view" href="view.html">View</a></li>
-                <li><a class="toblack" id="admin" href="admin.html">Admin</a></li>
-
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a onclick="signUpClick()" id="signUp" class="toblack"><span class="glyphicon glyphicon-user singupc"></span> Sign Up</a></li>
-                <li><a id="login" href="login.html" class="toblack"><span class="glyphicon glyphicon-log-in "></span> Login</a></li>
-                <li><a onclick="exitFunc()" id="exit" class="toblack"><span class="glyphicon glyphicon-log-in "></span> Exit</a></li>
-            </ul>
-        </div>
-    </nav>`
-}

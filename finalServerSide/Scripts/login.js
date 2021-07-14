@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
+    $("#test-nav").load("signup.html");
     $("#pForm").submit(submit);
-    //navBarVisability();
 });
 
 function submit() {
@@ -50,9 +50,7 @@ function storeProfile(email) {
         ref.child(email).getDownloadURL()
             .then(url => {
                 console.log(url);
-                alert("image here!");
                 localStorage.setItem("profileSrc", JSON.stringify(url));
-
             })
     }
     catch (error) {
@@ -60,5 +58,4 @@ function storeProfile(email) {
         let avatarImg = "https://image.ibb.co/jw55Ex/def_face.jpg";
         localStorage.setItem("profileSrc", JSON.stringify(avatarImg));
     }
-
 }
