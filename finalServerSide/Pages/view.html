@@ -24,14 +24,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <script>
-
-        $(document).ready(function () {
-            $("#nav-bar").load("signup.html");
-        });
-    </script>
-    <!--<link href="myStyle.css" rel="stylesheet" />
-    <link href="navbarStyle.css" rel="stylesheet" />-->
     <style>
 
 
@@ -62,14 +54,17 @@
     </style>
     <script>
         $(document).ready(function () {
+
+            $("#nav-bar").load("signup.html");
             imagePath = "https://image.tmdb.org/t/p/w500/";
-            navBarVisability();
+            //navBarVisability();
             /*modal();*/
 
             $("#phView").html("");
             str = "<select id='series' onchange=showEpisodes(this)>";
             str += "<option>select</option>";
-
+            if (localStorage.user != null) {                user = JSON.parse(localStorage["user"]);
+            }
             userId = user.Id;
             userName = user.FirstName + " " + user.LastName;
             userTmp = {
