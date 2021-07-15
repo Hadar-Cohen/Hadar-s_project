@@ -186,13 +186,13 @@ namespace Ex2.Models.DAL
 
                 String selectSTR = "SELECT distinct S.*";
                 selectSTR += "FROM User_2021 as U right join Preferences_2021 as P on U.id = P.userId inner join Series_2021 as S on P.seriesId = S.id ";
-                selectSTR += "WHERE U.id IN(";
-                selectSTR += "SELECT U1.id FROM(";
-                selectSTR += "SELECT U2.id as tmpId,U2.gender as tmpGender,U2.yearOfBirth as tmpYOB";
+                selectSTR += "WHERE U.id IN( ";
+                selectSTR += "SELECT U1.id FROM( ";
+                selectSTR += "SELECT U2.id as tmpId,U2.gender as tmpGender,U2.yearOfBirth as tmpYOB ";
                 selectSTR += "FROM User_2021 as U2 WHERE U2.id =" + userId;
-                selectSTR += ")TmpUser left join User_2021 as U1 on TmpUser.tmpGender= U1.gender and";
-                selectSTR += "U1.yearOfBirth Between TmpUser.tmpYOB - 5 and TmpUser.tmpYOB + 5";
-                selectSTR += "and TmpUser.tmpId <> U1.id)";
+                selectSTR += ")TmpUser left join User_2021 as U1 on TmpUser.tmpGender= U1.gender and ";
+                selectSTR += "U1.yearOfBirth Between TmpUser.tmpYOB - 5 and TmpUser.tmpYOB + 5 ";
+                selectSTR += "and TmpUser.tmpId <> U1.id) ";
                 SqlCommand cmd = new SqlCommand(selectSTR, con);
 
                 // get a reader

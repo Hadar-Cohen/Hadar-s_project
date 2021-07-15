@@ -75,21 +75,21 @@ function drawtopRated(TVShow) {
 function getRecommendForYou(user) {
     
     let api = "../api/Totals?userId=" + user.Id; //+ "&email=" + user.Email;
-    ajaxCall("GET", api, "", getSuccessUserRecommendations, errorMostViewed);
+    ajaxCall("GET", api, "", getSuccessRecommendForYou, errorMostViewed);
 }
 
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 recommendForYouArr = [];//local arrey to render and play onclick function
 
-function getSuccessUserRecommendations(topV) {
-    recommendForYouArr = topV;////
+function getSuccessRecommendForYou(recForYou) {
+    recommendForYouArr = recForYou;////
     recommendForYouList = "<div style= 'display:flex; justify-content:center;' class='row'>";
-    while (r < 8) {
-        recommendForYouList += drawRecommendForYou(topV[r]);
+    while (r < 8 && recForYou[r] != undefined) {
+        recommendForYouList += drawRecommendForYou(recForYou[r]);
         r++;
     }
     recommendForYouList += "</div>";
-    $("#mostViewed").html(recommendForYouList);
+    $("#RecommendForYou").html(recommendForYouList);
     r = 0;
 }
 
@@ -130,11 +130,11 @@ function getMostViewed() {
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 mostViewedArr = [];//local arrey to render and play onclick function
 
-function getSuccessMostViewed(topV) {
-    mostViewedArr = topV;////
+function getSuccessMostViewed(mostView) {
+    mostViewedArr = mostView;////
     mostViewedList = "<div style= 'display:flex; justify-content:center;' class='row'>";
     while (r < 8) {
-        mostViewedList += drawMostViewed(topV[r]);
+        mostViewedList += drawMostViewed(mostView[r]);
         r++;
     }
     mostViewedList += "</div>";
@@ -180,12 +180,12 @@ function getMostViewedEpisodes() {
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 mostViewedEpisodesArr = [];//local arrey to render and play onclick function
 
-function getSuccessMostViewedEpisodes(topV) {
-    mostViewedEpisodesArr = topV;/////
+function getSuccessMostViewedEpisodes(mostViewEpisodes) {
+    mostViewedEpisodesArr = mostViewEpisodes;/////
     mostViewedEpisodesList = "<div style= 'display:flex; justify-content:center;' class='row'>";
 
     while (r < 8) {
-        mostViewedEpisodesList += drawMostViewedEpisodes(topV[r]);
+        mostViewedEpisodesList += drawMostViewedEpisodes(mostViewEpisodes[r]);
         r++;
     }
     mostViewedEpisodesList += "</div>";
