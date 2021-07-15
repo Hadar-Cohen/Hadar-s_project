@@ -224,7 +224,7 @@ function getSuccessTVShowGenres(seriess) {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     r = 0;
-    $("html, #seriesAccoGenre").animate({ scrollTop: document.body.getElementsById.scrollHeight }, "slow");
+  //  $("html, #seriesAccoGenre").animate({ scrollTop: document.body.getElementsById.scrollHeight }, "slow");
 
 
 }
