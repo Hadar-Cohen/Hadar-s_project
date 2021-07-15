@@ -74,7 +74,7 @@
             }
             /*series = document.getElementById('series');*/
             //selectedText = series.options[series.selectedIndex].innerHTML;
-            let api = "../api/Totals?UserId=" + userId;
+            let api = "../api/Totals?UserId=" + userId + "&userEmail=" + userEmail;
             ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
         });
 
