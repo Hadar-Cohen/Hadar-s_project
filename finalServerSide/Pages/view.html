@@ -67,6 +67,7 @@
                 user = JSON.parse(localStorage["user"]);
             }
             userId = user.Id;
+            userEmail = user.Email;
             userName = user.FirstName + " " + user.LastName;
             userTmp = {
                 id: userId,
@@ -74,7 +75,7 @@
             }
             /*series = document.getElementById('series');*/
             //selectedText = series.options[series.selectedIndex].innerHTML;
-            let api = "../api/Totals?UserId=" + userId + "&userEmail=" + userEmail;
+            let api = "../api/Totals?UserId=" + userId + "&email=" + userEmail;
             ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
         });
 
@@ -82,7 +83,6 @@
     <script src="../Scripts/navbarFunc.js"></script>
     <script src="../Scripts/view.js"></script>
     <!--<script src="../Scripts/viewChat.js"></script>-->
-
 </head>
 <body>
     <div id="nav-bar"></div>
