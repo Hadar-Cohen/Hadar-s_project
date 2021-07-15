@@ -156,6 +156,7 @@ namespace Ex2.Models.DAL
                     Series s = new Series();
                     s.Id = Convert.ToInt32(dr["id"]);
                     s.Name= (string)dr["name"];
+                    s.Popularity=(string)
                     seriesNames.Add(s);
                 }
 
@@ -178,7 +179,7 @@ namespace Ex2.Models.DAL
         public List<Series> GetSimilarSeries(int userId)
         {
             SqlConnection con = null;
-            List<Series> seriesNames = new List<Series>();
+            List<Series> similarsSeriesForYou = new List<Series>();
 
             try
             {
@@ -202,11 +203,17 @@ namespace Ex2.Models.DAL
                 {   // Read till the end of the data into a row
                     Series s = new Series();
                     s.Id = Convert.ToInt32(dr["id"]);
+                    s.First_air_date = (string)dr["first_air_date"];
                     s.Name = (string)dr["name"];
-                    seriesNames.Add(s);
+                    s.Origin_country = (string)dr["origin_country"];
+                    s.Original_language = (string)dr["original_language"];
+                    s.Overview = (string)dr["overview"];
+                    s.Popularity = Convert.ToInt32(dr["popularity"]);
+                    s.Poster_path = (string)(dr["poster_path"]);
+                    similarsSeriesForYou.Add(s);
                 }
 
-                return seriesNames;
+                return similarsSeriesForYou;
             }
             catch (Exception ex)
             {

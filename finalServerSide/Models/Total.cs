@@ -12,12 +12,14 @@ namespace Ex2.Models
         Series series;
         Episode episode;
         int userId;
+        string email;
 
-        public Total(Series series, Episode episode, int userId)
+        public Total(Series series, Episode episode, int userId, string email)
         {
             this.Series = series;
             this.Episode = episode;
             this.UserId = userId;
+            this.Email = email;
         }
 
         public Total()
@@ -27,6 +29,7 @@ namespace Ex2.Models
         public Series Series { get => series; set => series = value; }
         public Episode Episode { get => episode; set => episode = value; }
         public int UserId { get => userId; set => userId = value; }
+        public string Email { get => email; set => email = value; }
 
         public int Insert()
         {
