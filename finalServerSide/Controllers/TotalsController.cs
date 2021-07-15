@@ -11,11 +11,18 @@ namespace Ex2.Controllers
     public class TotalsController : ApiController
     {
         // GET api/<controller>
-        public List<Series> Get(int userId) //Get series of user (according to his preferences)
+        public List<Series> Get(int userId, string email) //Get series of user (according to his preferences)
         {
             Total total = new Total();
-            return total.GetSeries(userId);
+            return total.GetSeries(userId, email);
         }
+
+        public List<Series> Get(int userId) //Get series similars user
+        {
+            Total total = new Total();
+            return total.GetSimilarsSeries(userId);
+        }
+
 
         public List<Episode> Get(string seriesName, int userId)
         {
@@ -34,7 +41,7 @@ namespace Ex2.Controllers
         public void Put(int id, [FromBody] string value)
         {
         }
-        //
+        
         public void Delete(int episodeId, int seriesId, int userId)
         {
             Total total = new Total();

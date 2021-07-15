@@ -36,10 +36,10 @@ namespace Ex2.Models
             return ds.Insert(this);
         }
 
-        public List<Series> GetSeries(int userId)
+        public List<Series> GetSeries(int userId, string email)
         {
             TotalDBServices tDB = new TotalDBServices();
-            return tDB.GetSeries(userId);
+            return tDB.GetSeries(userId, email);
         }
 
         //DeletePreferences///.......
@@ -48,5 +48,11 @@ namespace Ex2.Models
             TotalDBServices tDB = new TotalDBServices();
             tDB.DeletePreferences(episodeId,seriesId, userId);
         }
+        public List<Series> GetSimilarsSeries(int userId)
+        {
+            TotalDBServices tDB = new TotalDBServices();
+            return tDB.GetSimilarSeries(userId);
+        }
+
     }
 }

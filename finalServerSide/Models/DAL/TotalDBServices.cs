@@ -133,7 +133,7 @@ namespace Ex2.Models.DAL
         //---------------------------------------------------------------------------------
         // Read from the DB into a list all the series names that the user prefered- dataReader
         //---------------------------------------------------------------------------------
-        public List<Series> GetSeries(int userId)
+        public List<Series> GetSeries(int userId, string email)
         {
             SqlConnection con = null;
             List<Series> seriesNames = new List<Series>();
@@ -175,7 +175,52 @@ namespace Ex2.Models.DAL
             }
         }
 
-        
+        public List<Series> GetSimilarSeries(int userId)
+        {
+            SqlConnection con = null;
+            List<Series> seriesNames = new List<Series>();
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "SELECT distinct S.*";
+                selectSTR += "FROM User_2021 as U right join Preferences_2021 as P on U.id = P.userId inner join Series_2021 as S on P.seriesId = S.id ";
+                selectSTR += "WHERE U.id IN(";
+                selectSTR += "SELECT U1.id FROM(";
+                selectSTR += "SELECT U2.id as tmpId,U2.gender as tmpGender,U2.yearOfBirth as tmpYOB";
+                selectSTR += "FROM User_2021 as U2 WHERE U2.id =" + userId;
+                selectSTR += ")TmpUser left join User_2021 as U1 on TmpUser.tmpGender= U1.gender and";
+                selectSTR += "U1.yearOfBirth Between TmpUser.tmpYOB - 5 and TmpUser.tmpYOB + 5";
+                selectSTR += "and TmpUser.tmpId <> U1.id)";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+
+                // get a reader
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+
+                while (dr.Read())
+                {   // Read till the end of the data into a row
+                    Series s = new Series();
+                    s.Id = Convert.ToInt32(dr["id"]);
+                    s.Name = (string)dr["name"];
+                    seriesNames.Add(s);
+                }
+
+                return seriesNames;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
+        }
 
         public void UpdatePreferencesSeriesCount(int preferencesCount, int id)
         {
