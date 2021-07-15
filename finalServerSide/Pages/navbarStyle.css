@@ -9,6 +9,10 @@
     background-repeat: no-repeat;
     background-size: cover;*/
 }
+.navbar-nav {
+    color: black;
+}
+
 
 .navbar-toggle .icon-bar {
     background-color: #333;
