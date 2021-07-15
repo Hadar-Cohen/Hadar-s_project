@@ -27,8 +27,8 @@ function getMovie() {
 function toGetMovie(name) {
     i = 1;
     k = 0;
-    moviesList = "<div class='container'>";
-    moviesList += "<div class='row'>";
+  //  moviesList = "<div class='container'>";
+    moviesList = "<div class='row'>";
 
      method = "3/search/movie?";
     
@@ -51,7 +51,7 @@ function getMovieSuccessCB(movie) {
     //    moviesList += drawMovie(Movie);
     //    i++;
     //});
-    moviesList += "</div></div>";
+    moviesList += "</div";//</div>";
     $("#TheMovieList").html(moviesList);
     i = 0;
 }
@@ -62,7 +62,7 @@ function drawMovie(movie) {
      else
         movieImg = imagePath + movie.poster_path;
     str = "";
-    str = `<div id='` + (i-1) + `' class='card' onclick = 'showAbout(moviesArr[this.id])'>
+    str = `<div id='` + (i-1) + `' class='recommand-card' onclick = 'showAbout(moviesArr[this.id])'>
                            <img class ="movieImg" src='` + movieImg + `'>
                            <h4><b>` + movie.title + `</b></h4></div>`
     return str;
@@ -149,8 +149,8 @@ function showMovieData(movie) {
 
 //actors
 function getCredists(movie) {
-    actorsList = "<div class='container'>";
-    actorsList += "<div class='actors-row'>";
+   // actorsList = "<div class='container'>";
+    actorsList = "<div class='actors-row'>";
 
     let apiCall = url + "3/movie/" + movie.Id + "/credits?" + api_key;
     ajaxCall("GET", apiCall, "", getCastSuccessCB, getCastErrorCB);
@@ -167,7 +167,7 @@ function getCastSuccessCB(credit) {
     });
 
 
-    actorsList += "</div></div>";
+    actorsList += "</div>";//</div>";
     $("#actors").html(actorsList);
 }
 function getCastErrorCB(err) {

@@ -340,6 +340,7 @@
     <Content Include="Pages\editUser.html" />
     <Content Include="Pages\homePage.css" />
     <Content Include="Pages\homePage.html" />
+    <Content Include="Pages\movie.css" />
     <Content Include="Pages\signupStyle.css" />
     <Content Include="Pages\links.css" />
     <Content Include="Pages\linkTest.html" />
