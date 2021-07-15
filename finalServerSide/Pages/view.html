@@ -63,7 +63,8 @@
             $("#phView").html("");
             str = "<select id='series' onchange=showEpisodes(this)>";
             str += "<option>select</option>";
-            if (localStorage.user != null) {                user = JSON.parse(localStorage["user"]);
+            if (localStorage.user != null) {
+                user = JSON.parse(localStorage["user"]);
             }
             userId = user.Id;
             userName = user.FirstName + " " + user.LastName;

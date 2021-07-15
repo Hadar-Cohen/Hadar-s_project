@@ -156,7 +156,7 @@ function drawMostViewedEpisodes(TVShow) {
 //////////////////////////////////////////search according genre - /////////////////////////////////////////////////////////
 function getGenres() {
     genresList = "<div> <select id='genre' onchange=showSeriesAccoGenre(this.value)>";
-    genresList += "<option value=" + null + "> select </option>";
+    genresList += "<option value=" + null + "> Select By Genre </option>";
 
     let apiCall = url + "3/genre/tv/list?" + api_key;
     ajaxCall("GET", apiCall, "", getSuccessGenres, errorGenres);
@@ -224,7 +224,7 @@ function getSuccessTVShowGenres(seriess) {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     r = 0;
-    $("html, body").animate({ scrollTop: document.body.scrollHeight }, "slow");
+    $("html, #seriesAccoGenre").animate({ scrollTop: document.body.getElementsById.scrollHeight }, "slow");
 
 
 }
