@@ -156,7 +156,6 @@ namespace Ex2.Models.DAL
                     Series s = new Series();
                     s.Id = Convert.ToInt32(dr["id"]);
                     s.Name= (string)dr["name"];
-                    s.Popularity=(string)
                     seriesNames.Add(s);
                 }
 

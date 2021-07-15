@@ -12,6 +12,10 @@
     getMostViewed();
     getMostViewedEpisodes();
     getGenres()
+    if (localStorage.user != null) {
+        user = JSON.parse(localStorage["user"]);
+        getRecommendForYou(user);
+    }
 
 });
 ////////////////////////////////////top rated from the movie DB api - //////////////////////////////////////////////
@@ -66,6 +70,56 @@ function drawtopRated(TVShow) {
 }
 
 ///////////////////////////////////////most view according awere DB ///////////////////////////////////////////////////
+////////////////////////////////////// User recommendations ///////////////////////////////////////////////////
+
+function getRecommendForYou(user) {
+    
+    let api = "../api/Totals?userId=" + user.Id; //+ "&email=" + user.Email;
+    ajaxCall("GET", api, "", getSuccessUserRecommendations, errorMostViewed);
+}
+
+r = 0; //index in result array that contain all the tv shows in the TMDB services
+recommendForYouArr = [];//local arrey to render and play onclick function
+
+function getSuccessUserRecommendations(topV) {
+    recommendForYouArr = topV;////
+    recommendForYouList = "<div style= 'display:flex; justify-content:center;' class='row'>";
+    while (r < 8) {
+        recommendForYouList += drawRecommendForYou(topV[r]);
+        r++;
+    }
+    recommendForYouList += "</div>";
+    $("#mostViewed").html(recommendForYouList);
+    r = 0;
+}
+
+
+
+function drawRecommendForYou(TVShow) {
+    console.log(TVShow);
+    let stars = 5;
+    let popularity = TVShow.Popularity;
+    switch (true) {
+        case (popularity < 40):
+            stars = 1
+            break;
+        case (popularity < 60):
+            stars = 2
+            break;
+        case (popularity < 200):
+            stars = 3
+            break;
+        case (popularity < 400):
+            stars = 4
+            break;
+    }
+    str = "";
+    str = `<div class='recommand-card' onclick = 'showAboutFromOurWeb(recommendForYouArr[` + r + `])'>
+                           <img src='`+ TVShow.Poster_path + `'>
+                           <h4><b>` + TVShow.Name + `</b></h4>
+                           <img class='starsPopularity' src= '../images/` + stars + `stars.png'/></div>`
+    return str;
+}
 ////////////////////////////////////// Seriess ///////////////////////////////////////////////////
 
 function getMostViewed() {
@@ -111,7 +165,7 @@ function drawMostViewed(TVShow) {
             break;
     }
     str = "";
-    str = `<div class='recommand-card' onclick = 'showAboutFronOurWeb(mostViewedArr[` + r + `])'>
+    str = `<div class='recommand-card' onclick = 'showAboutFromOurWeb(mostViewedArr[` + r + `])'>
                            <img src='`+ TVShow.Poster_path + `'>
                            <h4><b>` + TVShow.Name + `</b></h4>
                            <img class='starsPopularity' src= '../images/` + stars + `stars.png'/></div>`
@@ -287,7 +341,7 @@ function storeToLS(tvShow) {
 }
 
 ///////////in our prij we need Upper letters - property//////////
-function showAboutFronOurWeb(tvShow) {
+function showAboutFromOurWeb(tvShow) {
     console.log(tvShow);
     storeToLsFromSeriesDB(tvShow);
     window.location.replace("searchTv.html");
