@@ -335,7 +335,7 @@
     <Content Include="Pages\btnLikeStyle.css" />
     <Content Include="Pages\chatStyle.css" />
     <Content Include="Pages\forum.html" />
-    <Content Include="Pages\commentStyle.css" />
+    <Content Include="Pages\forumStyle.css" />
     <Content Include="Pages\editUser.css" />
     <Content Include="Pages\editUser.html" />
     <Content Include="Pages\homePage.css" />
@@ -343,7 +343,6 @@
     <Content Include="Pages\movie.css" />
     <Content Include="Pages\signupStyle.css" />
     <Content Include="Pages\links.css" />
-    <Content Include="Pages\linkTest.html" />
     <Content Include="Pages\login.html" />
     <Content Include="Pages\login_style_sheet.css" />
     <Content Include="Pages\modalView.css" />
@@ -353,7 +352,6 @@
     <Content Include="Pages\searchTv.html" />
     <Content Include="Pages\signup.html" />
     <Content Include="Pages\StyleSheetModalactor.css" />
-    <Content Include="Pages\TrySlider.html" />
     <Content Include="Pages\view.html" />
     <Content Include="Scripts\aboutTv.js" />
     <Content Include="Scripts\admin.js" />
@@ -534,13 +532,13 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <Content Include="Scripts\liveChat.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\movie.js" />
     <Content Include="Scripts\navbarFunc.js" />
     <Content Include="Scripts\owl-carousel-script.min.js" />
     <Content Include="Scripts\signUp.js" />
+    <Content Include="Scripts\updateUser.js" />
     <Content Include="Scripts\view.js" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
