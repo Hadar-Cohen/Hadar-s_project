@@ -10,25 +10,12 @@
     else
         userProfile = "https://image.ibb.co/jw55Ex/def_face.jpg";
 
-    $('#forumTitle').html("Welcome to the Fan Forum Of " + s.seriesObj.Name);
+    $('#forumTitle').html("Welcome to the Fan Forum Of </br>'" + s.seriesObj.Name + "'");
     buttonsEvents();
     showForum(seriesId, user.Id);
 
-    //get the user and the comments he likes
-    //getUserCommetsLike(user.Id, seriesId);
-
-    /*            getUserLikeComm();*/
 });
-///////////////////////
-//function getUserLikeComm() {
-//    let api = "../api/UserLikesComm";
-//    ajaxCall("GET", api, "", getFSuccessCB, error)
 
-//}
-//function getFSuccessCB(list) {
-//    alert("WORK :)");
-//    console.log(list);
-//}
 ///////////////////////
 function buttonsEvents() {
     submit.addEventListener('click', function publishComment() {

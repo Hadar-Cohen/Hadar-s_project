@@ -334,7 +334,7 @@
     <Content Include="Pages\adminStyle.css" />
     <Content Include="Pages\btnLikeStyle.css" />
     <Content Include="Pages\chatStyle.css" />
-    <Content Include="Pages\comment.html" />
+    <Content Include="Pages\forum.html" />
     <Content Include="Pages\commentStyle.css" />
     <Content Include="Pages\editUser.css" />
     <Content Include="Pages\editUser.html" />
