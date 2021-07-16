@@ -529,7 +529,7 @@
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\forum.js" />
     <Content Include="Scripts\homePage.js" />
-    <Content Include="Scripts\insert.js" />
+    <Content Include="Scripts\searchTv.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />

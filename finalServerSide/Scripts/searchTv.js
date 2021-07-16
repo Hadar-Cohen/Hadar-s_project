@@ -1,8 +1,4 @@
-﻿/// <reference path="navbarfunc.js" />
-// https://api.themoviedb.org/3/search/tv?api_key=1c107f2bd2f3fc2aee24aa4f2f8d8647&language=en-US&page=1&include_adult=false&query=Grey%27s%20Anatomy
-
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $("#getTV").click(getTV);
     $("#tvShowName").keyup(function (e) {
         if (e.keyCode == 13) {
@@ -22,7 +18,7 @@ $(document).ready(function () {
     //navBarVisability();
 
     if (localStorage.series != null) {
-     //   getTV();
+        //   getTV();
         var series = JSON.parse(localStorage["series"]);
         $("#tvShowName").val(series.seriesObj.Name);
         toGetTv(series.seriesObj.Name);
@@ -32,16 +28,16 @@ $(document).ready(function () {
         document.getElementById('scripted').focus();
     };
 
-        //$("i").click(function () {
-        //    $("i,span").toggleClass("press", 1000);
-        //});
+    //$("i").click(function () {
+    //    $("i,span").toggleClass("press", 1000);
+    //});
 
     swal({
         title: "Sweet!",
         text: "Here's a custom image.",
         imageUrl: 'thumbs-up.jpg'
     });
-   
+
     swal("Sweet!", "Here's a custom image.", 'thumbs-up.jpg');
 
 });
@@ -53,7 +49,7 @@ function aboutPage() {
 }
 
 function getTV() {
-  
+
     let name = $("#tvShowName").val();
     $("#seasonsList").html("");
     $("#episodeList").html("");
@@ -134,7 +130,7 @@ function buildTvSeriese(tv) {
     }
     console.log(totalSeries);
 
-   localStorage.setItem("series", JSON.stringify(totalSeries));
+    localStorage.setItem("series", JSON.stringify(totalSeries));
 }
 function getTVErrorCB(err) {
     console.log(err);
@@ -178,7 +174,7 @@ function showEpisode(seasonNum) {
     saveSeasonNum = seasonNum;
     episodesList = "";
     $("#Episodes").html(episodesList);
-   
+
     let method = "3/tv/";
     let api_key = "api_key=" + key;
     epArr = [];
@@ -192,7 +188,7 @@ function chooseSeasonClass(seasonNum) {
     if (saveSeasonNum != 0) {
         document.getElementById(saveSeasonNum).classList.remove("cardSelected");
     }
-       
+
     //}
 }
 
@@ -212,8 +208,8 @@ function getEpisodeSuccessCB(episodes) {
     }
     if (episodes.still_path == null)
         episode.ImageURL = imagePath + posterURL;
-      
-    
+
+
     epArr.push(episode);    //מערך של כל הפרקים
     episodesList += "<div class='card2'><img class= 'imgCard' id='" + j + "' src='" + episode.ImageURL + "'>"; //td changed to div
     episodesList += "<div class='episodeBlock'><br><b class='episodeTitle'>" + (episodes.name)/*.slice(0, 17)*/;
