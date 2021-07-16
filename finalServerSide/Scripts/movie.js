@@ -8,15 +8,12 @@
     });
     key = "90f77ef6862d870eb9f5fff3bc587100";
     api_key = "api_key=" + key;
-  //  url = "https://api.themoviedb.org/3/search/movie?";
     url = "https://api.themoviedb.org/";
     imagePath = "https://image.tmdb.org/t/p/w500/";
     getTopRated();
-    //document.getElementById('card').onclick = function () {
-    //    document.getElementById('scripted').focus();
-    //};
-})
+});
 
+////////////////////////////////////////////////////////////Get Movie according to the search//////////////////////////////////////////////////////////
 function getMovie() {
     $("html, #TheMovieList").animate({ scrollTop: document.body.scrollHeight }, "slow");
     let name = $("#SearchMovieName").val();
@@ -27,20 +24,16 @@ function getMovie() {
 function toGetMovie(name) {
     i = 1;
     k = 0;
-  //  moviesList = "<div class='container'>";
-    
-
     method = "3/search/movie?";
     moreParams = "&language=en-US&page=1&include_adult=false&";
     query = "query=" + encodeURIComponent(name);
     let apiCall = url + method + api_key + moreParams + query;
     ajaxCall("GET", apiCall, "", getMovieSuccessCB, getMovieErrorCB);
 }
+
 i = 0;
 moviesArr = [];
 function getMovieSuccessCB(movie) {
-    //console.log(movie);
-    //moviesList = `<div class='title'><a>Top Rated Movies</a></div>`;
     document.getElementById("searchResultTitle").style.visibility = "visible";
     moviesList = "<div class='row'>";
     moviesArr = movie.results;
@@ -53,58 +46,60 @@ function getMovieSuccessCB(movie) {
     $("#TheMovieList").html(moviesList);
     i = 0;
 }
+
 function drawMovie(movie) {
-    //console.log(movie);
     if (movie.poster_path == null)
         movieImg =`../images/Default.jpg`;
      else
         movieImg = imagePath + movie.poster_path;
+
     str = "";
-    str = `<div id='` + (i-1) + `' class='recommand-card' onclick = 'showAbout(moviesArr[this.id])'>
-                           <img class ="movieImg" src='` + movieImg + `'>
-                           <h4><b>` + movie.title + `</b></h4></div>`
+    str = `<div id='` + (i - 1) + `' class='recommand-card' onclick = 'showAbout(moviesArr[this.id])'>
+            <img class ="movieImg" src='` + movieImg + `'>
+            <h4><b>` + movie.title + `</b></h4></div>`;
     return str;
 }
+
 function getMovieErrorCB(err) {
     console.log(err);
-
 }
+//When clicked on a movie --> to get more information
 function showAbout(movie) {
     $("html, #TheMovieList").animate({ scrollTop: document.body.scrollHeight }, "slow");
     console.log(movie);
-    storeToLS(movie);
-    rederAboutTheMovie();
-  
-   
-    // location.reload();
+    //storeToLS(movie); //Save the movie to local storage
+    rederAboutTheMovie(movie);
 }
-//Store to Local Storage the tvShow that was clicked
-function storeToLS(movie) {
-    if (movie.poster_path == null)
-        movieImg = `../images/Default.jpg`;
-    else
-        movieImg = imagePath + movie.poster_path;
 
-    Movie = {
-        Id: movie.id,
-        Name: movie.title,
-        Release_date: movie.release_date,
-        Original_language: movie.original_language,
-        Overview: movie.overview,
-        Popularity: movie.popularity,
-        Poster_path: movieImg,
-        Backdrop_path: imagePath + movie.backdrop_path
+//////////////////////////////////////////Store to Local Storage the tvShow that was clicked///////////////////////////////////////
+//function storeToLS(movie) {
+//    if (movie.poster_path == null)
+//        movieImg = `../images/Default.jpg`;
+//    else
+//        movieImg = imagePath + movie.poster_path;
 
-    }
-    localStorage.setItem("movie", JSON.stringify(Movie));
-}
-function rederAboutTheMovie() {
+//    Movie = {
+//        Id: movie.id,
+//        Name: movie.title,
+//        Release_date: movie.release_date,
+//        Original_language: movie.original_language,
+//        Overview: movie.overview,
+//        Popularity: movie.popularity,
+//        Poster_path: movieImg,
+//        Backdrop_path: imagePath + movie.backdrop_path
 
-    if (localStorage.movie != null) 
-        movie_s = JSON.parse(localStorage["movie"]);
+//    }
+//    localStorage.setItem("movie", JSON.stringify(Movie));
+//}
 
-    showMovieData(movie_s);
-    getCredists(movie_s);
+//////////////////////////////////////////About Movie///////////////////////////////////////
+function rederAboutTheMovie(movie) {
+
+    //if (localStorage.movie != null) 
+    //    movie = JSON.parse(localStorage["movie"]);
+
+    showMovieData(movie);
+    getCredists(movie);
     gapi.load("client", loadClient.bind(this));
 }
 
@@ -114,10 +109,6 @@ function showMovieData(movie) {
 
     let overview = movie.Overview;
     $("#overview").html(overview);
-
-    //// getCreateYouTubeTrailer();
-    //gapi.load("client", loadClient.bind(this));
-    ////execute(); // maybe
 
     let posterURL = movie.Poster_path;
     let poster = "<img src='" + posterURL + "'/>";
@@ -146,11 +137,8 @@ function showMovieData(movie) {
 }
 
 
-//actors
+///////////////////////////////////////////////////////Get Actors From TMDB Api//////////////////////////////////////////////////////////
 function getCredists(movie) {
-   // actorsList = "<div class='container'>";
-    actorsList = "<div class='actors-row'>";
-
     let apiCall = url + "3/movie/" + movie.Id + "/credits?" + api_key;
     ajaxCall("GET", apiCall, "", getCastSuccessCB, getCastErrorCB);
 }
@@ -159,15 +147,11 @@ k = 0;
 actors = null;
 function getCastSuccessCB(credit) {
     actors = credit.cast; //arr of all the actors
-
-
-   // actors.forEach(actor => {
-while (k < 7) {
+    actorsList = "<div class='actors-row'>";
+    while (k < 7) {
         actorsList += drawActor(actors[k]);
         k++;
     }
-
-
     actorsList += "</div>";//</div>";
     $("#actors").html(actorsList);
     k = 0;
@@ -187,8 +171,9 @@ function drawActor(actor) {
     return `<div class='actor-card' onclick='aboutTheActor(actors[` + k + `].id)'>
             <img src='` + actorImg + `'>
             <h4 class='card-text' style='text-align:center'><b>` + actor.name + `</b></h4></div>`
-
 }
+
+///////////////////////////////////////////////////////Open Actors Modal Information//////////////////////////////////////////////////////////////
 function aboutTheActor(actorId) {
     let apiCall = url + "3/person/" + actorId + "?" + api_key;
     ajaxCall("GET", apiCall, "", getActorSuccessCB, getActorErrorCB);
@@ -197,7 +182,7 @@ function aboutTheActor(actorId) {
 function getActorSuccessCB(actor) {
     openModal();
     let str = "";
-    str += "<div class='ActorTitle'>" + actor.name + "</div>"
+    str = "<div class='ActorTitle'>" + actor.name + "</div>"
     str += "<div class='row'>"
     if (actor.profile_path == null)
         actorImg = "https://image.ibb.co/jw55Ex/def_face.jpg";
@@ -208,7 +193,6 @@ function getActorSuccessCB(actor) {
     str += "<p class='aboutActor'>Birthday: " + actor.birthday + "</p>";
     str += "<p class='aboutActor'>Place of birth: " + actor.place_of_birth + "</p>";
     str += "<p>" + actor.biography + "</p>";
-    // str += "<div><span>Also known as:</span> " + actor.also_known_as[0] + "</div>"
 
     str += "</div></div>";
     $("#actorAbout").html(str);
@@ -233,14 +217,14 @@ function openModal() {
             modal.style.display = "none";
         }
     }
+    // When the user clicks anywhere outside of the modal, close it
 }
 
-// When the user clicks anywhere outside of the modal, close it
 function getActorErrorCB(err) {
     console.log(err);
 }
 
-
+///////////////////////////////////////////////////////Get Top Rated Movies//////////////////////////////////////////////////////////////
 function getTopRated() {
     let apiCall = url + "3/movie/top_rated?" + api_key;
     ajaxCall("GET", apiCall, "", getSuccessTopRated, errorTopRated);
@@ -293,7 +277,7 @@ function drawTopRated(movie) {
 
 ////////////////////////////////////////////////YouTube Trailer////////////////////////////////////////////////
 function loadClient() {
-    const keywordInput = movie_s.Name + " trailer";
+    const keywordInput = movie.Name + " trailer";
     const maxresultInput = 1;
     const orderInput = "viewCount";
     const videoList = document.getElementById('trailer');
@@ -341,11 +325,6 @@ function loadClient() {
                     if (response.result.prevPageToken) {
                         output += `<br><a class="paginate" href="#" data-id="${response.result.prevPageToken}" onclick="paginate(event, this)">Prev</a>`;
                     }
-
-                    //if (response.result.nextPageToken) {
-                    //    output += `<a href="#" class="paginate" data-id="${response.result.nextPageToken}" onclick="paginate(event, this)">Next</a>`;
-                    //}
-
                     // Output list
                     videoList.innerHTML = output;
                 }
@@ -359,5 +338,3 @@ function loadClient() {
         execute();
     }
 }
-
-////////////////////////////////////////////////YouTube Trailer - END////////////////////////////////////////////////

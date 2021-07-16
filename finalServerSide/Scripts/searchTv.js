@@ -82,6 +82,8 @@ function getTVSuccessCB(tv) {
 }
 
 function getTVErrorCB(err) {
+    if (err.status == 404)
+        console.log("cant find more");
     console.log(err);
 }
 
@@ -118,7 +120,6 @@ function buildTvSeriese(tv) {
 //////////////////////////////////////////////////Get Seasons///////////////////////////////////////////////////////
 seasonsCount = 0;
 function getSeasonSuccessCB(season) {
-    console.log(season);
     epArr = [];
     if (season.poster_path == null)
         season.poster_path = posterURL;
@@ -142,6 +143,8 @@ function getSeasonErrorCB(err) {
         console.log("All Seasons Loaded");
         i = 0;
     }
+    else
+        console.log(err);
 }
 saveSeasonNum = 0;
 function chooseSeasonClass(seasonNum) {
@@ -204,8 +207,12 @@ function getEpisodeSuccessCB(episodes) {
 }
 
 function getEpisodeErrorCB(err) {
-    c = 0;
-    console.log(err);
+    if (err.status == 404) {
+        console.log("All Episodes Loaded");
+        c = 0;
+    }
+    else
+        console.log(err);
 }
 
 //////////////////////////////////////////////////Add Preferences to our Total DB///////////////////////////////////////////////////////
@@ -222,13 +229,13 @@ function PostToServer(episodeToAdd) {
 }
 
 function postPreferenceSuccessCB(feedback) {
-    if (feedback == 1) //just for us
-        alert(totalObj.Series.Name + " Season " + totalObj.Episode.SeasonNum + " Episode " + totalObj.Episode.EpisodeName + " inserted ");
-    else
-        alert("preference already exists");
+    alert(feedback);
 }
 
-function postPreferenceErrorCB() {
-    alert("ERROR");
+function postPreferenceErrorCB(err) {
+    if (err.status == 404)
+        alert("Preference is already exists");
+    else
+        alert(err.status);
 }
 

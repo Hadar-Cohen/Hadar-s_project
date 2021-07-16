@@ -40,8 +40,6 @@ namespace Ex2.Controllers
         /*  * Insert to the preferences DB tbl
              * the user's Preferences Episodes and the Series it belongs 
              * and the user that choose them */
-         
-
         public HttpResponseMessage Post([FromBody]Total obj)
         {
             int feedback= obj.Insert();
