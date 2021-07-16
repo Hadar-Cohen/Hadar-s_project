@@ -109,7 +109,7 @@ function getClubmMSuccessCB(ma) {
 
     else {
         str = `  <div class="wrapper">
-              <a id="`+ selectedVal + `" onclick="commentP()">to the chat</a>
+              <a id="`+ selectedVal + `" onclick="toForum()">to the chat</a>
            </div> `;
     }
     $("#forum").html(str);
@@ -120,13 +120,13 @@ function postClubmMSuccessCB(ma) {
     alert("welcome to the gruop :)");
 
     str = `  <div class="wrapper">
-              <a id="`+ selectedVal + `" href="comment.html">to the forum</a>
+              <a id="`+ selectedVal + `" href="forum.html">to the forum</a>
            </div> `;
     $("#episodesView").html(episodesList);
     $("#forum").html(str);
 }
-function commentP() {
-    window.location.replace("comment.html");
+function toForum() {
+    window.location.replace("forum.html");
 }
 
 

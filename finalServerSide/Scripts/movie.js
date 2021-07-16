@@ -63,16 +63,19 @@ function drawMovie(movie) {
 function getMovieErrorCB(err) {
     console.log(err);
 }
+
+//////////////////////////////////////////About Movie///////////////////////////////////////
+movieName = "";
 //When clicked on a movie --> to get more information
 function showAbout(movie) {
     $("html, #TheMovieList").animate({ scrollTop: document.body.scrollHeight }, "slow");
     console.log(movie);
     showMovieData(movie);
     getCredists(movie);
+    movieName = movie.title;
     gapi.load("client", loadClient.bind(this));
 }
 
-//////////////////////////////////////////About Movie///////////////////////////////////////
 function showMovieData(movie) {
     let name = movie.title;
     $("#movieName").html(name);
@@ -249,7 +252,7 @@ function drawTopRated(movie) {
 
 ////////////////////////////////////////////////YouTube Trailer////////////////////////////////////////////////
 function loadClient() {
-    const keywordInput = movie.Name + " trailer";
+    const keywordInput = movieName + " trailer";
     const maxresultInput = 1;
     const orderInput = "viewCount";
     const videoList = document.getElementById('trailer');
