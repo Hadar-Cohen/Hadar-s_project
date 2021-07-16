@@ -67,54 +67,47 @@ function getMovieErrorCB(err) {
 function showAbout(movie) {
     $("html, #TheMovieList").animate({ scrollTop: document.body.scrollHeight }, "slow");
     console.log(movie);
-    //storeToLS(movie); //Save the movie to local storage
-    rederAboutTheMovie(movie);
-}
-
-//////////////////////////////////////////Store to Local Storage the tvShow that was clicked///////////////////////////////////////
-//function storeToLS(movie) {
-//    if (movie.poster_path == null)
-//        movieImg = `../images/Default.jpg`;
-//    else
-//        movieImg = imagePath + movie.poster_path;
-
-//    Movie = {
-//        Id: movie.id,
-//        Name: movie.title,
-//        Release_date: movie.release_date,
-//        Original_language: movie.original_language,
-//        Overview: movie.overview,
-//        Popularity: movie.popularity,
-//        Poster_path: movieImg,
-//        Backdrop_path: imagePath + movie.backdrop_path
-
-//    }
-//    localStorage.setItem("movie", JSON.stringify(Movie));
-//}
-
-//////////////////////////////////////////About Movie///////////////////////////////////////
-function rederAboutTheMovie(movie) {
-
-    //if (localStorage.movie != null) 
-    //    movie = JSON.parse(localStorage["movie"]);
-
     showMovieData(movie);
     getCredists(movie);
     gapi.load("client", loadClient.bind(this));
 }
 
+//////////////////////////////////////////Store to Local Storage the tvShow that was clicked///////////////////////////////////////
+function storeToLS(movie) {
+    if (movie.poster_path == null)
+        movieImg = `../images/Default.jpg`;
+    else
+        movieImg = imagePath + movie.poster_path;
+
+    Movie = {
+        Id: movie.id,
+        Name: movie.title,
+        Release_date: movie.release_date,
+        Original_language: movie.original_language,
+        Overview: movie.overview,
+        Popularity: movie.popularity,
+        Poster_path: movieImg,
+        Backdrop_path: imagePath + movie.backdrop_path
+
+    }
+    localStorage.setItem("movie", JSON.stringify(Movie));
+}
+
+//////////////////////////////////////////About Movie///////////////////////////////////////
 function showMovieData(movie) {
-    let name = movie.Name;
+    let name = movie.title;
     $("#movieName").html(name);
 
-    let overview = movie.Overview;
+    let overview = movie.overview;
     $("#overview").html(overview);
-
-    let posterURL = movie.Poster_path;
-    let poster = "<img src='" + posterURL + "'/>";
+    if (movie.poster_path == null)
+        movieImg = `../images/Default.jpg`;
+    else
+        movieImg = imagePath + movie.poster_path;
+    let poster = "<img src='" + movieImg + "'/>";
 
     let stars = 5;
-    let popularity = movie.Popularity;
+    let popularity = movie.popularity;
     switch (true) {
         case (popularity < 40):
             stars = 1
@@ -132,14 +125,14 @@ function showMovieData(movie) {
     poster += "<img class='starsPopularity' src= '../images/" + stars + "stars.png'/>";
     $("#Poster").html(poster);
 
-    let backdropImg = "<img src='" + movie.Backdrop_path + "'>";
+    let backdropImg = "<img src='" +imagePath + movie.backdrop_path + "'>";
     $("#backgroundPorter").html(backdropImg);
 }
 
 
 ///////////////////////////////////////////////////////Get Actors From TMDB Api//////////////////////////////////////////////////////////
 function getCredists(movie) {
-    let apiCall = url + "3/movie/" + movie.Id + "/credits?" + api_key;
+    let apiCall = url + "3/movie/" + movie.id + "/credits?" + api_key;
     ajaxCall("GET", apiCall, "", getCastSuccessCB, getCastErrorCB);
 }
 
