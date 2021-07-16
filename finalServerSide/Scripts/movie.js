@@ -161,15 +161,18 @@ actors = null;
 function getCastSuccessCB(credit) {
     actors = credit.cast; //arr of all the actors
 
-    actors.forEach(actor => {
-        actorsList += drawActor(actor);
+
+   // actors.forEach(actor => {
+while (k < 7) {
+        actorsList += drawActor(actors[k]);
         k++;
-    });
+    }
 
 
     actorsList += "</div>";//</div>";
     $("#actors").html(actorsList);
 }
+
 function getCastErrorCB(err) {
     if (err.status == 404) {
         console.log(err);
