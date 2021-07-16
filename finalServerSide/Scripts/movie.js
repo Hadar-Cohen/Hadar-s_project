@@ -18,7 +18,7 @@
 })
 
 function getMovie() {
-
+    $("html, #TheMovieList").animate({ scrollTop: document.body.scrollHeight }, "slow");
     let name = $("#SearchMovieName").val();
     $("#TheMovieList").html("");
     toGetMovie(name);
@@ -70,6 +70,7 @@ function getMovieErrorCB(err) {
 
 }
 function showAbout(movie) {
+    $("html, #TheMovieList").animate({ scrollTop: document.body.scrollHeight }, "slow");
     console.log(movie);
     storeToLS(movie);
     rederAboutTheMovie();
@@ -169,6 +170,7 @@ while (k < 7) {
 
     actorsList += "</div>";//</div>";
     $("#actors").html(actorsList);
+    k = 0;
 }
 
 function getCastErrorCB(err) {
