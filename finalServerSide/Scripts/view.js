@@ -43,7 +43,6 @@ function showEpisodes(series) {
     saveToLocalS(selectedText);
     seriesReload = selectedText;
     getToDBShowEpisodes(selectedText);
-  
 }
 function getToDBShowEpisodes(selectedText)
 {

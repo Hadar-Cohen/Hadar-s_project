@@ -181,7 +181,7 @@ function showEpisode(seasonNum) {
    
     let method = "3/tv/";
     let api_key = "api_key=" + key;
-
+    epArr = [];
     apiCall = url + method + tvId + "/season/" + seasonNum + "/episode/" + j + "?" + api_key;
     ajaxCall("GET", apiCall, "", getEpisodeSuccessCB, getEpisodeErrorCB);
 }
@@ -213,7 +213,7 @@ function getEpisodeSuccessCB(episodes) {
     if (episodes.still_path == null)
         episode.ImageURL = imagePath + posterURL;
       
-
+    
     epArr.push(episode);    //מערך של כל הפרקים
     episodesList += "<div class='card2'><img class= 'imgCard' id='" + j + "' src='" + episode.ImageURL + "'>"; //td changed to div
     episodesList += "<div class='episodeBlock'><br><b class='episodeTitle'>" + (episodes.name)/*.slice(0, 17)*/;
