@@ -239,10 +239,10 @@ function drawGenres(genre) {
     return str;
 }
 
-function showSeriesAccoGenre(ganerId) {
+function showSeriesAccoGenre(genreId) {
     seriesAccoGenreList = "<div class='container'>";
     seriesAccoGenreList += "<div class='owl-carousel owl-theme row'>";
-    let apiCall = url + "3/discover/tv?" + api_key + "&sort_by=popularity.desc&with_genres=" + ganerId;
+    let apiCall = url + "3/discover/tv?" + api_key + "&sort_by=popularity.desc&with_genres=" + genreId;
     ajaxCall("GET", apiCall, "", getSuccessTVShowGenres, errorGenres);
 }
 r = 0; //index in result array that contain all the tv shows in the TMDB services

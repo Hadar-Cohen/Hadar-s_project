@@ -588,7 +588,7 @@ function getSocialSuccessCB(socialLinks) {
     str = "<ul>";
     if (socialLinks.facebook_id != null) {
         //https://www.facebook.com/NetflixElite
-        str += ` <li class="facebook"><a href="https://www.facebook.com/` + socialLinks.facebook_id + `">
+        str += ` <li class="facebook"><a href="https://www.facebook.com/` + socialLinks.facebook_id + `"target="_blank">
                              <i class="fa fa-facebook" aria-hidden="true"></i></a>
                            <div class="slider">
                                 <p>facebook</p>
@@ -597,7 +597,7 @@ function getSocialSuccessCB(socialLinks) {
     }
     //https://www.instagram.com/elitenetflix/
     if (socialLinks.instagram_id != null) {
-        str += `<li class="instagram"><a href="https://www.instagram.com/` + socialLinks.instagram_id +`/">
+        str += `<li class="instagram"><a href="https://www.instagram.com/` + socialLinks.instagram_id +`/"target="_blank">
                             <i class="fa fa-instagram" aria-hidden="true"></i></a>
                             <div class="slider">
                                 <p>instagram</p>
@@ -606,7 +606,7 @@ function getSocialSuccessCB(socialLinks) {
     }
     //https://twitter.com/greysabc
     if (socialLinks.twitter_id != null) {
-        str += ` <li class="twitter"><a href="https://twitter.com/` + socialLinks.twitter_id + `">
+        str += ` <li class="twitter"><a href="https://twitter.com/` + socialLinks.twitter_id + `" target="_blank">
                             <i class="fa fa-twitter" aria-hidden="true"></i></a>
                             <div class="slider">
                                  <p>twitter</p>
@@ -621,7 +621,4 @@ function getSocialSuccessCB(socialLinks) {
 function getSocialErrorCB(err) {
     alert("ERROR");
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function getLinks() {
 
-}

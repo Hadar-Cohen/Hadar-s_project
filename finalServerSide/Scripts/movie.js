@@ -251,7 +251,7 @@ topRatedMoviesArr = [];//local arrey to render and play onclick function
 function getSuccessTopRated(topRated) {
     topRatedMoviesArr = topRated.results;
     topRatedList = "<div class='container'>";
-    topRatedList += "<div class='row'>";
+    topRatedList += "<div class='owl-carousel owl-theme row'>";
     topRatedMoviesArr.forEach(movie => {
         topRatedList += drawTopRated(movie);
         r++;
@@ -333,8 +333,8 @@ function loadClient() {
                         const videoId = item.id.videoId;
                         const videoTitle = item.snippet.title;
                         output += `
-                                            <li><a data-fancybox href="https://youtube.com/watch?v=${videoId}"><img src="http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg" /></a></li>
-                                        `;
+                                  <li><a data-fancybox href="https://youtube.com/watch?v=${videoId}">
+                                    <img src="http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg" /></a></li>`; 
                     });
                     output += '</ul>';
 
