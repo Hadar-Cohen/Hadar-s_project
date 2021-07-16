@@ -20,9 +20,27 @@ namespace Ex2.Models.DAL
             con.Open();
             return con;
         }
+        //---------------------------------------------------------------------------------
+        // Create the SqlCommand
+        //---------------------------------------------------------------------------------
+        private SqlCommand CreateCommand(String CommandSTR, SqlConnection con)
+        {
+
+            SqlCommand cmd = new SqlCommand(); // create the command object
+
+            cmd.Connection = con;              // assign the connection to the command object
+
+            cmd.CommandText = CommandSTR;      // can be Select, Insert, Update, Delete 
+
+            cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+            cmd.CommandType = System.Data.CommandType.Text; // the type of the command, can also be stored procedure
+
+            return cmd;
+        }
 
         //--------------------------------------------------------------------------------------------------
-        // This method inserts a car to the cars table 
+        // This method inserts an Episode to the episodes table 
         //--------------------------------------------------------------------------------------------------
         public int Insert(Episode episode)
         {
@@ -69,28 +87,10 @@ namespace Ex2.Models.DAL
                 }
             }
         }
-
-        //---------------------------------------------------------------------------------
-        // Create the SqlCommand
-        //---------------------------------------------------------------------------------
-        private SqlCommand CreateCommand(String CommandSTR, SqlConnection con)
-        {
-
-            SqlCommand cmd = new SqlCommand(); // create the command object
-
-            cmd.Connection = con;              // assign the connection to the command object
-
-            cmd.CommandText = CommandSTR;      // can be Select, Insert, Update, Delete 
-
-            cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
-
-            cmd.CommandType = System.Data.CommandType.Text; // the type of the command, can also be stored procedure
-
-            return cmd;
-        }
-
+      
         //---------------------------------------------------------------------------------
         // Read from the DB into a list - dataReader
+        // Get the episodes from Preferences Tbl that the user added according to series name and user Id 
         //---------------------------------------------------------------------------------
         public List<Episode> GetEpisodes(string seriesName, int userId)
         {
@@ -138,9 +138,8 @@ namespace Ex2.Models.DAL
             }
         }
 
-/*     * The most viewed episode on our site for display on the Home page
-        * input - none
-        * Output - a sorted list of the most episode series on the site  */
+        /* The most viewed episode on our site for display on the Home page
+         * Returns - a sorted list of the most episode series on the site  */
         public List<Episode> GetEpisode()
         {
             SqlConnection con = null;
@@ -173,16 +172,14 @@ namespace Ex2.Models.DAL
 
             catch (Exception ex)
             {
-                // write to log
-                throw (ex);
+                throw (ex); // write to log
             }
 
             finally
             {
                 if (con != null)
                 {
-                    // close the db connection
-                    con.Close();
+                    con.Close();// close the db connection
                 }
             }
         }

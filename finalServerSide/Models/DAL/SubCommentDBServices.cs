@@ -44,6 +44,8 @@ namespace finalServerSide.Models.DAL
 
         //--------------------------------------------------------------------------------------------------
         // This method inserts a comment
+        // Insert a SubComment to the SubComments Table 
+        // Returns the seriesId of the forum comments
         //--------------------------------------------------------------------------------------------------
         public int Insert(SubComment comment)
         {
@@ -100,9 +102,10 @@ namespace finalServerSide.Models.DAL
             return command;
         }
 
-        //---------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------
         // Read from the DB into a list - dataReader
-        //---------------------------------------------------------------------------------
+        // Get a list of all the SubComments for each Comment - according to the series and the primary comment
+        //-----------------------------------------------------------------------------------------------------------
         public List<SubComment> GetSubComments(int seriesId, int commentId)
         {
             SqlConnection con = null;

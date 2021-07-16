@@ -10,7 +10,7 @@ namespace Ex2.Controllers
 {
     public class EpisodesController : ApiController
     {
-        // GET api/<controller>/5
+        /* Return the episodes list from Preferences Tbl that the user added according to series name and user Id */
         public List<Episode> Get(string seriesName, int userId)
         {
             Episode e = new Episode();
@@ -18,25 +18,15 @@ namespace Ex2.Controllers
             return Elist;
         }
 
-        // POST api/<controller>
+        /* Inserts an Episode to the episodes table  */
         public int Post([FromBody]Episode e)
         {
             e.Insert();
             return 1;
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
-        /*     * The most viewed episode on our site for display on the Home page
-               * input - none
-               * Output - a sorted list of the most episode series on the site  */
+        /* The most viewed episode on our site for display on the Home page
+         * Returns - a sorted list of the most episode series on the site  */
         public HttpResponseMessage Get()//List<Episode>
         {
             Episode s = new Episode();

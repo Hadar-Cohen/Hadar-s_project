@@ -43,9 +43,6 @@ namespace finalServerSide.Models.DAL
             return cmd;
         }
 
-        // TODO : Add a DeleteFlight method
-        // TODO : Add a BuildFlightDeleteCommand method
-
 
         public ClubMember Get(int seriesId, int userId)
         {

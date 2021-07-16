@@ -38,12 +38,16 @@ namespace finalServerSide.Models.DAL
         public string Content { get => content; set => content = value; }
         public string Profile { get => profile; set => profile = value; }
 
+        /* Insert a SubComment to the SubComments Table 
+         * Returns the seriesId of the forum comments
+         */
         public int PostSubComment()
         {
             SubCommentDBServices db = new SubCommentDBServices();
             return db.Insert(this); 
         }
 
+        /* Get a list of all the SubComments for each Comment */
         public List<SubComment> Get(int seriesId, int commentId)
         {
             SubCommentDBServices db = new SubCommentDBServices();

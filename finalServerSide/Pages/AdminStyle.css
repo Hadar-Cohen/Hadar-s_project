@@ -114,4 +114,8 @@ td > p > .overview{
     font-size: 20px;
     color: aliceblue;
 }
+
+.row {
+    width:100%;
+}
  

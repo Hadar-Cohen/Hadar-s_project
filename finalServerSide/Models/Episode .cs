@@ -46,12 +46,14 @@ namespace Ex2.Models
             this.preferencesCount = preferencesCount;
         }
 
+        /* Inserts an Episode to the episodes table  */
         public int Insert()
         {
             EpisodeDataServices ds = new EpisodeDataServices();
             return ds.Insert(this);
         }
 
+        /* Get the episodes from Preferences Tbl that the user added according to series name and user Id */
         public List<Episode> Get(string seriesName, int userId)
         {
             EpisodeDataServices d = new EpisodeDataServices();
@@ -59,9 +61,8 @@ namespace Ex2.Models
             return episodeList;
         }
 
- /*     * The most viewed episode on our site for display on the Home page
-        * input - none
-        * Output - a sorted list of the most episode series on the site  */
+        /* The most viewed episode on our site for display on the Home page
+         * Returns - a sorted list of the most episode series on the site  */
         public List<Episode> Get()
         {
             EpisodeDataServices us = new EpisodeDataServices();

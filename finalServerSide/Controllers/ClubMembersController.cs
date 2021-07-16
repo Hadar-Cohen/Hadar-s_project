@@ -10,12 +10,6 @@ namespace finalServerSide.Controllers
 {
     public class ClubMembersController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/<controller>/5
         public ClubMember Get(int seriesId, int userId)
         {

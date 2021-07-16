@@ -83,7 +83,7 @@ body {
 .seasons-center { 
     display: grid;
     width: 100%;
-    grid-template-columns: repeat( auto-fit, minmax(100px, auto) );
+    grid-template-columns: repeat( auto-fit, minmax(180px, auto) );
     justify-content: center;
 }
 
@@ -138,11 +138,11 @@ div:focus {
     box-shadow: 2px 2px 5px white;
 }
 
-    .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        background: rgb(30,33,45);
-        background: linear-gradient(234deg, rgba(30,33,45,1) 0%, rgba(141,155,214,1) 50%, rgba(235,200,240,1) 100%);
-    }
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background: rgb(30,33,45);
+    background: linear-gradient(234deg, rgba(30,33,45,1) 0%, rgba(141,155,214,1) 50%, rgba(235,200,240,1) 100%);
+}
 
 .cardSelected {
     background: rgb(30,33,45);
