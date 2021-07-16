@@ -208,17 +208,18 @@ function drawMostViewedEpisodes(TVShow) {
 }
 
 
-//////////////////////////////////////////search according genre - /////////////////////////////////////////////////////////
+////////////////////////////////////////// search according genre - movie DB api /////////////////////////////////////////////////////////
 function getGenres() {
     genresList = "<div> <select id='genre' onchange=showSeriesAccoGenre(this.value)>";
     genresList += "<option value=" + null + "> Select By Genre </option>";
 
     let apiCall = url + "3/genre/tv/list?" + api_key;
-    ajaxCall("GET", apiCall, "", getSuccessGenres, errorGenres);
+    ajaxCall("GET", apiCall, "", getSuccessGenres, apiError);
 }
 
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 genresArr = [];//local arrey to render and play onclick function
+
 function getSuccessGenres(genre) {
     genresArr = genre.genres;
     genresArr.forEach(genre => {
@@ -228,26 +229,25 @@ function getSuccessGenres(genre) {
     genresList += "</select></div>";
     $("#genreSearch").html(genresList);
     r = 0;
+}
 
-}
-function errorGenres(err) {
-    console.log(err);
-}
 function drawGenres(genre) {
     console.log(genre);
     str = "";
     str += "<option value=" + genre.id + ">" + genre.name + "</option>";
     return str;
 }
-
+////show the Top Rated according the genre the user select///
 function showSeriesAccoGenre(genreId) {
     seriesAccoGenreList = "<div class='container'>";
     seriesAccoGenreList += "<div class='owl-carousel owl-theme row'>";
+
     let apiCall = url + "3/discover/tv?" + api_key + "&sort_by=popularity.desc&with_genres=" + genreId;
     ajaxCall("GET", apiCall, "", getSuccessTVShowGenres, errorGenres);
 }
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 seriesAccoGenreArr = [];//local arrey to render and play onclick function
+
 function getSuccessTVShowGenres(seriess) {
     seriesAccoGenreArr = seriess.results;
     
@@ -257,7 +257,7 @@ function getSuccessTVShowGenres(seriess) {
     });
     seriesAccoGenreList += "</div></div>";
     $("#seriesAccoGenre").html(seriesAccoGenreList);
-    ///////////////////////////////////////////////// carousel function ////////////////////////////////////////////////////////////
+///////////////////////////////////////////////// carousel function ////////////////////////////////////////////////////////////
     jQuery(function ($) {
         $('.owl-carousel').owlCarousel({
             loop: true,
@@ -276,13 +276,10 @@ function getSuccessTVShowGenres(seriess) {
             }
         })
     });
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
     r = 0;
-  //  $("html, #seriesAccoGenre").animate({ scrollTop: document.body.getElementsById.scrollHeight }, "slow");
-
-
 }
+
 function drawAccoGenre(TVShow) {
     console.log(TVShow);
     let stars = 5;
@@ -309,14 +306,16 @@ function drawAccoGenre(TVShow) {
 
     return str;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////  GLOBAL FUNCTIONS  /////////////////////////////////////////////////
+
+//Transition function - Click on a series from the API//
 function showAbout(tvShow) {
     console.log(tvShow);
     storeToLS(tvShow);
     window.location.replace("searchTv.html");
-    // location.reload();
 }
-//Store to Local Storage the tvShow that was clicked
+
+//Store to Local Storage the tvShow that was clicked - for series from the API//
 function storeToLS(tvShow) {
     seriesObj = {
         Id: tvShow.id,
@@ -340,15 +339,14 @@ function storeToLS(tvShow) {
     }
     localStorage.setItem("series", JSON.stringify(totalSeries));
 }
-
-///////////in our prij we need Upper letters - property//////////
+//Transition function - Click on a series from our DB  - we need Upper letters//
 function showAboutFromOurWeb(tvShow) {
     console.log(tvShow);
     storeToLsFromSeriesDB(tvShow);
     window.location.replace("searchTv.html");
-    // location.reload();
 }
-///////////in our proj we need Upper letters - property//////////
+
+//Store to Local Storage the tvShow that was clicked - for series from our DB//
 function storeToLsFromSeriesDB(tvShow) {
     seriesObj = {
         Id: tvShow.Id,

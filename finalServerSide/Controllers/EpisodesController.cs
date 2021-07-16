@@ -34,10 +34,21 @@ namespace Ex2.Controllers
         public void Delete(int id)
         {
         }
-        public List<Episode> Get()
+        /*     * The most viewed episode on our site for display on the Home page
+               * input - none
+               * Output - a sorted list of the most episode series on the site  */
+        public HttpResponseMessage Get()//List<Episode>
         {
             Episode s = new Episode();
-            return s.Get();
+            List<Episode> episodesList= s.Get();
+            if (episodesList != null)
+            {
+                return Request.CreateResponse<List<Episode>>(HttpStatusCode.OK, episodesList);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "most viewed series on our site not exists");
+            }
         }
     }
 }

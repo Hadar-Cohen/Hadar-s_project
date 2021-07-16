@@ -138,7 +138,9 @@ namespace Ex2.Models.DAL
             }
         }
 
-        
+/*     * The most viewed episode on our site for display on the Home page
+        * input - none
+        * Output - a sorted list of the most episode series on the site  */
         public List<Episode> GetEpisode()
         {
             SqlConnection con = null;
