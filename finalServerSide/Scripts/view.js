@@ -1,25 +1,22 @@
 ﻿$(document).ready(function () {
-
     $("#nav-bar").load("signup.html");
     imagePath = "https://image.tmdb.org/t/p/w500/";
-    //navBarVisability();
-    /*modal();*/
 
     $("#phView").html("");
     str = "<select id='series' onchange=showEpisodes(this)>";
     str += "<option>select</option>";
+
     if (localStorage.user != null) {
         user = JSON.parse(localStorage["user"]);
+        userId = user.Id;
+        userEmail = user.Email;
+        userName = user.FirstName + " " + user.LastName;
+        userTmp = {
+            id: userId,
+            name: userName
+        }
     }
-    userId = user.Id;
-    userEmail = user.Email;
-    userName = user.FirstName + " " + user.LastName;
-    userTmp = {
-        id: userId,
-        name: userName
-    }
-    /*series = document.getElementById('series');*/
-    //selectedText = series.options[series.selectedIndex].innerHTML;
+   
     let api = "../api/Totals?UserId=" + userId + "&email=" + userEmail;
     ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
 });
@@ -35,6 +32,7 @@ function getSeriesSuccessCB(series) {
 function getSeriesErrorCB(err) {
     alert("Error -cant get the Series names");
 }
+
 episodesList = "";
 seriesReload = 0;
 function showEpisodes(series) {

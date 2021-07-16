@@ -38,7 +38,9 @@ namespace Ex2.Models
             Episode.Insert();
             return ds.Insert(this);
         }
-
+        /*  * Show the user in view page series loved their episodes
+           * input - userId and email
+           * Output - a sorted list of the series he liked */
         public List<Series> GetSeries(int userId, string email)
         {
             TotalDBServices tDB = new TotalDBServices();
