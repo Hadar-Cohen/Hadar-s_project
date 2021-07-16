@@ -3,6 +3,9 @@ function signUpClick() {
     document.getElementById('modalBox').style.display = 'block';
 
     $("#pForm").submit(submit); // bind the submit event to a function called addUser
+
+
+    //////////////////////////////////////////////auto complete -- google maps/////////////////////////////////////////////////////
     var autocomplete;
     autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
         types: ['geocode'],
@@ -13,15 +16,9 @@ function signUpClick() {
         document.getElementById('loc_lat').value = near_place.geometry.location.lat();
         document.getElementById('loc_long').value = near_place.geometry.location.lng();
     });
-
-    $('#passwordTB, #confirmPasswordTB').on('keyup', function () {
-        if ($('#passwordTB').val() == $('#confirmPasswordTB').val()) {
-            $('#message').html('Passwords are Matching').css('color', 'green');
-        } else
-            $('#message').html('Passwords are Not Matching').css('color', 'red');
-    });
 }
 
+/////////////////////////////////////////////////////////Registration Process //////////////////////////////////////////////////////////////
 function submit() {
     addUser();
     return false;
@@ -43,6 +40,7 @@ function addUser() {
     ajaxCall("POST", api, JSON.stringify(user), postSuccess, postError)
 }
 
+// Add user unless he does exists in the system
 function postSuccess(emailExist) {
     if (emailExist == - 1) {
         alert("email Exist !");
@@ -58,7 +56,7 @@ function postSuccess(emailExist) {
 }
 
 function postError(err) {
-    alert("Error - post user to server");
+    alert("Error - cant insert user to server");
     console.log(err);
 }
 
@@ -67,6 +65,7 @@ function checkEmail(mail) {
     this.setCustomValidity('This email already exists');
 }
 
+///////////////////////////////////////////////////Logout and Exit to to home page///////////////////////////////////////////////////
 function exitFunc() {
     localStorage.clear();
     document.location = 'homePage.html';
@@ -74,7 +73,7 @@ function exitFunc() {
 }
 
 
-////
+///////////////////////////////////////////////Upload Img to FireBase Storage -- new technology ////////////////////////////////////////////////////////////
 function uploadImage() {
     const ref = firebase.storage().ref();
 
