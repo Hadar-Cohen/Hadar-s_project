@@ -4,7 +4,6 @@ $(document).ready(function () {
     getMostViewedS();
     getMostViewedE();
     getMostActiveUser();
-    adminDatails();
     $("#showUsers").on("click", getUsers);
     $("#showSeries").on("click", getSeries);
     $("#showEpisodes").on("click", getEpisodes);
@@ -263,4 +262,44 @@ function redrawTable(tbl, data) {
 // this function is activated in case of a failure
 function error(err) {
     swal("Error: " + err);
+}
+
+function getMostViewedS() {
+    let api = "../api/Seriess";
+    ajaxCall("GET", api, "", getSuccessMostViewedS, errorMostViewed);
+}
+
+function getSuccessMostViewedS(topV) {
+    mostViewedList = "<p class='MostViewed'> The most popular series <br><br><b>" + topV[0].Name + "</b></p>";
+    $("#redDiv").html(mostViewedList);
+}
+///////////////////////////////////// get the Most popular episode in our DB//////////////////////////////////////////////////////
+
+function getMostViewedE() {
+    let api = "../api/Episodes";
+    ajaxCall("GET", api, "", getSuccessMostViewedE, errorMostViewed);
+}
+
+function getSuccessMostViewedE(topV) {
+    mostViewedList = "<p class='MostViewed'> The most popular Episode <br><br><b>" + topV[0].EpisodeName + "</b> in " + topV[0].SeriesName + "</p>";
+    $("#blueDiv").html(mostViewedList);
+}
+function getMostActiveUser() {
+    let api = "../api/Comments";
+    ajaxCall("GET", api, "", getSuccessMostActiveUser, errorMostViewed);
+}
+///////////////////////////////////// get the id of Most Active User in our DB//////////////////////////////////////////////////////
+
+function getSuccessMostActiveUser(userId) {
+    let api = "../api/Users?id=" + userId;
+    ajaxCall("GET", api, "", getSuccessMostActiveUserDetails, errorMostViewed);
+}
+///////////////////////////////////// get the Details of Most Active User in our DB//////////////////////////////////////////////////////
+function getSuccessMostActiveUserDetails(user) {
+    mostViewedList = "<p class='MostViewed'> The most responses <br><br><b>" + user.FirstName + " " + user.LastName + "</b><br>id: " + user.Id + "</p>";
+    $("#greenDiv").html(mostViewedList);
+}
+
+function errorMostViewed(err) {
+    console.log(err);
 }
