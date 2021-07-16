@@ -18,7 +18,6 @@
     getRecommendations(); //    Get recommandation
     getSimilars();  // Get similars Tv show
     getReviews();   // Get the reviews for a TV show.
-    getLinks(); 
     /////////////jast members cat see chat///////////////
     if (localStorage.user == null)
         document.getElementById("floatingChat").style.visibility = "hidden";
@@ -587,7 +586,6 @@ function getSocialSuccessCB(socialLinks) {
     console.log(socialLinks);
     str = "<ul>";
     if (socialLinks.facebook_id != null) {
-        //https://www.facebook.com/NetflixElite
         str += ` <li class="facebook"><a href="https://www.facebook.com/` + socialLinks.facebook_id + `"target="_blank">
                              <i class="fa fa-facebook" aria-hidden="true"></i></a>
                            <div class="slider">
@@ -595,7 +593,6 @@ function getSocialSuccessCB(socialLinks) {
                             </div>
                         </li>`;
     }
-    //https://www.instagram.com/elitenetflix/
     if (socialLinks.instagram_id != null) {
         str += `<li class="instagram"><a href="https://www.instagram.com/` + socialLinks.instagram_id +`/"target="_blank">
                             <i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -604,7 +601,6 @@ function getSocialSuccessCB(socialLinks) {
                             </div>
                         </li>`;
     }
-    //https://twitter.com/greysabc
     if (socialLinks.twitter_id != null) {
         str += ` <li class="twitter"><a href="https://twitter.com/` + socialLinks.twitter_id + `" target="_blank">
                             <i class="fa fa-twitter" aria-hidden="true"></i></a>
