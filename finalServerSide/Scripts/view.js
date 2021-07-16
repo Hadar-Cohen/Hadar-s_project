@@ -1,4 +1,30 @@
-﻿function getSeriesSuccessCB(series) {
+﻿$(document).ready(function () {
+
+    $("#nav-bar").load("signup.html");
+    imagePath = "https://image.tmdb.org/t/p/w500/";
+    //navBarVisability();
+    /*modal();*/
+
+    $("#phView").html("");
+    str = "<select id='series' onchange=showEpisodes(this)>";
+    str += "<option>select</option>";
+    if (localStorage.user != null) {
+        user = JSON.parse(localStorage["user"]);
+    }
+    userId = user.Id;
+    userEmail = user.Email;
+    userName = user.FirstName + " " + user.LastName;
+    userTmp = {
+        id: userId,
+        name: userName
+    }
+    /*series = document.getElementById('series');*/
+    //selectedText = series.options[series.selectedIndex].innerHTML;
+    let api = "../api/Totals?UserId=" + userId + "&email=" + userEmail;
+    ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
+});
+
+function getSeriesSuccessCB(series) {
 
     for (const s of series) {
         str += "<option value=" + s.Id + ">" + s.Name + "</option>";
@@ -10,10 +36,17 @@ function getSeriesErrorCB(err) {
     alert("Error -cant get the Series names");
 }
 episodesList = "";
+seriesReload = 0;
 function showEpisodes(series) {
     var selectedText = series.options[series.selectedIndex].innerHTML;
     selectedVal = series.options[series.selectedIndex].value;
     saveToLocalS(selectedText);
+    seriesReload = selectedText;
+    getToDBShowEpisodes(selectedText);
+  
+}
+function getToDBShowEpisodes(selectedText)
+{
     let api = "../api/Totals?seriesName=" + selectedText + "&userId=" + userId;
     ajaxCall("GET", api, "", getEpisodesSuccessCB, Error);
 }
@@ -56,7 +89,8 @@ function deleteEpisode(episode) {
 
 function deleteEpisodesSuccess()
 {
-    location.reload();
+    getToDBShowEpisodes(seriesReload);
+   // location.reload();
     alert('deleted');
 }
 

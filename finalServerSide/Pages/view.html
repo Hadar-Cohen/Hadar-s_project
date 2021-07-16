@@ -53,31 +53,31 @@
                 }
     </style>
     <script>
-        $(document).ready(function () {
+        //$(document).ready(function () {
 
-            $("#nav-bar").load("signup.html");
-            imagePath = "https://image.tmdb.org/t/p/w500/";
-            //navBarVisability();
-            /*modal();*/
+        //    $("#nav-bar").load("signup.html");
+        //    imagePath = "https://image.tmdb.org/t/p/w500/";
+        //    //navBarVisability();
+        //    /*modal();*/
 
-            $("#phView").html("");
-            str = "<select id='series' onchange=showEpisodes(this)>";
-            str += "<option>select</option>";
-            if (localStorage.user != null) {
-                user = JSON.parse(localStorage["user"]);
-            }
-            userId = user.Id;
-            userEmail = user.Email;
-            userName = user.FirstName + " " + user.LastName;
-            userTmp = {
-                id: userId,
-                name: userName
-            }
-            /*series = document.getElementById('series');*/
-            //selectedText = series.options[series.selectedIndex].innerHTML;
-            let api = "../api/Totals?UserId=" + userId + "&email=" + userEmail;
-            ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
-        });
+        //    $("#phView").html("");
+        //    str = "<select id='series' onchange=showEpisodes(this)>";
+        //    str += "<option>select</option>";
+        //    if (localStorage.user != null) {
+        //        user = JSON.parse(localStorage["user"]);
+        //    }
+        //    userId = user.Id;
+        //    userEmail = user.Email;
+        //    userName = user.FirstName + " " + user.LastName;
+        //    userTmp = {
+        //        id: userId,
+        //        name: userName
+        //    }
+        //    /*series = document.getElementById('series');*/
+        //    //selectedText = series.options[series.selectedIndex].innerHTML;
+        //    let api = "../api/Totals?UserId=" + userId + "&email=" + userEmail;
+        //    ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
+        //});
 
     </script>
     <script src="../Scripts/navbarFunc.js"></script>
@@ -99,13 +99,13 @@
 
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <!--<div id="myModal" class="modal">-->
         <!-- Modal content -->
-        <div class="modal-content">
+        <!--<div class="modal-content">
             <span class="close">&times;</span>
-            <div class='title'><a>Chat Furum</a></div>
+            <div class='title'><a>Chat Furum</a></div>-->
             <!-- Chat: -->
-            <div class="page-content page-container" id="page-content">
+            <!--<div class="page-content page-container" id="page-content">
                 <div class="padding">
                     <div class="row container d-flex justify-content-center">
                         <div class="col-md-6">
@@ -135,6 +135,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </body>
 </html>
