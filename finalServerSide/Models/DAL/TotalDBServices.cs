@@ -174,8 +174,12 @@ namespace Ex2.Models.DAL
                 }
             }
         }
-
-        public List<Series> GetSimilarSeries(int userId)
+        /*  * Recommended series for the user according to our algorithm according to our calculation
+            * The algorithm selects "similar users" and recommends the user to see the most common series they liked.
+            * Similar users = users in the same age range (5 years up and down) and members with the same gender. 
+            * input - userId
+            * Output - a sorted list of the most viewed series on the site */
+        public List<Series> RecommendForTheUser(int userId)
         {
             SqlConnection con = null;
             List<Series> similarsSeriesForYou = new List<Series>();

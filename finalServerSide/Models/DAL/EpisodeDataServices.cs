@@ -138,7 +138,7 @@ namespace Ex2.Models.DAL
             }
         }
 
-        //GetSeries
+        
         public List<Episode> GetEpisode()
         {
             SqlConnection con = null;

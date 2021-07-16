@@ -51,10 +51,16 @@ namespace Ex2.Models
             TotalDBServices tDB = new TotalDBServices();
             tDB.DeletePreferences(episodeId,seriesId, userId);
         }
-        public List<Series> GetSimilarsSeries(int userId)
+
+        /*  * Recommended series for the user according to our algorithm according to our calculation
+            * The algorithm selects "similar users" and recommends the user to see the most common series they liked.
+            * Similar users = users in the same age range (5 years up and down) and members with the same gender. 
+            * input - userId
+            * Output - a sorted list of the most viewed series on the site */
+        public List<Series> RecommendForTheUser(int userId)
         {
             TotalDBServices tDB = new TotalDBServices();
-            return tDB.GetSimilarSeries(userId);
+            return tDB.RecommendForTheUser(userId);
         }
 
     }

@@ -17,13 +17,22 @@ namespace Ex2.Controllers
             return total.GetSeries(userId, email);
         }
 
-        public List<Series> Get(int userId) //Get series similars user
+
+        /*  * Recommended series for the user according to our algorithm according to our calculation
+            * The algorithm selects "similar users" and recommends the user to see the most common series they liked.
+            * Similar users = users in the same age range (5 years up and down) and members with the same gender. 
+            * input - userId
+            * Output - a sorted list of the most viewed series on the site */
+        public List<Series> Get(int userId)// List<Series>
         {
             Total total = new Total();
-            return total.GetSimilarsSeries(userId);
+            return total.RecommendForTheUser(userId);
+
         }
-
-
+        /*  * Insert to the preferences DB tbl
+            * the user's Preferences Episodes and the Series it belongs 
+            * and the user that choose them
+        */
         public List<Episode> Get(string seriesName, int userId)
         {
             Episode e = new Episode();
@@ -32,9 +41,20 @@ namespace Ex2.Controllers
         }
 
         // POST api/<controller>
-        public int Post([FromBody]Total obj)
+    
+        public HttpResponseMessage Post([FromBody]Total obj)
         {
-            return obj.Insert();
+            int feedback= obj.Insert();
+            if (feedback == 1)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "Preferences Inserted");
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, " Preferences already exists");
+            }
+
+            
         }
 
         // PUT api/<controller>/5
@@ -48,11 +68,5 @@ namespace Ex2.Controllers
             total.DeletePreferences(episodeId, seriesId, userId);
         }
         
-        // DELETE api/<controller>/5
-        //public int Delete(int id)
-        //{
-        //    User us = new User();
-        //    return us.Delete(id);
-        //}
     }
 }

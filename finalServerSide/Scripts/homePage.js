@@ -1,34 +1,34 @@
 ﻿$(document).ready(function () {
     $("#nav-bar").load("signup.html");
     key = "90f77ef6862d870eb9f5fff3bc587100";
-
     url = "https://api.themoviedb.org/";
     imagePath = "https://image.tmdb.org/t/p/w500/";
-
     method = "3/tv/";
     api_key = "api_key=" + key;
 
-    getTopRated();  // Get similars Tv show
+    getTopRated();  
     getMostViewed();
     getMostViewedEpisodes();
     getGenres()
+
     if (localStorage.user != null) {
         user = JSON.parse(localStorage["user"]);
         getRecommendForYou(user);
     }
 
 });
-////////////////////////////////////top rated from the movie DB api - //////////////////////////////////////////////
+///////////////////////////////////////////////// Get Top Rated from the movie DB api ////////////////////////////////////////////////////////
 function getTopRated() {
     topRatedList = "<div class='container'>";
     topRatedList += "<div class='owl-carousel owl-theme row'>";
 
     let apiCall = url + "3/trending/tv/week?" + api_key;
-    ajaxCall("GET", apiCall, "", getSuccesstopRated, errortopRated);
+    ajaxCall("GET", apiCall, "", getSuccesstopRated, apiError);
 }
 
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 topRatedArr = [];//local arrey to render and play onclick function
+
 function getSuccesstopRated(topRated) {
     topRatedArr = topRated.results;
     topRatedArr.forEach(TVShow => {
@@ -39,10 +39,11 @@ function getSuccesstopRated(topRated) {
     $("#topRated").html(topRatedList);
     r = 0;
 }
-
-function errortopRated(err) {
+///ERROR FROM API///
+function apiError(err) {
     console.log(err);
 }
+
 function drawtopRated(TVShow) {
     console.log(TVShow);
     let stars = 5;
@@ -69,12 +70,10 @@ function drawtopRated(TVShow) {
     return str;
 }
 
-///////////////////////////////////////most view according awere DB ///////////////////////////////////////////////////
-////////////////////////////////////// User recommendations ///////////////////////////////////////////////////
+/////////////////// Recommended series for the user according to our algorithm according to our calculation (from our DB) /////////////////////////////
 
 function getRecommendForYou(user) {
-    
-    let api = "../api/Totals?userId=" + user.Id; //+ "&email=" + user.Email;
+    let api = "../api/Totals?userId=" + user.Id; 
     ajaxCall("GET", api, "", getSuccessRecommendForYou, errorMostViewed);
 }
 
@@ -82,7 +81,7 @@ r = 0; //index in result array that contain all the tv shows in the TMDB service
 recommendForYouArr = [];//local arrey to render and play onclick function
 
 function getSuccessRecommendForYou(recForYou) {
-    recommendForYouArr = recForYou;////
+    recommendForYouArr = recForYou;
     recommendForYouList = "<div style= 'display:flex; justify-content:center;' class='row'>";
     while (r < 8 && recForYou[r] != undefined) {
         recommendForYouList += drawRecommendForYou(recForYou[r]);
@@ -92,8 +91,6 @@ function getSuccessRecommendForYou(recForYou) {
     $("#RecommendForYou").html(recommendForYouList);
     r = 0;
 }
-
-
 
 function drawRecommendForYou(TVShow) {
     console.log(TVShow);
@@ -120,8 +117,8 @@ function drawRecommendForYou(TVShow) {
                            <img class='starsPopularity' src= '../images/` + stars + `stars.png'/></div>`
     return str;
 }
-////////////////////////////////////// Seriess ///////////////////////////////////////////////////
 
+////////////////////////////////////// The most watched Series - according our DB ///////////////////////////////////////////////////
 function getMostViewed() {
     let api = "../api/Seriess";
     ajaxCall("GET", api, "", getSuccessMostViewed, errorMostViewed);
@@ -131,7 +128,7 @@ r = 0; //index in result array that contain all the tv shows in the TMDB service
 mostViewedArr = [];//local arrey to render and play onclick function
 
 function getSuccessMostViewed(mostView) {
-    mostViewedArr = mostView;////
+    mostViewedArr = mostView;
     mostViewedList = "<div style= 'display:flex; justify-content:center;' class='row'>";
     while (r < 8) {
         mostViewedList += drawMostViewed(mostView[r]);

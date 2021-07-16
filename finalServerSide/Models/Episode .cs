@@ -58,6 +58,8 @@ namespace Ex2.Models
             List<Episode> episodeList = d.GetEpisodes(seriesName, userId);
             return episodeList;
         }
+
+    
         public List<Episode> Get()
         {
             EpisodeDataServices us = new EpisodeDataServices();
