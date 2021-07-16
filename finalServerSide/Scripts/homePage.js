@@ -243,7 +243,7 @@ function showSeriesAccoGenre(genreId) {
     seriesAccoGenreList += "<div class='owl-carousel owl-theme row'>";
 
     let apiCall = url + "3/discover/tv?" + api_key + "&sort_by=popularity.desc&with_genres=" + genreId;
-    ajaxCall("GET", apiCall, "", getSuccessTVShowGenres, errorGenres);
+    ajaxCall("GET", apiCall, "", getSuccessTVShowGenres, apiError);
 }
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 seriesAccoGenreArr = [];//local arrey to render and play onclick function
