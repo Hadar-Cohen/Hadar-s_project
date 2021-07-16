@@ -72,27 +72,6 @@ function showAbout(movie) {
     gapi.load("client", loadClient.bind(this));
 }
 
-//////////////////////////////////////////Store to Local Storage the tvShow that was clicked///////////////////////////////////////
-function storeToLS(movie) {
-    if (movie.poster_path == null)
-        movieImg = `../images/Default.jpg`;
-    else
-        movieImg = imagePath + movie.poster_path;
-
-    Movie = {
-        Id: movie.id,
-        Name: movie.title,
-        Release_date: movie.release_date,
-        Original_language: movie.original_language,
-        Overview: movie.overview,
-        Popularity: movie.popularity,
-        Poster_path: movieImg,
-        Backdrop_path: imagePath + movie.backdrop_path
-
-    }
-    localStorage.setItem("movie", JSON.stringify(Movie));
-}
-
 //////////////////////////////////////////About Movie///////////////////////////////////////
 function showMovieData(movie) {
     let name = movie.title;
