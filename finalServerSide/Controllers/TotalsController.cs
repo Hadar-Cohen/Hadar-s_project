@@ -29,10 +29,7 @@ namespace Ex2.Controllers
             return total.RecommendForTheUser(userId);
 
         }
-        /*  * Insert to the preferences DB tbl
-            * the user's Preferences Episodes and the Series it belongs 
-            * and the user that choose them
-        */
+     
         public List<Episode> Get(string seriesName, int userId)
         {
             Episode e = new Episode();
@@ -40,8 +37,11 @@ namespace Ex2.Controllers
             return Elist;
         }
 
-        // POST api/<controller>
-    
+        /*  * Insert to the preferences DB tbl
+             * the user's Preferences Episodes and the Series it belongs 
+             * and the user that choose them */
+         
+
         public HttpResponseMessage Post([FromBody]Total obj)
         {
             int feedback= obj.Insert();

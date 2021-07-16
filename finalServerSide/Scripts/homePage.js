@@ -74,7 +74,7 @@ function drawtopRated(TVShow) {
 
 function getRecommendForYou(user) {
     let api = "../api/Totals?userId=" + user.Id; 
-    ajaxCall("GET", api, "", getSuccessRecommendForYou, errorMostViewed);
+    ajaxCall("GET", api, "", getSuccessRecommendForYou, errortRecommendForYou);
 }
 
 r = 0; //index in result array that contain all the tv shows in the TMDB services
@@ -92,6 +92,9 @@ function getSuccessRecommendForYou(recForYou) {
     r = 0;
 }
 
+function errortRecommendForYou(err) {
+    console.log(err);
+}
 function drawRecommendForYou(TVShow) {
     console.log(TVShow);
     let stars = 5;
