@@ -10,7 +10,9 @@ namespace Ex2.Controllers
 {
     public class TotalsController : ApiController
     {
-        // GET api/<controller>
+        /*  * Show the user in view page series loved their episodes
+            * input - userId and email
+            * Output - a sorted list of the series he liked */
         public List<Series> Get(int userId, string email) //Get series of user (according to his preferences)
         {
             Total total = new Total();

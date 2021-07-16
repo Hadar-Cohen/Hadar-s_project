@@ -133,6 +133,10 @@ namespace Ex2.Models.DAL
         //---------------------------------------------------------------------------------
         // Read from the DB into a list all the series names that the user prefered- dataReader
         //---------------------------------------------------------------------------------
+
+/*  * Show the user in view page series loved their episodes
+    * input - userId and email
+    * Output - a sorted list of the series he liked */
         public List<Series> GetSeries(int userId, string email)
         {
             SqlConnection con = null;
