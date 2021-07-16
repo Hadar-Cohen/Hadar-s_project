@@ -5,16 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Ex2.Models;
+using Ex2.Models.DAL;
 
 namespace Ex2.Controllers
 {
     public class SeriessController : ApiController
     {
-        // GET api/<controller>
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+      
 
         // GET api/<controller>/5
         public string Get(int id)
@@ -37,11 +34,21 @@ namespace Ex2.Controllers
         public void Delete(int id)
         {
         }
-        /* The most watched Series in our DB */
-        public List<Series> Get()
+ /*     * The most viewed series on our site for display on the Home page
+        * input - none
+        * Output - a sorted list of the most viewed series on the site  */
+        public HttpResponseMessage Get()//List<Series>
         {
             Series s = new Series();
-            return s.Get();
+            List<Series> seriesList= s.Get();
+            if (seriesList != null)
+            {
+                return Request.CreateResponse<List<Series>>(HttpStatusCode.OK, seriesList);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "most viewed series on our site not exists");
+            }
         }
     }
 }

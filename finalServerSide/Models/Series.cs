@@ -51,6 +51,9 @@ namespace Ex2.Models
             SeriesDBServices dbs = new SeriesDBServices();
             dbs.Insert(this);
         }
+/*     * The most viewed series on our site for display on the Home page
+       * input - none
+       * Output - a sorted list of the most viewed series on the site  */
         public List<Series> Get()
         {
             SeriesDBServices us = new SeriesDBServices();

@@ -204,7 +204,9 @@ namespace Ex2.Models.DAL
         }
 
 
-        //GetSeries
+/*      * The most viewed series on our site for display on the Home page
+        * input - none
+        * Output - a sorted list of the most viewed series on the site  */
         public List<Series> GetSeries()
         {
             SqlConnection con = null;

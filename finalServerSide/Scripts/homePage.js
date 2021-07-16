@@ -172,7 +172,8 @@ function drawMostViewed(TVShow) {
     return str;
 }
 
-////////////////////////////////////// Episodes ///////////////////////////////////////////////////
+////////////////////////////////////// The most watched Episodes - according our DB ///////////////////////////////////////////////////
+
 function getMostViewedEpisodes() {
     let api = "../api/Episodes";
     ajaxCall("GET", api, "", getSuccessMostViewedEpisodes, errorMostViewedEpisodes);
