@@ -28,12 +28,11 @@ function toGetMovie(name) {
     i = 1;
     k = 0;
   //  moviesList = "<div class='container'>";
-    moviesList = "<div class='row'>";
-
-     method = "3/search/movie?";
     
-     moreParams = "&language=en-US&page=1&include_adult=false&";
-     query = "query=" + encodeURIComponent(name);
+
+    method = "3/search/movie?";
+    moreParams = "&language=en-US&page=1&include_adult=false&";
+    query = "query=" + encodeURIComponent(name);
     let apiCall = url + method + api_key + moreParams + query;
     ajaxCall("GET", apiCall, "", getMovieSuccessCB, getMovieErrorCB);
 }
@@ -41,17 +40,16 @@ i = 0;
 moviesArr = [];
 function getMovieSuccessCB(movie) {
     //console.log(movie);
+    //moviesList = `<div class='title'><a>Top Rated Movies</a></div>`;
+    document.getElementById("searchResultTitle").style.visibility = "visible";
+    moviesList = "<div class='row'>";
     moviesArr = movie.results;
 
     while (i < 7) {
         moviesList += drawMovie(moviesArr[i]);
         i++;
     }
-    //moviesArr.forEach(Movie => {
-    //    moviesList += drawMovie(Movie);
-    //    i++;
-    //});
-    moviesList += "</div";//</div>";
+    moviesList += "</div";
     $("#TheMovieList").html(moviesList);
     i = 0;
 }
