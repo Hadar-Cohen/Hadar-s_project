@@ -9,6 +9,7 @@
     $("#pForm").submit(submit); // bind the submit event to a function called addUser
 });
 
+//////////////////////////////////////////////////Auto Complete//////////////////////////////////////////////////////
 function addressAutoComplete() {
     let searchInput = 'search_input';
     var autocomplete;
@@ -22,6 +23,8 @@ function addressAutoComplete() {
         document.getElementById('loc_long').value = near_place.geometry.location.lng();
     });
 }
+
+/////////////////////////////////////////////////////Get the User and his Details///////////////////////////////////////////////
 function getUserData() {
     let api = "../api/Users?id=" + userId;
     ajaxCall("GET", api, "", getSuccessCB, getErrorCB)
@@ -45,6 +48,8 @@ function renderDataToTB(user) {
     $('#genreTB').val(user.Genre);
     $('#search_input').val(user.Address);
 }
+
+////////////////////////////////////////////////////////Update The User In the User DB tbl///////////////////////////////////////////////////////////
 function updateUser() {
     user = {
         Id: userId,
@@ -89,6 +94,7 @@ function submit() {
 function clearForm() {
     document.getElementById("pForm").reset();
 }
+
 function backHome() {
     clearForm();
     window.location.replace("homePage.html");
