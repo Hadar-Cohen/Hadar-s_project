@@ -17,25 +17,23 @@
     }
     else
         document.getElementById("recommandTitle").style.visibility = "hidden";
-
-
 });
+
 ///////////////////////////////////////////////// Get Top Rated from the movie DB api ////////////////////////////////////////////////////////
 function getTopRated() {
-    topRatedList = "<div class='container'>";
-    topRatedList += "<div class='owl-carousel owl-theme row'>";
-
     let apiCall = url + "3/trending/tv/week?" + api_key;
     ajaxCall("GET", apiCall, "", getSuccesstopRated, apiError);
 }
 
 r = 0; //index in result array that contain all the tv shows in the TMDB services
-topRatedArr = [];//local arrey to render and play onclick function
+topRatedArr = [];//local array to render and play onclick function
 
 function getSuccesstopRated(topRated) {
     topRatedArr = topRated.results;
+    topRatedList = "<div class='container'>";
+    topRatedList += "<div class='owl-carousel owl-theme row'>";
     topRatedArr.forEach(TVShow => {
-        topRatedList += drawtopRated(TVShow);
+        topRatedList += drawTv(TVShow);
         r++;
     });
     topRatedList += "</div></div>";
@@ -51,7 +49,7 @@ function apiError(err) {
         alert(err.status);
 }
 
-function drawtopRated(TVShow) {
+function drawTv(TVShow) {
     console.log(TVShow);
     let stars = 5;
     let popularity = TVShow.popularity;
@@ -77,17 +75,20 @@ function drawtopRated(TVShow) {
     return str;
 }
 
-/////////////////// Recommended series for the user according to our algorithm according to our calculation (from our DB) /////////////////////////////
+///////////////////Recommended series for the user according to our algorithm according to our calculation (from our DB) /////////////////////////////
 
 function getRecommendForYou(user) {
     let api = "../api/Totals?userId=" + user.Id; 
     ajaxCall("GET", api, "", getSuccessRecommendForYou, errortRecommendForYou);
 }
 
-r = 0; //index in result array that contain all the tv shows in the TMDB services
+//r = 0; //index in result array that contain all the tv shows in the TMDB services
 recommendForYouArr = [];//local arrey to render and play onclick function
-
 function getSuccessRecommendForYou(recForYou) {
+    if (recForYou == null) {
+        getPopular();
+    }
+
     recommendForYouArr = recForYou;
     recommendForYouList = "<div style= 'display:flex; justify-content:center;' class='row'>";
     while (r < 8 && recForYou[r] != undefined) {
@@ -96,6 +97,28 @@ function getSuccessRecommendForYou(recForYou) {
     }
     recommendForYouList += "</div>";
     $("#RecommendForYou").html(recommendForYouList);
+    r = 0;
+}
+
+//If dont have recommended series - then show the popular
+function getPopular() {
+    let apiCall = url + "3/tv/popular?" + api_key;
+    ajaxCall("GET", apiCall, "", getSuccessPopular, apiError);
+}
+
+//p = 0; //index in result array that contain all the tv shows in the TMDB services
+popularsArr = [];//local array to render and play onclick function
+
+function getSuccessPopular(populars) {
+    popularsArr = populars.results;
+    popularsList = "<div class='container'>";
+    popularsList += "<div class='owl-carousel owl-theme row'>";
+    popularsArr.forEach(TVShow => {
+        popularsList += drawTv(TVShow);
+        p++;
+    });
+    topRatedList += "</div></div>";
+    $("#topRated").html(topRatedList);
     r = 0;
 }
 
@@ -138,7 +161,7 @@ function getMostViewed() {
     ajaxCall("GET", api, "", getSuccessMostViewed, errorMostViewed);
 }
 
-r = 0; //index in result array that contain all the tv shows in the TMDB services
+//r = 0; //index in result array that contain all the tv shows in the TMDB services
 mostViewedArr = [];//local arrey to render and play onclick function
 
 function getSuccessMostViewed(mostView) {
@@ -192,7 +215,7 @@ function getMostViewedEpisodes() {
     let api = "../api/Episodes";
     ajaxCall("GET", api, "", getSuccessMostViewedEpisodes, errorMostViewedEpisodes);
 }
-r = 0; //index in result array that contain all the tv shows in the TMDB services
+//r = 0; //index in result array that contain all the tv shows in the TMDB services
 mostViewedEpisodesArr = [];//local arrey to render and play onclick function
 
 function getSuccessMostViewedEpisodes(mostViewEpisodes) {
@@ -234,7 +257,7 @@ function getGenres() {
     ajaxCall("GET", apiCall, "", getSuccessGenres, apiError);
 }
 
-r = 0; //index in result array that contain all the tv shows in the TMDB services
+//r = 0; //index in result array that contain all the tv shows in the TMDB services
 genresArr = [];//local arrey to render and play onclick function
 
 function getSuccessGenres(genre) {
@@ -264,7 +287,7 @@ function showSeriesAccoGenre(genreId) {
     ajaxCall("GET", apiCall, "", getSuccessTVShowGenres, apiError);
 }
 
-r = 0; //index in result array that contain all the tv shows in the TMDB services
+//r = 0; //index in result array that contain all the tv shows in the TMDB services
 seriesAccoGenreArr = [];//local arrey to render and play onclick function
 
 function getSuccessTVShowGenres(seriess) {
@@ -276,6 +299,7 @@ function getSuccessTVShowGenres(seriess) {
     });
     seriesAccoGenreList += "</div></div>";
     $("#seriesAccoGenre").html(seriesAccoGenreList);
+    r = 0;
 ///////////////////////////////////////////////// carousel function ////////////////////////////////////////////////////////////
     jQuery(function ($) {
         $('.owl-carousel').owlCarousel({
@@ -295,12 +319,10 @@ function getSuccessTVShowGenres(seriess) {
             }
         })
     });
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    r = 0;
+ 
 }
 
 function drawAccoGenre(TVShow) {
-    console.log(TVShow);
     let stars = 5;
     let popularity = TVShow.popularity;
     switch (true) {
