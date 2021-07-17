@@ -78,8 +78,6 @@ namespace Ex2.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, " Preferences already exists");
             }
-
-            
         }
 
         // PUT api/<controller>/5
@@ -95,6 +93,5 @@ namespace Ex2.Controllers
             Total total = new Total();
             total.DeletePreferences(episodeId, seriesId, userId);
         }
-        
     }
 }

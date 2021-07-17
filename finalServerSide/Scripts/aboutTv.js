@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-   /* $("#nav-bar").load("signup.html");*/
     key = "90f77ef6862d870eb9f5fff3bc587100";
 
     url = "https://api.themoviedb.org/";
@@ -17,8 +16,8 @@
     getCredists();  // Get actors
     getRecommendations(); //    Get recommandation
     getSimilars();  // Get similars Tv show
-    getReviews();   // Get the reviews for a TV show.
-    /////////////jast members cat see chat///////////////
+    getReviews();   // Get the reviews for a TV show
+    /////////////just members can see chat///////////////
     if (localStorage.user == null)
         document.getElementById("floatingChat").style.visibility = "hidden";
 
@@ -35,38 +34,11 @@
                 items: 3
             },
             1000: {
-                items: 5
+                items: 6
             }
         }
     })
-
-    //$('.right').click(function () {
-    //    var position = $('.container').position();
-    //    var r = position.left - $(window).width()
-    //    $('.container').animate({
-    //        'left': '' + r + 'px'
-    //    });
-    //});
-
-    //$('.left').click(function () {
-    //    var position = $('.container').position();
-    //    var l = position.left + $(window).width()
-    //    if (l <= 0) {
-    //        $('.container').animate({
-    //            'left': '' + l + 'px'
-    //        });
-    //    }
-    //});    
-
 });
-
-////Here we are getting the number of the divs with class contentContainer inside the div container
-//var length = $('div .container').children('div .recommand-card').length;
-////Here we are setting the % width depending on the number of the child divs
-//$(".container").width(length * 100 + '%');
-
-
-
 
 //Header of the page -> Show the basic data of the TV show. Taking it from LS.
 function showTVData() {
@@ -78,7 +50,6 @@ function showTVData() {
 
     // getCreateYouTubeTrailer();
     gapi.load("client", loadClient.bind(this));
-    //execute(); // maybe
 
     let posterURL = series.seriesObj.Poster_path;
     let poster = "<img src='" + posterURL + "'/>";
@@ -106,32 +77,25 @@ function showTVData() {
     $("#backgroundPorter").append(backdropImg);
 }
 
+//////////////////////////////////////////////////Get Actors from TMDB Api////////////////////////////////////////////////////////////
 function getCredists() {
-    actorsList = "<div class='container'>";
-    actorsList += "<div class='actors-row'>";
-
     let apiCall = url + method + tvId + "/credits?" + api_key;
-    ajaxCall("GET", apiCall, "", getCastSuccessCB, getCastErrorCB);
+    ajaxCall("GET", apiCall, "", getCastSuccessCB, errorApiDB);
 }
 
 k = 0;
 actors = null;
 function getCastSuccessCB(credit) {
     actors = credit.cast; //arr of all the actors
-
+    actorsList = "<div class='container'>";
+    actorsList += "<div class='actors-row'>";
     actors.forEach(actor => {
         actorsList += drawActor(actor);
         k++;
     });
     
-
     actorsList += "</div></div>";
     $("#actors").html(actorsList);
-}
-function getCastErrorCB(err) {
-    if (err.status == 404) {
-        console.log(err);
-    }
 }
 
 function drawActor(actor) {
@@ -164,8 +128,6 @@ function getActorSuccessCB(actor) {
     str += "<p class='aboutActor'>Birthday: " + actor.birthday + "</p>";
     str += "<p class='aboutActor'>Place of birth: " + actor.place_of_birth + "</p>";
     str += "<p>" + actor.biography + "</p>";
-    // str += "<div><span>Also known as:</span> " + actor.also_known_as[0] + "</div>"
-
     str += "</div></div>";
     $("#actorAbout").html(str);
     document.getElementById("myModal").style.display = "block";
@@ -196,10 +158,13 @@ function getActorErrorCB(err) {
     console.log(err);
 }
 
+
+////////////////////////////////Get Recommendations from TMDB Api accoreding to current series////////////////////////////////////
+
 //Reocommanded Series
 function getRecommendations() {
     let apiCall = url + method + tvId + "/recommendations?" + api_key;
-    ajaxCall("GET", apiCall, "", getSuccessRecommendationsCB, errorRecommendationsCB);
+    ajaxCall("GET", apiCall, "", getSuccessRecommendationsCB, errorApiDB);
 }
 
 //Get all the tv shows recommand to the user, according to his choises
@@ -217,9 +182,6 @@ function getSuccessRecommendationsCB(recommendations) {
     $("#recommendations").html(recList);
     r = 0;
     
-}
-function errorRecommendationsCB(err) {
-    alert("ERROR");
 }
 
 function drawRecommand(rec) {
@@ -249,12 +211,14 @@ function drawRecommand(rec) {
     return str;
 }
 
+////////////////////////////////Get Similar series from TMDB Api accoreding to current series////////////////////////////////////
+//Get a list of similar TV shows. These items are assembled by looking at keywords and genres.
+
 function getSimilars() {
     let apiCall = url + method + tvId + "/similar?" + api_key;
-    ajaxCall("GET", apiCall, "", getSuccessSimilarsCB, errorSimilarsCB);
+    ajaxCall("GET", apiCall, "", getSuccessSimilarsCB, errorApiDB);
 }
 
-//Get a list of similar TV shows. These items are assembled by looking at keywords and genres.
 similarArr = null;
 function getSuccessSimilarsCB(similars) {
     similarArr = similars.results;
@@ -268,16 +232,13 @@ function getSuccessSimilarsCB(similars) {
     $("#similars").html(similarList);
     r = 0;
 }
-function errorSimilarsCB(err) {
-    alert("ERROR");
-}
 
-//Show the about page of this tvshow was clicked
+/////////////////////////////////////////////////Show the about page of this tvshow was clicked////////////////////////////////////////
 function showAbout(tvShow) {
-    console.log(tvShow);
     storeToLS(tvShow);
     location.reload();
 }
+
 //Store to Local Storage the tvShow that was clicked
 function storeToLS(tvShow) {
     seriesObj = {
@@ -303,15 +264,52 @@ function storeToLS(tvShow) {
     localStorage.setItem("series", JSON.stringify(totalSeries));
 }
 
-////////////////////////////////////////////////Reviews////////////////////////////////////////////////
+////////////////////////////////////////////////Get Social Media Links from TMDB Api////////////////////////////////////////////////
+function getSocialMedia() {
+    let apiCall = url + method + tvId + "/external_ids?" + api_key;
+    ajaxCall("GET", apiCall, "", getSocialSuccessCB, errorApiDB);
+}
+
+function getSocialSuccessCB(socialLinks) {
+    console.log(socialLinks);
+    str = "<ul>";
+    if (socialLinks.facebook_id != null) {
+        str += ` <li class="facebook"><a href="https://www.facebook.com/` + socialLinks.facebook_id + `"target="_blank">
+                        <i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <div class="slider">
+                        <p>facebook</p>
+                    </div>
+                </li>`;
+    }
+    if (socialLinks.instagram_id != null) {
+        str += `<li class="instagram"><a href="https://www.instagram.com/` + socialLinks.instagram_id + `/"target="_blank">
+                            <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <div class="slider">
+                                <p>instagram</p>
+                            </div>
+                        </li>`;
+    }
+    if (socialLinks.twitter_id != null) {
+        str += ` <li class="twitter"><a href="https://twitter.com/` + socialLinks.twitter_id + `" target="_blank">
+                            <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <div class="slider">
+                                 <p>twitter</p>
+                            </div>
+                        </li>`;
+    }
+
+    str += "</ul>";
+    $('#mediaLinks').html(str);
+}
+
+
+///////////////////////////////////////////Get Reviews from TMDB Api accoreding to current series/////////////////////////////////////
 function getReviews() {
     let apiCall = url + method + tvId + "/reviews?" + api_key;
-    ajaxCall("GET", apiCall, "", getSuccessReviewsCB, errorReviewsCB);
+    ajaxCall("GET", apiCall, "", getSuccessReviewsCB, errorApiDB);
 }
 
 function getSuccessReviewsCB(reviewsArr) {
-    console.log(reviewsArr.results)
-
     let reviewsList = "<div class='reviews'>";
     reviewsList = `<div class="carousel">`;
     if (reviewsArr.results != undefined) {
@@ -332,15 +330,13 @@ function getSuccessReviewsCB(reviewsArr) {
 
         setCarousel();
     }
-    else
-        alert("NO REVIEWS");
 }
 
 function drawReview(review) {
-    //if (review.author_details['avatar_path'].startsWith() == '"/https:')
-    //    imgAvatar = "https://image.ibb.co/jw55Ex/def_face.jpg";//review.author_details['avatar_path'].slice(1);//"https://image.ibb.co/jw55Ex/def_face.jpg";
-    //else
-    imgAvatar = imagePath + review.author_details['avatar_path'];
+    if (review.author_details['avatar_path'].startsWith() == '"/https:')
+        imgAvatar = "https://image.ibb.co/jw55Ex/def_face.jpg";//review.author_details['avatar_path'].slice(1);//"https://image.ibb.co/jw55Ex/def_face.jpg";
+    else
+        imgAvatar = imagePath + review.author_details['avatar_path'];
     return `<div class="carousel-cell">
             <div class="review-avatar">
                 <img class="p" src="`+ imgAvatar + `">
@@ -350,7 +346,7 @@ function drawReview(review) {
             <p class= "b">read allready</p>
             </div>`;
 }
-
+//Reviews Carousel
 function setCarousel() {
     $(".b").click(function () {
         $(this).toggleClass("b");
@@ -366,14 +362,12 @@ function setCarousel() {
         friction: 0.15
     });
     flkty = new Flickity('.carousel', {
-        // options
     });
 }
 
-function errorReviewsCB(err) {
+function errorApiDB(err) {
     console.log(err);
 }
-////////////////////////////////////////////////Reviews-END////////////////////////////////////////////////
 
 ////////////////////////////////////////////////YouTube Trailer////////////////////////////////////////////////
 function loadClient() {
@@ -444,7 +438,6 @@ function loadClient() {
     }
 }
 
-////////////////////////////////////////////////YouTube Trailer - END////////////////////////////////////////////////
 
 ////////////////////////////////////////////////Chat////////////////////////////////////////////////
 function initChat() {
@@ -473,15 +466,13 @@ function initChat() {
     else {
         document.getElementById("chat").style.visibility = "hidden";
     }
+
     //pulling the name of tvshow from ls and insert there too
     ref = firebase.database().ref(seriesName);
     // listen to incoming messages
     listenToNewMessages();
-    // listen to removing messages
-    //listenToRemove();
 
     chat = document.getElementById("chat");
-    //setTimeout(scrollChatDown, 1000);
     date = calcDay();
 }
 
@@ -490,6 +481,7 @@ function scrollChatDown() {
     element.scrollTop = element.scrollHeight;
 }
 
+//Get the cuurent date
 function calcDay() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -502,27 +494,20 @@ function listenToNewMessages() {
     // child_added will be evoked for every child that was added
     // on the first entry, it will bring all the childs
     ref.on("child_added", snapshot => {
-
         msg = {
             user: snapshot.val().user,
             content: snapshot.val().msg,
             date: snapshot.val().date,
         }
-        //msgArr.push(msg)
         classStyle = "", imgAvatar = "";
         if (userId == msg.user.id) {
             classStyle = ` media-chat-reverse`;
-            /*imgAvatar = msg.user.profile;*/
         }
-        //else
-        //    imgAvatar = `<img class="avatar" src="https://image.ibb.co/jw55Ex/def_face.jpg">`
         printMessage(msg);
     })
 }
 
 function printMessage(msg) {
-    //let str = "name: " + msg.name + ", content: " + msg.content + "<br/>";
-    //console.log(printToChat(msg));
     chat.innerHTML += printToChat(msg);
 }
 
@@ -539,16 +524,12 @@ function addMSG() { //add msg to the array of messages
     let content = document.getElementById("msgTB").textContent;
     let name = userName;//document.getElementById("nameTB").value;
 
-    //if (name == "") {
-    //    alert("must enter a name");
-    //    return;
-    //}
     ref.push().set({ "msg": content, "user": userTmp, "date": date })
     setTimeout(scrollChatDown, 1);
     document.getElementById("msgTB").textContent = "";
 }
 
-function printToChat(msg) {/*class="media-body"*/
+function printToChat(msg) {
     console.log(msg);
     return `<div class="media media-meta-day">` + msg.date + `</div>
                 <div class="media media-chat `+ classStyle + `">
@@ -557,9 +538,8 @@ function printToChat(msg) {/*class="media-body"*/
                 </div>
             </div>`;
 }
-////////////////////////////////////////////////Chat////////////////////////////////////////////////
 
-////////////////////////////////////////////////Tabs////////////////////////////////////////////////
+/////////////////////////////////////////////////////////Tabs Bar////////////////////////////////////////////////////////
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -574,47 +554,3 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
     document.getElementById(tabName).scrollIntoView();
 }
-////////////////////////////////////////////////Tabs////////////////////////////////////////////////
-
-function getSocialMedia() {
-    let apiCall = url + method + tvId + "/external_ids?" + api_key;
-    ajaxCall("GET", apiCall, "", getSocialSuccessCB, getSocialErrorCB);
-}
-
-function getSocialSuccessCB(socialLinks) {
-
-    console.log(socialLinks);
-    str = "<ul>";
-    if (socialLinks.facebook_id != null) {
-        str += ` <li class="facebook"><a href="https://www.facebook.com/` + socialLinks.facebook_id + `"target="_blank">
-                             <i class="fa fa-facebook" aria-hidden="true"></i></a>
-                           <div class="slider">
-                                <p>facebook</p>
-                            </div>
-                        </li>`;
-    }
-    if (socialLinks.instagram_id != null) {
-        str += `<li class="instagram"><a href="https://www.instagram.com/` + socialLinks.instagram_id +`/"target="_blank">
-                            <i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            <div class="slider">
-                                <p>instagram</p>
-                            </div>
-                        </li>`;
-    }
-    if (socialLinks.twitter_id != null) {
-        str += ` <li class="twitter"><a href="https://twitter.com/` + socialLinks.twitter_id + `" target="_blank">
-                            <i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <div class="slider">
-                                 <p>twitter</p>
-                            </div>
-                        </li>`;
-    }
-
-    str += "</ul>";
-    $('#mediaLinks').html(str);
-}
-
-function getSocialErrorCB(err) {
-    alert("ERROR");
-}
-
