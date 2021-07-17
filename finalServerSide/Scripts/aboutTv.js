@@ -8,7 +8,8 @@
         series = JSON.parse(localStorage["series"]);
         tvId = series.seriesObj.Id;
     }
-    initChat();
+    initChat(); 
+    
     method = "3/tv/";
     api_key = "api_key=" + key;
     getSocialMedia();
@@ -17,27 +18,9 @@
     getRecommendations(); //    Get recommandation
     getSimilars();  // Get similars Tv show
     getReviews();   // Get the reviews for a TV show
-    /////////////just members can see chat///////////////
-    if (localStorage.user == null)
+
+    if (localStorage.user == null)//just members can see chat
         document.getElementById("floatingChat").style.visibility = "hidden";
-
-
-    $('.owl-carousel').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 6
-            }
-        }
-    })
 });
 
 //Header of the page -> Show the basic data of the TV show. Taking it from LS.
@@ -111,7 +94,7 @@ function drawActor(actor) {
 
 function aboutTheActor(actorId) {
     let apiCall = url + "3/person/" + actorId + "?" + api_key;
-    ajaxCall("GET", apiCall, "", getActorSuccessCB, getActorErrorCB);
+    ajaxCall("GET", apiCall, "", getActorSuccessCB, errorApiDB);
 }
 
 function getActorSuccessCB(actor) {
@@ -153,12 +136,6 @@ function openModal() {
     }
 }
 
-// When the user clicks anywhere outside of the modal, close it
-function getActorErrorCB(err) {
-    console.log(err);
-}
-
-
 ////////////////////////////////Get Recommendations from TMDB Api accoreding to current series////////////////////////////////////
 
 //Reocommanded Series
@@ -185,7 +162,6 @@ function getSuccessRecommendationsCB(recommendations) {
 }
 
 function drawRecommand(rec) {
-    console.log(rec);
     let stars = 5;
     let popularity = rec.popularity;
     switch (true) {
@@ -212,7 +188,7 @@ function drawRecommand(rec) {
 }
 
 ////////////////////////////////Get Similar series from TMDB Api accoreding to current series////////////////////////////////////
-//Get a list of similar TV shows. These items are assembled by looking at keywords and genres.
+///////////////////////Get a list of similar TV shows. These items are assembled by looking at keywords and genres///////////////
 
 function getSimilars() {
     let apiCall = url + method + tvId + "/similar?" + api_key;
@@ -233,7 +209,7 @@ function getSuccessSimilarsCB(similars) {
     r = 0;
 }
 
-/////////////////////////////////////////////////Show the about page of this tvshow was clicked////////////////////////////////////////
+/////////////////////////////////////////////Show the about page of this tvShow that was clicked////////////////////////////////////
 function showAbout(tvShow) {
     storeToLS(tvShow);
     location.reload();
@@ -271,7 +247,6 @@ function getSocialMedia() {
 }
 
 function getSocialSuccessCB(socialLinks) {
-    console.log(socialLinks);
     str = "<ul>";
     if (socialLinks.facebook_id != null) {
         str += ` <li class="facebook"><a href="https://www.facebook.com/` + socialLinks.facebook_id + `"target="_blank">
@@ -346,6 +321,7 @@ function drawReview(review) {
             <p class= "b">read allready</p>
             </div>`;
 }
+
 //Reviews Carousel
 function setCarousel() {
     $(".b").click(function () {
@@ -365,7 +341,9 @@ function setCarousel() {
     });
 }
 
+//Error function to all TMDB Api
 function errorApiDB(err) {
+    console.log("TMDB Api Error");
     console.log(err);
 }
 
@@ -411,8 +389,8 @@ function loadClient() {
                         const videoId = item.id.videoId;
                         const videoTitle = item.snippet.title;
                         output += `
-                                            <li><a data-fancybox href="https://youtube.com/watch?v=${videoId}"><img src="http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg" /></a></li>
-                                        `;
+                                    <li><a data-fancybox href="https://youtube.com/watch?v=${videoId}"><img src="http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg" /></a></li>
+                                `;
                     });
                     output += '</ul>';
 
