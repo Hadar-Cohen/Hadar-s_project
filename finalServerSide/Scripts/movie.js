@@ -22,7 +22,7 @@ function getMovie() {
 }
 
 function toGetMovie(name) {
-    i = 1;
+    i = 0;
     k = 0;
     method = "3/search/movie?";
     moreParams = "&language=en-US&page=1&include_adult=false&";
@@ -54,7 +54,7 @@ function drawMovie(movie) {
         movieImg = imagePath + movie.poster_path;
 
     str = "";
-    str = `<div id='` + (i - 1) + `' class='recommand-card' onclick = 'showAbout(moviesArr[this.id])'>
+    str = `<div id='` + i + `' class='recommand-card' onclick = 'showAbout(moviesArr[this.id])'>
             <img class ="movieImg" src='` + movieImg + `'>
             <h4><b>` + movie.title + `</b></h4></div>`;
     return str;
