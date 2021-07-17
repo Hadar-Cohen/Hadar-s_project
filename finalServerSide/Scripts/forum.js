@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#nav-bar").load("signup.html");
-
+    navBarVisability();
     //Details about TVShow and the user:
     s = JSON.parse(localStorage.series);
     seriesId = s.seriesObj.Id;
