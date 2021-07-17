@@ -26,4 +26,4 @@ function closeElement() {
         element.getElementsByClassName('chat')[0].style.display = 'flex';
         element.onclick = openElement;
     }, 500);
-}
+} 
