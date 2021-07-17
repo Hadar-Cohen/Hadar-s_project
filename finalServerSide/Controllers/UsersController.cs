@@ -11,6 +11,7 @@ namespace Ex2.Controllers
 {
     public class UsersController : ApiController
     {
+        /* Get User when login to the system, if the user exists */
         public HttpResponseMessage Get(string email, string password)
         {
             User us = new User();
@@ -26,24 +27,27 @@ namespace Ex2.Controllers
             }
         }
 
+        /* Get user by Id */
         public User Get(int id)
         {
             User us = new User();
             return us.GetById(id);
         }
 
+        /* Get all users list */
         public List<User> Get()
         {
             User us = new User();
             return us.Get();
         }
-        // POST api/<controller>
+
+        /* This method inserts a user to the Users table */
         public int Post([FromBody] User user)
         {
             return user.Insert(); //return 1
         }
 
-        // PUT api/<controller>/5
+        /* Update User Details to the Users Tbl */
         public HttpResponseMessage Put(User user)
         {
             int num = user.UpdateUser();
@@ -55,10 +59,9 @@ namespace Ex2.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "user not found");
             }
-
         }
 
-        // DELETE api/<controller>/5
+        /* Delete a User from the Users Tbl, according to the userId */
         public int Delete(int id)
         {
             User us = new User();

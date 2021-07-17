@@ -32,22 +32,13 @@ namespace finalServerSide.Models
         public bool Like { get => like; set => like = value; }
         public bool Dislike { get => dislike; set => dislike = value; }
 
-        public void Insert()
-        {
-            //UserLikeCommDBServices ulc = new UserLikeCommDBServices();
-            //return ulc.Insert(this); 
-        }
-
+        /* Update user like or dislike the comment 
+        * Get all the relevant information- commentId, userId, seriesId and whether he like/ dislike this comment
+        */
         public int Update()
         {
             UserLikeCommDBServices ulc = new UserLikeCommDBServices();
             return ulc.Update(this);
         }
-
-        //public List<UserLikesComment> GetList()
-        //{
-        //    UserLikeCommDBServices ulc = new UserLikeCommDBServices();
-        //    return ulc.Get();
-        //}
     }
 }

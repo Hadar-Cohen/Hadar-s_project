@@ -20,5 +20,5 @@ namespace finalServerSide.Controllers
             UserLikesComment ulc = new UserLikesComment(commentId, userId, seriesId, like, dislike);
             ulc.Update();
         }
-    }
-}
+    } 
+} 

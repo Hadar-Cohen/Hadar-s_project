@@ -49,39 +49,47 @@ namespace Ex2.Models
         {
             this.email = email;
         }
+
+        /* Insert a new user to the User Tbl */
         public int Insert()
         {
             UserDataServices us = new UserDataServices();
             return us.Insert(this); //return 1/-1;
         }
+
+        /* Get User when login to the system, if the user exists - return him */
         public User checkLogin(string email, string pass)
         {
             UserDataServices us = new UserDataServices();
             return us.checkLogIn(email, pass);
         }
 
+        /* Get all users list */
         public List<User> Get()
         {
             UserDataServices us = new UserDataServices();
             return us.GetUsers();
         }
+
+        /* Delete a User from the Users Tbl and his preferences from PreferencesTbl */
         public int Delete(int id)
         {
             UserDataServices db = new UserDataServices();
-            return db.Delete(id);
+            return db.DeleteUserPreferences(id);
         }
 
+        /* Get user by Id */
         public User GetById(int id)
         {
             UserDataServices us = new UserDataServices();
             return us.GetById(id);
         }
 
+        /* Update User Details to the Users Tbl */
         public int UpdateUser()
         {
             UserDataServices us = new UserDataServices();
             return us.UpdateUser(this); //return 1/-1;
         }
-
     }
 }

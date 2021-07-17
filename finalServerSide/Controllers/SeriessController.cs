@@ -15,7 +15,7 @@ namespace Ex2.Controllers
         public void Post([FromBody] Series series)
         {
             series.Insert();
-        }
+        } 
 
         /* The most viewed series on our site for display on the Home page
         * Returns - a sorted list of the most viewed series on the site  */

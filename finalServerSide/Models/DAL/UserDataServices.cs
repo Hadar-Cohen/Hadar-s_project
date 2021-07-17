@@ -27,8 +27,27 @@ namespace Ex2.Models.DAL
             return con;
         }
 
+        //---------------------------------------------------------------------------------
+        // Create the SqlCommand
+        //---------------------------------------------------------------------------------
+        private SqlCommand CreateCommand(String CommandSTR, SqlConnection con)
+        {
+
+            SqlCommand cmd = new SqlCommand(); // create the command object
+
+            cmd.Connection = con;              // assign the connection to the command object
+
+            cmd.CommandText = CommandSTR;      // can be Select, Insert, Update, Delete 
+
+            cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+            cmd.CommandType = System.Data.CommandType.Text; // the type of the command, can also be stored procedure
+
+            return cmd;
+        }
+
         //--------------------------------------------------------------------------------------------------
-        // This method inserts a car to the cars table 
+        // This method inserts a user to the Users table 
         //--------------------------------------------------------------------------------------------------
         public int Insert(User user)
         {        
@@ -99,28 +118,9 @@ namespace Ex2.Models.DAL
         }
 
         //---------------------------------------------------------------------------------
-        // Create the SqlCommand
+        // This method check if the user exists in the Users table
+        // And return this user if he exists
         //---------------------------------------------------------------------------------
-        private SqlCommand CreateCommand(String CommandSTR, SqlConnection con)
-        {
-
-            SqlCommand cmd = new SqlCommand(); // create the command object
-
-            cmd.Connection = con;              // assign the connection to the command object
-
-            cmd.CommandText = CommandSTR;      // can be Select, Insert, Update, Delete 
-
-            cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
-
-            cmd.CommandType = System.Data.CommandType.Text; // the type of the command, can also be stored procedure
-
-            return cmd;
-        }
-
-        // TODO : Add a DeleteFlight method
-        // TODO : Add a BuildFlightDeleteCommand method
-
-
         public User checkLogIn(string email, string pass)
         {
             SqlConnection con = null;
@@ -148,7 +148,6 @@ namespace Ex2.Models.DAL
             
             catch (Exception ex)
             {
-                // write to log
                 throw (ex);
             }
 
@@ -162,6 +161,9 @@ namespace Ex2.Models.DAL
             }
         }
 
+        //---------------------------------------------------------------------------------
+        // Get user by Id from Users Tbl
+        //---------------------------------------------------------------------------------
         public User GetById(int id)
         {
             SqlConnection con = null;
@@ -179,7 +181,6 @@ namespace Ex2.Models.DAL
                 User u = new User();
                 if (dr.Read())
                 {
-                    //u = new User();
                     u.Id = Convert.ToInt32(dr["id"]);
                     u.FirstName = (string)dr["firstName"];
                     u.LastName = (string)dr["lastName"];
@@ -210,6 +211,9 @@ namespace Ex2.Models.DAL
             }
         }
 
+        //---------------------------------------------------------------------------------
+        // Get List of users from Users Tbl
+        //---------------------------------------------------------------------------------
         public List<User> GetUsers()
         {
             SqlConnection con = null;
@@ -257,6 +261,9 @@ namespace Ex2.Models.DAL
             }
         }
 
+        //---------------------------------------------------------------------------------
+        // Update User Details to the Users Tbl
+        //---------------------------------------------------------------------------------
         public int UpdateUser(User user)
         {
             SqlConnection con;
@@ -309,8 +316,11 @@ namespace Ex2.Models.DAL
             command = prefix + sb.ToString() + end;
             return command;
         }
-        /// //////////////////////////////////////////////////////
-        public int Delete(int id)
+
+        //---------------------------------------------------------------------------------
+        // Delete a Preferences from the Users Tbl, according to the userId the function get
+        //---------------------------------------------------------------------------------
+        public int DeleteUserPreferences(int id)
         {
 
             SqlConnection con;
@@ -325,8 +335,7 @@ namespace Ex2.Models.DAL
                 // write to log
                 throw (ex);
             }
-            //DeleteFromAdminAlgo(id);
-            String cStr = BuildDeletepreferencesCommand(id);      // helper method to build the insert string
+            String cStr = BuildDeletepreferencesCommand(id); 
 
             cmd = CreateCommand(cStr, con);             // create the command
 
@@ -347,18 +356,17 @@ namespace Ex2.Models.DAL
                 {
                     // close the db connection
                     con.Close();
-                    DeleteUser(id);//try to do this in deferent way
+                    DeleteUser(id);
                 }
             }
 
         }
-
-        /// DeleteUser
-
+        //---------------------------------------------------------------------------------
+        // Delete a User from the Users Tbl, according to the userId the function get
+        //---------------------------------------------------------------------------------
 
         public int DeleteUser(int id)
         {
-
             SqlConnection con;
             SqlCommand cmd;
 
