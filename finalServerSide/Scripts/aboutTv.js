@@ -71,7 +71,7 @@ actors = null;
 function getCastSuccessCB(credit) {
     actors = credit.cast; //arr of all the actors
     actorsList = "<div class='container'>";
-    actorsList += "<div class='actors-row'>";
+    actorsList += "<div class='owl-carousel owl-theme actors-row'>";
     actors.forEach(actor => {
         actorsList += drawActor(actor);
         k++;
