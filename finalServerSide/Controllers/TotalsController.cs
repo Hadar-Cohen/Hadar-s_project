@@ -27,7 +27,6 @@ namespace Ex2.Controllers
             }
         }
 
-
         /*  * Recommended series for the user according to our algorithm according to our calculation
             * The algorithm selects "similar users" and recommends the user to see the most common series they liked.
             * Similar users = users in the same age range (5 years up and down) and members with the same gender. 
@@ -80,11 +79,6 @@ namespace Ex2.Controllers
             }
         }
 
-        // PUT api/<controller>/5
-      
-        public void Put(int id, [FromBody] string value)
-        {
-        }
         /*  * Delete the chapter from the user's preferences list
             input - episode Id, series Id, userId
            * Output - none */

@@ -15,16 +15,6 @@ namespace finalServerSide.Controllers
         {
             ClubMember cm = new ClubMember();
             return cm.Get(seriesId, userId);
-
-            
-            //if (cm.UserId != 0)
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.OK, cm);
-            //}
-            //else
-            //{
-            //    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "error");
-            //}
         }
 
         // POST api/<controller>
@@ -32,17 +22,6 @@ namespace finalServerSide.Controllers
         {
             ClubMember cm = new ClubMember();
             return cm.Insert(seriesId, userId);
-
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
         }
     }
 }

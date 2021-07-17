@@ -93,7 +93,10 @@ function getSuccessRecommendForYou(recForYou) {
 }
 
 function errortRecommendForYou(err) {
-    console.log(err);
+    if (err.status == 404)
+        console.log("Can't find series recommend for you")
+    else
+        console.log(err);
 }
 function drawRecommendForYou(TVShow) {
     console.log(TVShow);

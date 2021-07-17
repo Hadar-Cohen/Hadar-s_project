@@ -83,7 +83,7 @@ function getTVSuccessCB(tv) {
 
 function getTVErrorCB(err) {
     if (err.status == 404)
-        console.log("cant find more");
+        console.log("can't find more");
     console.log(err);
 }
 
