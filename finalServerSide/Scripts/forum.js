@@ -77,7 +77,7 @@ function getSCSuccessCB(subCommentsList) {
         let str = "";
         str += drawSubComment(c);
         let commId = document.getElementById('comment-' + c.CommentId);
-        commId.innerHTML += str;
+        commId.innerHTML += str;    //add the subComment to each main comment
     }
 }
 function getSCErrorCB(err) {
@@ -102,15 +102,12 @@ function addComment(comment) {
 }
 function postCommentSuccess(series) {
     $('#contentText').val("");
-    alert("Submitted to the server! success");
-    console.log(series);
+    sweetAlert("Submitted to the server!", "Success");
     showForum(series, user.Id);
 }
 function postCommentError(err) {
-    if (err.status == 404)
-        console.log("Can't post new Comment")
-    else
-        console.log(err);
+    console.log("Can't post new Comment")
+    console.log(err);
 }
 function drawComment(comm) {
     return `<div class="be-comment">
@@ -233,8 +230,8 @@ function toggleLike(x, otherThumbId, commentId, myClass, otherClass, updateCallb
     } else {
         numberOfLikes--;
     }
-    updateCounterLable(x.id, numberOfLikes);
-    updateCallback(commentId, numberOfLikes);
+    updateCounterLable(x.id, numberOfLikes);     // This function update the lable immediately
+    updateCallback(commentId, numberOfLikes);   // This function update the DB comments and UserLikeComment
 }
 function updateUserLikeComment(commentId, isLike, value) {
     let api = "../api/UserLikesComm?commentId=" + commentId + "&userId=" + user.Id + "&seriesId=" + seriesId + "&like=" + value + "&dislike=" + isLike;
@@ -242,9 +239,6 @@ function updateUserLikeComment(commentId, isLike, value) {
 }
 function updateUserLikeCommentSuccess() {
     console.log("update user like / dislike comment success");
-}
-function updateLikesSuccess() {
-    console.log("update like / dislike success");
 }
 function updateUserLikeCommentError(err) {
     if (err.status == 404)
@@ -260,19 +254,27 @@ function updateCounterLable(btnId, number) {
 }
 // Update the number of likes //
 function updateCommentLikes(commentId, number) {
-    alert("change " + commentId + " likes by " + number);
     // update comment with this commentId likes on db ny number //
     let api = "../api/Comments?commentId=" + commentId + "&likes=" + number + "&dislikes=0";
-    ajaxCall("PUT", api, "", updateLikesSuccess, error);
+    ajaxCall("PUT", api, "", updateLikesSuccess, updateError);
     // POST USERLIKESCOMM //
     updateUserLikeComment(commentId, true, number > 0);
 }
  // Update the number of Dislikes //
 function updateCommentDislikes(commentId, number) {
-    alert("change " + commentId + " dislikes by " + number);
     // update comment with this commentId dislikes on db ny number //
     let api = "../api/Comments?commentId=" + commentId + "&likes=0" + "&dislikes=" + number;
-    ajaxCall("PUT", api, "", updateLikesSuccess, error);
+    ajaxCall("PUT", api, "", updateLikesSuccess, updateError);
     updateUserLikeComment(commentId, false, number > 0);
 }
 
+function updateLikesSuccess() {
+    console.log("update like / dislike success");
+}
+
+function updateError(err) {
+    if (err.status == 404)
+        console.log("Can't update User Like Comment")
+    else
+        console.log(err);
+}

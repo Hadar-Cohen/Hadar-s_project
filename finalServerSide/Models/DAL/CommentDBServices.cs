@@ -91,7 +91,6 @@ namespace finalServerSide.Models.DAL
         private String BuildInsertCommand(Comment comment)
         {
             String command;
-
             StringBuilder sb = new StringBuilder();
             // use a string builder to create the dynamic string
             sb.AppendFormat("Values('{0}', {1}, '{2}', {3}, '{4}','{5}')", comment.CurrDate, comment.UserId, comment.UserName, comment.SeriesId, comment.Content, comment.Profile);

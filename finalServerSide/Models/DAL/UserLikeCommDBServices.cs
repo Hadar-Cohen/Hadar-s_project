@@ -60,8 +60,6 @@ namespace finalServerSide.Models.DAL
                 ulc.Dislike = true;
                 ulc.Like = false;
             }
-
-
             else
             {
                 ulc.Like = true;
@@ -79,7 +77,6 @@ namespace finalServerSide.Models.DAL
         //--------------------------------------------------------------------------------------------------------
         public int Update(UserLikesComment ulc)
         {
-
             SqlConnection con;
             SqlCommand cmd;
             {
@@ -92,7 +89,6 @@ namespace finalServerSide.Models.DAL
                     throw (ex);
                 }
 
-                //String cStr = BuildUpdateCommand(ulc);
                 String cStr = "";
                 string mode = "dislike";
                 if (ulc.Dislike) //use this way to relise what to update, value in Like
@@ -110,7 +106,7 @@ namespace finalServerSide.Models.DAL
                 try
                 {
                     int rowEffected = cmd.ExecuteNonQuery(); // execute the command
-                    if (rowEffected == 0)
+                    if (rowEffected == 0)   // If didnt find any row to change so the row is not exists
                     {
                         cStr = BuildInsertCommand(ulc, mode);
                         cmd = CreateCommand(cStr, con);
@@ -168,52 +164,5 @@ namespace finalServerSide.Models.DAL
             command = prefix + sb.ToString() + end;
             return command;
         }
-
-        //    //---------------------------------------------------------------------------------
-        //    // Read from the DB into a list - dataReader
-        //    // Get all the likes according to series and current connected userId 
-        //    //---------------------------------------------------------------------------------
-        //    public List<UserLikesComment> Get()
-        //    {
-        //        SqlConnection con = null;
-        //        List<UserLikesComment> userCommentsList = new List<UserLikesComment>();
-
-        //        try
-        //        {
-        //            con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
-
-        //            String selectSTR = "SELECT * FROM UserLikeComments_2021";
-        //            SqlCommand cmd = new SqlCommand(selectSTR, con);
-
-        //            // get a reader
-        //            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
-
-        //            while (dr.Read())
-        //            {   // Read till the end of the data into a row
-        //                UserLikesComment c = new UserLikesComment();
-        //                c.CommentId = Convert.ToInt32(dr["commentId"]);
-        //                c.UserId = Convert.ToInt32(dr["userId"]);
-        //                c.SeriesId = Convert.ToInt32(dr["seriesId"]);
-        //                c.Like = Convert.ToBoolean(dr["like"]);
-        //                c.Dislike = Convert.ToBoolean(dr["dislike"]);
-        //                userCommentsList.Add(c);
-        //            }
-
-        //            return userCommentsList;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            // write to log
-        //            throw (ex);
-        //        }
-        //        finally
-        //        {
-        //            if (con != null)
-        //            {
-        //                con.Close();
-        //            }
-
-        //        }
-        //    }
     }
 }

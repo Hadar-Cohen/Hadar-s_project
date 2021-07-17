@@ -423,7 +423,7 @@ function loadClient() {
 
 ////////////////////////////////////////////////Chat////////////////////////////////////////////////
 function initChat() {
-    msgArr = [];
+/*    msgArr = [];*/
     var seriesName;
     if (localStorage.series != null) {
         var series = JSON.parse(localStorage["series"]);
@@ -493,18 +493,9 @@ function printMessage(msg) {
     chat.innerHTML += printToChat(msg);
 }
 
-function printMessages(msgArr) {
-    var str = "";
-    for (let index = 0; index < msgArr.length; index++) {
-        const msg = msgArr[index];
-        str += printToChat(msg);
-    }
-    chat.innerHTML += str;
-}
-
 function addMSG() { //add msg to the array of messages
     let content = document.getElementById("msgTB").textContent;
-    let name = userName;//document.getElementById("nameTB").value;
+    let name = userName;
 
     ref.push().set({ "msg": content, "user": userTmp, "date": date })
     setTimeout(scrollChatDown, 1);
@@ -512,7 +503,6 @@ function addMSG() { //add msg to the array of messages
 }
 
 function printToChat(msg) {
-    console.log(msg);
     return `<div class="media media-meta-day">` + msg.date + `</div>
                 <div class="media media-chat `+ classStyle + `">
                     <div class="media-body"><img class= "avatarChat" src="` + msg.user.profile + `" style= "height: 46px; width: 43px; border-radius: 25px;">

@@ -52,7 +52,7 @@ namespace finalServerSide.Models.DAL
         public int PostComment()
         {
             CommentDBServices db = new CommentDBServices();
-            return db.Insert(this); //return 1/-1;
+            return db.Insert(this); 
         }
 
         /* Get all the comments according to series and current connected userId */
