@@ -1,22 +1,26 @@
 ﻿$(document).ready(function () {
-    navBarVisability();
+    $("#nav-bar").load("signup.html");
+
+    $('#forumTitle').html("Welcome to the Fan Forum Of </br>'" + s.seriesObj.Name + "'");
     //Details about TVShow and the user:
-    s = JSON.parse(localStorage.series);
-    seriesId = s.seriesObj.Id;
-    user = JSON.parse(localStorage.user);
+    if (localStorage.series != null) {
+        s = JSON.parse(localStorage.series);
+        seriesId = s.seriesObj.Id;
+    }
+    if (localStorage.user != null) 
+        user = JSON.parse(localStorage.user);
+
     date = calcDay();
+    buttonsEvents();
+    showForum(seriesId, user.Id);
+
     if (localStorage.profileSrc != undefined)
         userProfile = JSON.parse(localStorage.profileSrc);
     else
         userProfile = "https://image.ibb.co/jw55Ex/def_face.jpg";
-
-    $('#forumTitle').html("Welcome to the Fan Forum Of </br>'" + s.seriesObj.Name + "'");
-    buttonsEvents();
-    showForum(seriesId, user.Id);
-
 });
 
-///////////////////////
+///////////////////////////////////////// buttons Events /////////////////////////////////////////////////////
 function buttonsEvents() {
     submit.addEventListener('click', function publishComment() {
         let content = $("#contentText").val();
@@ -45,15 +49,11 @@ function closeDialog(commentId) {
     var dialogElem = document.getElementById("idDialog" + commentId);
     dialogElem.close();
 }
-
-
-
+//////////////////////////////////////// Upload previous messages if any ////////////////////////////////////
 function showForum(seriesId, userId) {
     let api = "../api/Comments?seriesId=" + seriesId + "&connectedUserId=" + userId;
     ajaxCall("GET", api, "", getSuccessCB, getErrorCB)
 }
-
-
 function getSuccessCB(commentsList) {
     let str = "";
     for (const c of commentsList) {
@@ -62,19 +62,19 @@ function getSuccessCB(commentsList) {
         setTimeout(() => { updateLikes(c); }, 0);
     }
     $("#forum").html(str);
-
 }
-
 function getErrorCB(err) {
-    alert("ERROR");
-    console.log(err);
+    if (err.status == 404)
+        console.log("Can't find previous messages")
+    else
+        console.log(err);
 }
 
+// Upload Sub Comments //
 function getSubComments(seriesId, commentId) {
     let api = "../api/SubComments?seriesId=" + seriesId + "&commentId=" + commentId;
     ajaxCall("GET", api, "", getSCSuccessCB, getSCErrorCB);
 }
-
 function getSCSuccessCB(subCommentsList) {
     for (const c of subCommentsList) {
         let str = "";
@@ -83,11 +83,14 @@ function getSCSuccessCB(subCommentsList) {
         commId.innerHTML += str;
     }
 }
-
 function getSCErrorCB(err) {
-    alert("ERROR");
-    console.log(err);
+    if (err.status == 404)
+        console.log("Can't find Sub Comments")
+    else
+        console.log(err);
 }
+
+//////////////////////////////////////// Updated date calculation ////////////////////////////////////////
 function calcDay() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -96,7 +99,7 @@ function calcDay() {
 
     return today = mm + '/' + dd + '/' + yyyy;
 }
-
+//////////////////////////////////////// Add new comment ////////////////////////////////////////////////
 function addComment(comment) {
     ajaxCall("POST", "../api/Comments", JSON.stringify(comment), postCommentSuccess, postCommentError)
 }
@@ -106,43 +109,12 @@ function postCommentSuccess(series) {
     console.log(series);
     showForum(series, user.Id);
 }
-
 function postCommentError(err) {
-    alert("ERROR");
-    console.log(err);
+    if (err.status == 404)
+        console.log("Can't post new Comment")
+    else
+        console.log(err);
 }
-function addSubComment(commId) {
-    subCommentContent = $('#reply' + commId).val();
-    if (subCommentContent != "") {
-        let subComment = {
-            commentId: commId,
-            currDate: date,
-            userId: user.Id,
-            userName: user.FirstName + " " + user.LastName,
-            seriesId: seriesId,
-            content: subCommentContent,
-            profile: userProfile
-        }
-        console.log(subComment);
-        ajaxCall("POST", "../api/SubComments", JSON.stringify(subComment), postSCommentSuccess, postSCommentError);
-    }
-    else {
-        sweetAlert("Cant send comment...", "Content is missing!", "error")
-    }
-    closeDialog(commId);
-}
-
-function postSCommentSuccess(series) {
-    alert("Post Success!");
-    console.log(series);
-    showForum(series, user.Id);
-}
-
-function postSCommentError(err) {
-    alert("error");
-    console.log(err);
-}
-
 function drawComment(comm) {
     return `<div class="be-comment">
                         <div class="be-img-comment">
@@ -178,82 +150,37 @@ function drawComment(comm) {
 
 }
 
-function drawLike(comm) {
-    let likeId = "like" + comm.CommentId;
-    let dislikeId = "dislike" + comm.CommentId;
-    return `<label id="count-` + likeId + `" class="likes" style = "color: green"> ` + comm.Likes + `</label>
-                    <i id="` + likeId + `" onclick="toggleLike(this, '` + dislikeId + `', ` + comm.CommentId + `, 'fa-thumbs-up', 'fa-thumbs-down', updateCommentLikes)" class="fa fa-thumbs-o-up"></i>
-                    <label id="count-` + dislikeId + `" class="dislikes" style = "color: red"> ` + comm.Dislikes + `</label>
-                    <i id="` + dislikeId + `" onclick="toggleLike(this, '` + likeId + `',` + comm.CommentId + `, 'fa-thumbs-down', 'fa-thumbs-up', updateCommentDislikes)" class="fa fa-thumbs-o-down"></i>
-                    `;
-}
-
-function updateLikes(comm) {
-    let likeId = "like" + comm.CommentId;
-    let dislikeId = "dislike" + comm.CommentId;
-
-    if (comm.IsLike) {
-        document.getElementById(likeId).classList.toggle('fa-thumbs-up');
+//////////////////////////////////////// Add new sub comment ////////////////////////////////////////////
+function addSubComment(commId) {
+    subCommentContent = $('#reply' + commId).val();
+    if (subCommentContent != "") {
+        let subComment = {
+            commentId: commId,
+            currDate: date,
+            userId: user.Id,
+            userName: user.FirstName + " " + user.LastName,
+            seriesId: seriesId,
+            content: subCommentContent,
+            profile: userProfile
+        }
+        console.log(subComment);
+        ajaxCall("POST", "../api/SubComments", JSON.stringify(subComment), postSCommentSuccess, postSCommentError);
     }
-    if (comm.IsDislike) {
-        document.getElementById(dislikeId).classList.toggle('fa-thumbs-down');
+    else {
+        sweetAlert("Cant send comment...", "Content is missing!", "error")
     }
+    closeDialog(commId);
 }
-
-function toggleLike(x, otherThumbId, commentId, myClass, otherClass, updateCallback) {
-    let y = document.getElementById(otherThumbId);
-    if (y.classList.contains(otherClass)) {
-        y.click();
-    }
-
-    let numberOfLikes = 0;
-    x.classList.toggle(myClass);
-
-    if (x.classList.contains(myClass)) {
-        numberOfLikes++;
-    } else {
-        numberOfLikes--;
-    }
-    updateCounterLable(x.id, numberOfLikes);
-    updateCallback(commentId, numberOfLikes);
+function postSCommentSuccess(series) {
+    sweetAlert("Post Success!");
+    showForum(series, user.Id);
 }
-
-function updateCounterLable(btnId, number) {
-    let x = parseInt(document.getElementById("count-" + btnId).innerHTML);
-    document.getElementById("count-" + btnId).innerHTML = x + number;
+function postSCommentError(err) {
+    if (err.status == 404)
+        console.log("Can't  post Sub Comment")
+    else
+        console.log(err);
 }
-
-function updateCommentLikes(commentId, number) {
-    alert("change " + commentId + " likes by " + number);
-    //update comment with this commentId likes on db ny number
-    let api = "../api/Comments?commentId=" + commentId + "&likes=" + number + "&dislikes=0";
-    ajaxCall("PUT", api, "", updateLikesSuccess, error);
-    ////////////////////////////////////////POST USERLIKESCOMM
-    updateUserLikeComment(commentId, true, number > 0);
-}
-
-function updateCommentDislikes(commentId, number) {
-    alert("change " + commentId + " dislikes by " + number);
-    //update comment with this commentId dislikes on db ny number
-    let api = "../api/Comments?commentId=" + commentId + "&likes=0" + "&dislikes=" + number;
-    ajaxCall("PUT", api, "", updateLikesSuccess, error);
-    updateUserLikeComment(commentId, false, number > 0);
-}
-
-function updateUserLikeComment(commentId, isLike, value) {
-    let api = "../api/UserLikesComm?commentId=" + commentId + "&userId=" + user.Id + "&seriesId=" + seriesId + "&like=" + value + "&dislike=" + isLike;
-    ajaxCall("PUT", api, "", updateUserLikeCommentSuccess, error)
-}
-function updateUserLikeCommentSuccess() {
-    console.log("update user like / dislike comment success");
-}
-function updateLikesSuccess() {
-    console.log("update like / dislike success");
-}
-function error(err) {
-    alert("ERROR :(")
-}
-
 function drawSubComment(comm) {
     return `<div class="be-comment" style= "margin-left: 60px;">
                         <div class="be-img-comment">
@@ -273,3 +200,84 @@ function drawSubComment(comm) {
                         </div>
                     </div>`
 }
+
+//////////////////////////////////////// Update likes on a post ////////////////////////////////////////
+function drawLike(comm) {
+    let likeId = "like" + comm.CommentId;
+    let dislikeId = "dislike" + comm.CommentId;
+    return `<label id="count-` + likeId + `" class="likes" style = "color: green"> ` + comm.Likes + `</label>
+                    <i id="` + likeId + `" onclick="toggleLike(this, '` + dislikeId + `', ` + comm.CommentId + `, 'fa-thumbs-up', 'fa-thumbs-down', updateCommentLikes)" class="fa fa-thumbs-o-up"></i>
+                    <label id="count-` + dislikeId + `" class="dislikes" style = "color: red"> ` + comm.Dislikes + `</label>
+                    <i id="` + dislikeId + `" onclick="toggleLike(this, '` + likeId + `',` + comm.CommentId + `, 'fa-thumbs-down', 'fa-thumbs-up', updateCommentDislikes)" class="fa fa-thumbs-o-down"></i>
+                    `;
+}
+function updateLikes(comm) {
+    let likeId = "like" + comm.CommentId;
+    let dislikeId = "dislike" + comm.CommentId;
+
+    if (comm.IsLike) {
+        document.getElementById(likeId).classList.toggle('fa-thumbs-up');
+    }
+    if (comm.IsDislike) {
+        document.getElementById(dislikeId).classList.toggle('fa-thumbs-down');
+    }
+}
+function toggleLike(x, otherThumbId, commentId, myClass, otherClass, updateCallback) {
+    let y = document.getElementById(otherThumbId);
+    if (y.classList.contains(otherClass)) {
+        y.click();
+    }
+
+    let numberOfLikes = 0;
+    x.classList.toggle(myClass);
+
+    if (x.classList.contains(myClass)) {
+        numberOfLikes++;
+    } else {
+        numberOfLikes--;
+    }
+    updateCounterLable(x.id, numberOfLikes);
+    updateCallback(commentId, numberOfLikes);
+}
+
+////////////////////////////////////// new like / dislike //////////////////////////////////////////////
+function updateUserLikeComment(commentId, isLike, value) {
+    let api = "../api/UserLikesComm?commentId=" + commentId + "&userId=" + user.Id + "&seriesId=" + seriesId + "&like=" + value + "&dislike=" + isLike;
+    ajaxCall("PUT", api, "", updateUserLikeCommentSuccess, updateUserLikeCommentError)
+}
+function updateUserLikeCommentSuccess() {
+    console.log("update user like / dislike comment success");
+}
+function updateLikesSuccess() {
+    console.log("update like / dislike success");
+}
+function updateUserLikeCommentError(err) {
+    if (err.status == 404)
+        console.log("Can't update User Like Comment")
+    else
+        console.log(err);
+}
+
+// update the Counter Lable //
+function updateCounterLable(btnId, number) {
+    let x = parseInt(document.getElementById("count-" + btnId).innerHTML);
+    document.getElementById("count-" + btnId).innerHTML = x + number;
+}
+// Update the number of likes //
+function updateCommentLikes(commentId, number) {
+    alert("change " + commentId + " likes by " + number);
+    // update comment with this commentId likes on db ny number //
+    let api = "../api/Comments?commentId=" + commentId + "&likes=" + number + "&dislikes=0";
+    ajaxCall("PUT", api, "", updateLikesSuccess, error);
+    // POST USERLIKESCOMM //
+    updateUserLikeComment(commentId, true, number > 0);
+}
+ // Update the number of Dislikes //
+function updateCommentDislikes(commentId, number) {
+    alert("change " + commentId + " dislikes by " + number);
+    // update comment with this commentId dislikes on db ny number //
+    let api = "../api/Comments?commentId=" + commentId + "&likes=0" + "&dislikes=" + number;
+    ajaxCall("PUT", api, "", updateLikesSuccess, error);
+    updateUserLikeComment(commentId, false, number > 0);
+}
+
