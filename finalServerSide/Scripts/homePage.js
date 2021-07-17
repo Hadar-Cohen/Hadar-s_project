@@ -15,6 +15,9 @@
         user = JSON.parse(localStorage["user"]);
         getRecommendForYou(user);
     }
+    else
+        document.getElementById("recommandTitle").style.visibility = "hidden";
+
 
 });
 ///////////////////////////////////////////////// Get Top Rated from the movie DB api ////////////////////////////////////////////////////////

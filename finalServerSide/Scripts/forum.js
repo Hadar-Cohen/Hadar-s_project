@@ -1,14 +1,12 @@
 ﻿$(document).ready(function () {
     $("#nav-bar").load("signup.html");
 
-    $('#forumTitle').html("Welcome to the Fan Forum Of </br>'" + s.seriesObj.Name + "'");
     //Details about TVShow and the user:
-    if (localStorage.series != null) {
-        s = JSON.parse(localStorage.series);
-        seriesId = s.seriesObj.Id;
-    }
-    if (localStorage.user != null) 
-        user = JSON.parse(localStorage.user);
+    s = JSON.parse(localStorage.series);
+    seriesId = s.seriesObj.Id;
+    $('#forumTitle').html("Welcome to the Fan Forum Of </br>'" + s.seriesObj.Name + "'");
+
+    user = JSON.parse(localStorage.user);
 
     date = calcDay();
     buttonsEvents();
@@ -239,8 +237,6 @@ function toggleLike(x, otherThumbId, commentId, myClass, otherClass, updateCallb
     updateCounterLable(x.id, numberOfLikes);
     updateCallback(commentId, numberOfLikes);
 }
-
-////////////////////////////////////// new like / dislike //////////////////////////////////////////////
 function updateUserLikeComment(commentId, isLike, value) {
     let api = "../api/UserLikesComm?commentId=" + commentId + "&userId=" + user.Id + "&seriesId=" + seriesId + "&like=" + value + "&dislike=" + isLike;
     ajaxCall("PUT", api, "", updateUserLikeCommentSuccess, updateUserLikeCommentError)

@@ -1,8 +1,4 @@
 ﻿body {
-    /*margin-top: 20px;*/
-    /*background-color: #1e212d;*/
-    /*background: rgb(30,33,45);
-    background: linear-gradient(273deg, rgba(30,33,45,1) 0%, rgba(141,155,214,1) 50%, rgba(235,200,240,1) 100%);*/
     background: rgb(30,33,45);
     background: radial-gradient(circle, rgba(30,33,45,0.9612219887955182) 49%, rgba(40,46,61,0.87718837535014) 100%);
 }
@@ -161,14 +157,15 @@
     margin-left: 5%;
     font-family: sans-serif;
     font-size: 20px;
+    height: 80px;
 }
 
 #submit {
     display: inline-block;
     height: 100%;
     /*float: right;*/
-    margin-right:5%;
-    
+    margin-right: 5%;
+    height: 80px;
 }
 
 #sendMsgRow {
