@@ -94,11 +94,5 @@ text-align:left;
     overflow-x: auto;
     overflow-y: hidden;
     z-index: 1;
-    /*    justify-content: center;
-*/
+    width: 100% !important;
 }
-
-
-/*.no-js .owl-carousel, .owl-carousel.owl-loaded{
-    z-index:-1;
-}*/
