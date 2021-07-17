@@ -10,13 +10,21 @@ namespace Ex2.Controllers
 {
     public class TotalsController : ApiController
     {
-        /*  * Show the user in view page series loved their episodes
+        /*  * Show the user in view page series according to his preferences
             * input - userId and email
             * Output - a sorted list of the series he liked */
-        public List<Series> Get(int userId, string email) //Get series of user (according to his preferences)
+        public HttpResponseMessage Get(int userId, string email) 
         {
             Total total = new Total();
-            return total.GetSeries(userId, email);
+            List<Series> Slist =  total.GetSeries(userId, email);
+            if (Slist != null)
+            {
+                return Request.CreateResponse<List<Series>>(HttpStatusCode.OK, Slist);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "The user has no saved series");
+            }
         }
 
 
@@ -25,18 +33,35 @@ namespace Ex2.Controllers
             * Similar users = users in the same age range (5 years up and down) and members with the same gender. 
             * input - userId
             * Output - a sorted list of the most viewed series on the site */
-        public List<Series> Get(int userId)// List<Series>
+        public HttpResponseMessage Get(int userId)// List<Series>
         {
             Total total = new Total();
-            return total.RecommendForTheUser(userId);
+            List<Series> Slist = total.RecommendForTheUser(userId);
+            if (Slist != null)
+            {
+                return Request.CreateResponse<List<Series>>(HttpStatusCode.OK, Slist);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "There are no recommended series for the user");
+            }
 
         }
-     
-        public List<Episode> Get(string seriesName, int userId)
+        /*  * Upload the episodes that the user liked according to the series he chose(preferences)
+              * input - series Name and user Id
+              * Output -  list of the Episode he liked */
+        public HttpResponseMessage Get(string seriesName, int userId)
         {
             Episode e = new Episode();
             List<Episode> Elist = e.Get(seriesName, userId);
-            return Elist;
+            if (Elist != null)
+            {
+                return Request.CreateResponse<List<Episode>>(HttpStatusCode.OK, Elist);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "There are no recommended series for the user");
+            }
         }
 
         /*  * Insert to the preferences DB tbl
@@ -58,10 +83,13 @@ namespace Ex2.Controllers
         }
 
         // PUT api/<controller>/5
+      
         public void Put(int id, [FromBody] string value)
         {
         }
-        
+        /*  * Delete the chapter from the user's preferences list
+            input - episode Id, series Id, userId
+           * Output - none */
         public void Delete(int episodeId, int seriesId, int userId)
         {
             Total total = new Total();

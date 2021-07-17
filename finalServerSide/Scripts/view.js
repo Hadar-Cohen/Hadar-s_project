@@ -16,7 +16,7 @@
             name: userName
         }
     }
-   
+   //Show the user in view page series according to his preferences//
     let api = "../api/Totals?UserId=" + userId + "&email=" + userEmail;
     ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
 });
@@ -29,28 +29,32 @@ function getSeriesSuccessCB(series) {
     str += "</select>";
     $("#phView").html(str);
 }
+
 function getSeriesErrorCB(err) {
     alert("Error -cant get the Series names");
 }
 
 episodesList = "";
 seriesReload = 0;
+
 function showEpisodes(series) {
-    var selectedText = series.options[series.selectedIndex].innerHTML;
-    selectedVal = series.options[series.selectedIndex].value;
+    var selectedText = series.options[series.selectedIndex].innerHTML; //series name
+    selectedVal = series.options[series.selectedIndex].value; //series id
+
     saveToLocalS(selectedText);
     seriesReload = selectedText;
     getToDBShowEpisodes(selectedText);
 }
+
 function getToDBShowEpisodes(selectedText)
 {
     let api = "../api/Totals?seriesName=" + selectedText + "&userId=" + userId;
-    ajaxCall("GET", api, "", getEpisodesSuccessCB, Error);
+    ajaxCall("GET", api, "", getEpisodesSuccessCB, getEpisodesError);
 }
 
 function getEpisodesSuccessCB(episodes) {
-    checkClub(selectedVal);
-    console.log(episodes);
+    
+    checkClub(selectedVal);//Check if he's part of the fan club
     episodesList = "";
 
     episodes.forEach(ep => {
@@ -62,6 +66,7 @@ function getEpisodesSuccessCB(episodes) {
 
 i = 0;
 episodes = [];
+
 function drawEpisodeCard(episode) {
     episodes[i] = episode;
     let str = "<div class='card2 cardInView' style='width:800px; height: 400px'><a class='deleteEpisodeBtn' onclick=deleteEpisode(episodes["+i+"]) tabindex='0' role='button'>X</a> <center><b><p class='episodeTitle'>" + episode.SeriesName + " season " + episode.SeasonNum + "</p></b></center><img class= 'imgCard' src='" + episode.ImageURL + "'>";
@@ -70,7 +75,7 @@ function drawEpisodeCard(episode) {
     return str;
 }
 
-function Error(err) {
+function getEpisodesError(err) {
     console.log(err);
 }
 
@@ -78,7 +83,7 @@ function exitFunc() {
     localStorage.clear();
     document.location = 'homePage.html';
 }
-
+//Delete the chapter from the user's preferences list//
 function deleteEpisode(episode) {
     let api = "../api/Totals?episodeId=" + episode.EpisodeId + "&seriesId=" + episode.SeriesId + "&userId=" + userId;
     ajaxCall("DELETE", api, "", deleteEpisodesSuccess, Error);
@@ -86,8 +91,7 @@ function deleteEpisode(episode) {
 
 function deleteEpisodesSuccess()
 {
-    getToDBShowEpisodes(seriesReload);
-   // location.reload();
+    getToDBShowEpisodes(seriesReload);// Reloading of the episodes
     alert('deleted');
 }
 
