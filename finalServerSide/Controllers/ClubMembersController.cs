@@ -17,7 +17,7 @@ namespace finalServerSide.Controllers
             return cm.Get(seriesId, userId);
         }
 
-        // POST api/<controller>
+        /* Insert a user into the clubMembers */
         public int Post(int seriesId, int userId)
         {
             ClubMember cm = new ClubMember();

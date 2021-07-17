@@ -43,7 +43,9 @@ namespace finalServerSide.Models.DAL
             return cmd;
         }
 
-
+        //---------------------------------------------------------------------------------
+        // Get a
+        //---------------------------------------------------------------------------------
         public ClubMember Get(int seriesId, int userId)
         {
             SqlConnection con = null;
@@ -82,7 +84,9 @@ namespace finalServerSide.Models.DAL
                 }
             }
         }
-
+        //---------------------------------------------------------------------------------
+        // Insert a user into the clubMembers
+        //---------------------------------------------------------------------------------
         public int Insert(int seriesId, int userId)
         {
             SqlConnection con;

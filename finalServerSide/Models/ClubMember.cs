@@ -24,6 +24,8 @@ namespace finalServerSide.Models
             ClubMemderDB cm = new ClubMemderDB();
             return cm.Get(seriesId, userId);
         }
+
+        /* Insert a user into the clubMembers */
         public int Insert(int seriesId, int userId)
         {
             ClubMemderDB us = new ClubMemderDB();
