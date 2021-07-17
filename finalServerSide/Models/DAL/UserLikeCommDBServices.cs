@@ -47,49 +47,6 @@ namespace finalServerSide.Models.DAL
             return cmd;
         }
 
-        //--------------------------------------------------------------------------------------------------
-        // This method inserts a comment
-        //--------------------------------------------------------------------------------------------------
-        //public int Insert(UserLikesComment ulc)
-        //{
-        //    SqlConnection con;
-        //    SqlCommand cmd;
-
-        //    try
-        //    {
-        //        con = connect("DBConnectionString"); // create the connection
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // write to log
-        //        throw (ex);
-        //    }
-
-        //    String cStr = BuildInsertCommand(ulc);      // helper method to build the insert string
-
-        //    cmd = CreateCommand(cStr, con);             // create the command
-
-        //    try
-        //    {
-        //        int numEffected = cmd.ExecuteNonQuery(); // execute the command
-        //        return numEffected;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // write to log
-        //        throw (ex);
-        //    }
-
-        //    finally
-        //    {
-        //        if (con != null)
-        //        {
-        //            // close the db connection
-        //            con.Close();
-        //        }
-        //    }
-        //}
-
         //--------------------------------------------------------------------
         // Build the Insert command String
         //--------------------------------------------------------------------
@@ -103,7 +60,7 @@ namespace finalServerSide.Models.DAL
                 ulc.Dislike = true;
                 ulc.Like = false;
             }
-                
+
 
             else
             {
@@ -115,7 +72,11 @@ namespace finalServerSide.Models.DAL
             command = prefix + sb.ToString();
             return command;
         }
-       
+
+        //--------------------------------------------------------------------------------------------------------
+        // Update user like or dislike the comment 
+        // Get all the relevant information- commentId, userId, seriesId and whether he like/ dislike this comment
+        //--------------------------------------------------------------------------------------------------------
         public int Update(UserLikesComment ulc)
         {
 
@@ -128,7 +89,6 @@ namespace finalServerSide.Models.DAL
                 }
                 catch (Exception ex)
                 {
-                    // write to log
                     throw (ex);
                 }
 
@@ -145,11 +105,6 @@ namespace finalServerSide.Models.DAL
                     cStr = BuildUpdateDislikesCommand(ulc);
                 }
 
-                //if (ulc.Dislike) //use this way to relise what to update, value in Like
-                //{
-                //    mode = "dislike";   
-                //}
-                //cStr = BuildUpdateCommand(ulc, mode);      // helper method to build the insert string
                 cmd = CreateCommand(cStr, con);             // create the command
 
                 try
@@ -183,26 +138,8 @@ namespace finalServerSide.Models.DAL
         }
 
         //--------------------------------------------------------------------
-        // Build the Update command String
+        // Build the Update Likes command String
         //--------------------------------------------------------------------
-        //private String BuildUpdateCommand(UserLikesComment ulc, string mode)
-        //{
-        //    String command;
-        //    StringBuilder sb = new StringBuilder();// use a string builder to create the dynamic string
-            
-        //    if (mode.Equals("dislike"))
-        //        ulc.Dislike = false;
-
-        //    else
-        //        ulc.Like = true;
-
-        //    sb.AppendFormat(" SET [CommentId]={0}, [UserId]={1}, [SeriesId]={2}, [Like]='{3}', [Dislike]='{4}'", ulc.CommentId, ulc.UserId, ulc.SeriesId, ulc.Like, ulc.Dislike);
-        //    String prefix = "UPDATE userLikeComments_2021" + " ";
-        //    String end = " WHERE CommentId= " + ulc.CommentId + " and UserId =" + ulc.UserId + " and SeriesId= " + ulc.SeriesId;
-        //    command = prefix + sb.ToString() + end;
-        //    return command;
-        //}
-
         private String BuildUpdateLikesCommand(UserLikesComment ulc)
         {
             String command;
@@ -216,6 +153,9 @@ namespace finalServerSide.Models.DAL
             return command;
         }
 
+        //--------------------------------------------------------------------
+        // Build the Update Dislikes command String
+        //--------------------------------------------------------------------
         private String BuildUpdateDislikesCommand(UserLikesComment ulc)
         {
             String command;
@@ -229,47 +169,51 @@ namespace finalServerSide.Models.DAL
             return command;
         }
 
-        public List<UserLikesComment> Get()
-        {
-            SqlConnection con = null;
-            List<UserLikesComment> userCommentsList = new List<UserLikesComment>();
+        //    //---------------------------------------------------------------------------------
+        //    // Read from the DB into a list - dataReader
+        //    // Get all the likes according to series and current connected userId 
+        //    //---------------------------------------------------------------------------------
+        //    public List<UserLikesComment> Get()
+        //    {
+        //        SqlConnection con = null;
+        //        List<UserLikesComment> userCommentsList = new List<UserLikesComment>();
 
-            try
-            {
-                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+        //        try
+        //        {
+        //            con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
 
-                String selectSTR = "SELECT * FROM UserLikeComments_2021";
-                SqlCommand cmd = new SqlCommand(selectSTR, con);
+        //            String selectSTR = "SELECT * FROM UserLikeComments_2021";
+        //            SqlCommand cmd = new SqlCommand(selectSTR, con);
 
-                // get a reader
-                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+        //            // get a reader
+        //            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
 
-                while (dr.Read())
-                {   // Read till the end of the data into a row
-                    UserLikesComment c = new UserLikesComment();
-                    c.CommentId = Convert.ToInt32(dr["commentId"]);
-                    c.UserId = Convert.ToInt32(dr["userId"]);
-                    c.SeriesId = Convert.ToInt32(dr["seriesId"]);
-                    c.Like = Convert.ToBoolean(dr["like"]);
-                    c.Dislike = Convert.ToBoolean(dr["dislike"]);
-                    userCommentsList.Add(c);
-                }
+        //            while (dr.Read())
+        //            {   // Read till the end of the data into a row
+        //                UserLikesComment c = new UserLikesComment();
+        //                c.CommentId = Convert.ToInt32(dr["commentId"]);
+        //                c.UserId = Convert.ToInt32(dr["userId"]);
+        //                c.SeriesId = Convert.ToInt32(dr["seriesId"]);
+        //                c.Like = Convert.ToBoolean(dr["like"]);
+        //                c.Dislike = Convert.ToBoolean(dr["dislike"]);
+        //                userCommentsList.Add(c);
+        //            }
 
-                return userCommentsList;
-            }
-            catch (Exception ex)
-            {
-                // write to log
-                throw (ex);
-            }
-            finally
-            {
-                if (con != null)
-                {
-                    con.Close();
-                }
+        //            return userCommentsList;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // write to log
+        //            throw (ex);
+        //        }
+        //        finally
+        //        {
+        //            if (con != null)
+        //            {
+        //                con.Close();
+        //            }
 
-            }
-        }
+        //        }
+        //    }
     }
 }

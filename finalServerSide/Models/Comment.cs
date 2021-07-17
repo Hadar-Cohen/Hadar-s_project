@@ -47,23 +47,29 @@ namespace finalServerSide.Models.DAL
         public bool IsDislike { get => isDislike; set => isDislike = value; }
         public string Profile { get => profile; set => profile = value; }
 
+
+        /* Insert new comment to the Comments Tbl */
         public int PostComment()
         {
             CommentDBServices db = new CommentDBServices();
             return db.Insert(this); //return 1/-1;
         }
 
+        /* Get all the comments according to series and current connected userId */
         public List<Comment> Get(int seriesId, int connectedUserId)
         {
             CommentDBServices db = new CommentDBServices();
             return db.GetComments(seriesId, connectedUserId);
         }
+
+        /* Get the most active user who wrote the most comments and return his UserId */
         public int Get()
         {
             CommentDBServices db = new CommentDBServices();
             return db.GetMostActivUser();
         }
 
+        /* Update like or dislike on comment */ 
         public int UpdateLikes(int commentId, int likes, int dislikes)
         {
             CommentDBServices db = new CommentDBServices();

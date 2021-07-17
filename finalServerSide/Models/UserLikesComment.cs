@@ -44,10 +44,10 @@ namespace finalServerSide.Models
             return ulc.Update(this);
         }
 
-        public List<UserLikesComment> GetList()
-        {
-            UserLikeCommDBServices ulc = new UserLikeCommDBServices();
-            return ulc.Get();
-        }
+        //public List<UserLikesComment> GetList()
+        //{
+        //    UserLikeCommDBServices ulc = new UserLikeCommDBServices();
+        //    return ulc.Get();
+        //}
     }
 }

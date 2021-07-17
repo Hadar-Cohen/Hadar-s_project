@@ -12,29 +12,13 @@ namespace finalServerSide.Controllers
 {
     public class UserLikesCommController : ApiController
     {
-        // GET api/<controller>/5
-        public List<UserLikesComment> Get()
-        {
-            UserLikesComment c = new UserLikesComment();
-            return c.GetList();
-        }
-
-        // POST api/<controller>
-        public void Post(UserLikesComment ulc)
-        {
-            //ulc.Insert();
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int commentId, int userId, int seriesId, bool like, bool dislike)//, bool isLikes
+        /* Update user like or dislike the comment 
+         * Get all the relevant information- commentId, userId, seriesId and whether he like/ dislike this comment
+         */
+        public void Put(int commentId, int userId, int seriesId, bool like, bool dislike)
         {
             UserLikesComment ulc = new UserLikesComment(commentId, userId, seriesId, like, dislike);
             ulc.Update();
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
         }
     }
 }

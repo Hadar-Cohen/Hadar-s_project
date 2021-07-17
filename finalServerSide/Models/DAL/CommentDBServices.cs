@@ -45,6 +45,7 @@ namespace finalServerSide.Models.DAL
 
         //--------------------------------------------------------------------------------------------------
         // This method inserts a comment
+        // Insert new comment to the Comments Tbl 
         //--------------------------------------------------------------------------------------------------
         public int Insert(Comment comment)
         {
@@ -72,7 +73,6 @@ namespace finalServerSide.Models.DAL
             }
             catch (Exception ex)
             {
-                // write to log
                 throw (ex);
             }
 
@@ -80,8 +80,7 @@ namespace finalServerSide.Models.DAL
             {
                 if (con != null)
                 {
-                    // close the db connection
-                    con.Close();
+                    con.Close();// close the db connection
                 }
             }
         }
@@ -103,6 +102,7 @@ namespace finalServerSide.Models.DAL
 
         //---------------------------------------------------------------------------------
         // Read from the DB into a list - dataReader
+        // Get all the comments according to series and current connected userId 
         //---------------------------------------------------------------------------------
         public List<Comment> GetComments(int seriesId, int connectedUserId)
         {
@@ -166,6 +166,10 @@ namespace finalServerSide.Models.DAL
             }
         }
 
+        //---------------------------------------------------------------------------------
+        // Read from the DB into a list - dataReader
+        // Get the most active user who wrote the most comments
+        //---------------------------------------------------------------------------------
         public int GetMostActivUser()
         {
             SqlConnection con = null;
@@ -186,7 +190,6 @@ namespace finalServerSide.Models.DAL
 
                     Comments.UserId = Convert.ToInt32(dr["userId"]);
                 }
-
                 return Comments.UserId;
             }
             catch (Exception ex)
@@ -203,7 +206,10 @@ namespace finalServerSide.Models.DAL
 
             }
         }
-
+        //--------------------------------------------------------------------
+        // Update command String
+        //Update like or dislike on comment
+        //--------------------------------------------------------------------
         public int UpdateLikes(int commentId, int likes, int dislikes)
         {
             SqlConnection con;
@@ -252,11 +258,6 @@ namespace finalServerSide.Models.DAL
         private String BuildUpdateCommand(int commentId, int likes, int dislikes)
         {
             String command;
-
-            //StringBuilder sb = new StringBuilder();
-            // use a string builder to create the dynamic string
-
-            //sb.AppendFormat(" SET [likes]=[likes] + " + addlikes);
             String prefix = "UPDATE Comments_2021 SET [likes]=[likes] + (" + likes + "), [dislikes]=[dislikes] + (" + dislikes + ")";
             String end = " WHERE commentId= " + commentId;
             command = prefix + end;
