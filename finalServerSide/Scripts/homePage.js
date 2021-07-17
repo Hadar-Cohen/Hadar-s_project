@@ -39,9 +39,13 @@ function getSuccesstopRated(topRated) {
     $("#topRated").html(topRatedList);
     r = 0;
 }
+
 ///ERROR FROM API///
 function apiError(err) {
-    console.log(err);
+    if (err.status == 404)
+        alert("error in 'the movie DB' Api");
+    else
+        alert(err.status);
 }
 
 function drawtopRated(TVShow) {
@@ -98,6 +102,7 @@ function errortRecommendForYou(err) {
     else
         console.log(err);
 }
+
 function drawRecommendForYou(TVShow) {
     console.log(TVShow);
     let stars = 5;
@@ -146,7 +151,10 @@ function getSuccessMostViewed(mostView) {
 }
 
 function errorMostViewed(err) {
-    console.log(err);
+    if (err.status == 404)
+        console.log("Can't find The most watched Series")
+    else
+        console.log(err);
 }
 
 function drawMostViewed(TVShow) {
@@ -198,7 +206,10 @@ function getSuccessMostViewedEpisodes(mostViewEpisodes) {
 }
 
 function errorMostViewedEpisodes(err) {
-    console.log(err);
+    if (err.status == 404)
+        console.log("Can't find The most watched Episodes")
+    else
+        console.log(err);
 }
 
 function drawMostViewedEpisodes(TVShow) {
@@ -240,6 +251,7 @@ function drawGenres(genre) {
     str += "<option value=" + genre.id + ">" + genre.name + "</option>";
     return str;
 }
+
 ////show the Top Rated according the genre the user select///
 function showSeriesAccoGenre(genreId) {
     seriesAccoGenreList = "<div class='container'>";
@@ -248,6 +260,7 @@ function showSeriesAccoGenre(genreId) {
     let apiCall = url + "3/discover/tv?" + api_key + "&sort_by=popularity.desc&with_genres=" + genreId;
     ajaxCall("GET", apiCall, "", getSuccessTVShowGenres, apiError);
 }
+
 r = 0; //index in result array that contain all the tv shows in the TMDB services
 seriesAccoGenreArr = [];//local arrey to render and play onclick function
 

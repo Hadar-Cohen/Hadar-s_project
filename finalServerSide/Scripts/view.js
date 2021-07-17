@@ -16,10 +16,10 @@
             name: userName
         }
     }
-   //Show the user in view page series according to his preferences//
     let api = "../api/Totals?UserId=" + userId + "&email=" + userEmail;
     ajaxCall("GET", api, "", getSeriesSuccessCB, getSeriesErrorCB);
 });
+   //////////////////////////////Show the user in view page, series according to his preferences///////////////////////////////
 
 function getSeriesSuccessCB(series) {
 
@@ -30,9 +30,15 @@ function getSeriesSuccessCB(series) {
     $("#phView").html(str);
 }
 
+
 function getSeriesErrorCB(err) {
-    alert("Error -cant get the Series names");
+    if (err.status == 404)
+        alert("Error -cant get the Series names");
+    else
+        alert(err.status);
 }
+
+//////////////////////////////Show the user in view page, Episodes According to the series he chose///////////////////////////////
 
 episodesList = "";
 seriesReload = 0;
@@ -54,7 +60,7 @@ function getToDBShowEpisodes(selectedText)
 
 function getEpisodesSuccessCB(episodes) {
     
-    checkClub(selectedVal);//Check if he's part of the fan club
+    checkClub(selectedVal); // Check if he's part of the fan club
     episodesList = "";
 
     episodes.forEach(ep => {
@@ -64,8 +70,8 @@ function getEpisodesSuccessCB(episodes) {
     $("#episodesView").html(episodesList);
 }
 
-i = 0;
-episodes = [];
+i = 0; //index in result array that contain all the tv shows
+episodes = []; //local arrey to render and play onclick function
 
 function drawEpisodeCard(episode) {
     episodes[i] = episode;
@@ -76,33 +82,45 @@ function drawEpisodeCard(episode) {
 }
 
 function getEpisodesError(err) {
-    console.log(err);
+    if (err.status == 404)
+        alert("Error -cant get the Episodes list");
+    else
+        alert(err.status);
 }
 
-function exitFunc() {
-    localStorage.clear();
-    document.location = 'homePage.html';
-}
-//Delete the chapter from the user's preferences list//
+/////////////////// Delete the episode from the user's preferences list /////////////////////////
+
 function deleteEpisode(episode) {
     let api = "../api/Totals?episodeId=" + episode.EpisodeId + "&seriesId=" + episode.SeriesId + "&userId=" + userId;
-    ajaxCall("DELETE", api, "", deleteEpisodesSuccess, Error);
+    ajaxCall("DELETE", api, "", deleteEpisodesSuccess, deleteEpisodeError);
 }
 
 function deleteEpisodesSuccess()
 {
     getToDBShowEpisodes(seriesReload);// Reloading of the episodes
-    alert('deleted');
+    //alert('deleted');
 }
 
+function deleteEpisodeError(err) {
+    if (err.status == 404)
+        alert("Error -cant delete Episode");
+    else
+        alert(err.status);
+}
+
+//////////////////////////////// Check if he's part of the fan club ///////////////////////////////
 function checkClub(seriesId) {
     let api = "../api/ClubMembers?seriesId=" + seriesId + "&userId=" + userId;
-    ajaxCall("GET", api, "", getClubmMSuccessCB, Error);
+    ajaxCall("GET", api, "", getClubmMSuccessCB, getClubmMError);
 }
-function addToClub(seriesId) {
-    let api = "../api/ClubMembers?seriesId=" + seriesId + "&userId=" + userId;
-    ajaxCall("POST", api, "", postClubmMSuccessCB, Error);
+
+function getClubmMError(err) {
+    if (err.status == 404)
+        alert("Error -cant get Club Member ");
+    else
+        alert(err.status);
 }
+
 function getClubmMSuccessCB(ma) {
     console.log(ma);
     if (ma.UserId == 0) {
@@ -119,9 +137,14 @@ function getClubmMSuccessCB(ma) {
     $("#forum").html(str);
 }
 
+//////////////////////////////////////// Join the members club /////////////////////////////////////// 
+function addToClub(seriesId) {
+    let api = "../api/ClubMembers?seriesId=" + seriesId + "&userId=" + userId;
+    ajaxCall("POST", api, "", postClubmMSuccessCB, postClubmMError);
+}
 
 function postClubmMSuccessCB(ma) {
-    alert("welcome to the gruop :)");
+    alert(" welcome to the gruop :) ");
 
     str = `  <div class="wrapper">
               <a id="`+ selectedVal + `" href="forum.html">to the forum</a>
@@ -129,10 +152,17 @@ function postClubmMSuccessCB(ma) {
     $("#episodesView").html(episodesList);
     $("#forum").html(str);
 }
+
+function postClubmMError(err) {
+    if (err.status == 404)
+        alert("Error -cant add To Club Member ");
+    else
+        alert(err.status);
+}
+
 function toForum() {
     window.location.replace("forum.html");
 }
-
 
 function saveToLocalS(selectedText) {
     seriesObj = {
